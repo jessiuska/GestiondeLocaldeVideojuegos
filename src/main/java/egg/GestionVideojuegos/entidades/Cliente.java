@@ -1,38 +1,45 @@
 package egg.GestionVideojuegos.entidades;
 
+import egg.GestionVideojuegos.enums.Rol;
 import java.time.LocalDateTime;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.OneToOne;
+import javax.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.SQLDelete;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 @Entity
 @Getter
 @Setter
+@EntityListeners(AuditingEntityListener.class)
+@SQLDelete(sql = "UPDATE cliente SET alta = false WHERE id = ?")
 public class Cliente {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer dni;
+    
     @Column(nullable = false)
     private String nombre;
+    
     @Column(nullable = false)
     private String apellido;
-    @Column(nullable = false)
+    
     @CreatedDate
-    private LocalDateTime fecAlta;
+    @Column(nullable = false, updatable = false)
+    private LocalDateTime fechaAlta;
+    
     @LastModifiedDate
-    private LocalDateTime fecBaja;
+    private LocalDateTime fechaModificacion;
 
     @OneToOne
     private Tarjeta tarjeta;
 
+    @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    private String rol;
+    private Rol rol;
+    
+    private Boolean alta;
+    
 }

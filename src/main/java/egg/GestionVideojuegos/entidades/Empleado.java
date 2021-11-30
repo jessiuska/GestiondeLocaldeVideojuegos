@@ -1,18 +1,14 @@
 package egg.GestionVideojuegos.entidades;
 
-import java.time.LocalDate;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.EntityListeners;
-
+import egg.GestionVideojuegos.enums.Rol;
+import java.time.LocalDateTime;
+import javax.persistence.*;
 import org.hibernate.annotations.SQLDelete;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
-
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.data.annotation.LastModifiedDate;
 
 @Entity
 @Setter
@@ -22,6 +18,7 @@ import lombok.Setter;
 public class Empleado {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     @Column(nullable = false)
@@ -30,12 +27,23 @@ public class Empleado {
     @Column(nullable = false)
     private String apellido;
 
+    @Column(nullable = false, unique = true)
+    private String usuario;
+
     @Column(nullable = false)
-    private String rol;
+    private String clave;
+    
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private Rol rol;
 
     @CreatedDate
     @Column(nullable = false, updatable = false)
-    private LocalDate fecAlta;
+    private LocalDateTime fechaAlta;
 
+    @LastModifiedDate
+    private LocalDateTime fechaModificacion;
+    
     private Boolean alta;
+    
 }

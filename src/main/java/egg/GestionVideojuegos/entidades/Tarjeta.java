@@ -1,20 +1,19 @@
-
 package egg.GestionVideojuegos.entidades;
 
-import java.time.LocalDate;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import java.time.LocalDateTime;
+import javax.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.SQLDelete;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 @Entity 
 @Getter
 @Setter
+@EntityListeners(AuditingEntityListener.class)
+@SQLDelete(sql = "UPDATE tarjeta SET alta = false WHERE id = ?")
 public class Tarjeta {
     
     @Id
@@ -23,11 +22,13 @@ public class Tarjeta {
     
     private Double saldo;
     
-    @Column(nullable = false)
     @CreatedDate
-    private LocalDate fecAlta;
     @Column(nullable = false)
-    @LastModifiedDate
-    private LocalDate fecBaja;
-   
+    private LocalDateTime fechaAlta;
+
+    @LastModifiedDate    
+    @Column(nullable = false)
+    private LocalDateTime fechaModificacion;
+    
+    private Boolean alta;
 }
