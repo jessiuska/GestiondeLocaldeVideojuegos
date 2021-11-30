@@ -1,4 +1,6 @@
 HELP.md
+nbactions.xml
+nb-configuration.xml
 target/
 !.mvn/wrapper/maven-wrapper.jar
 !**/src/main/**/target/
