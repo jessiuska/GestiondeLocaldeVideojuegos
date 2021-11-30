@@ -1,4 +1,4 @@
-package egg.GestionVideojuegos.Entidades;
+package egg.GestionVideojuegos.entidades;
 
 import java.time.LocalDateTime;
 import javax.persistence.Column;
