@@ -35,3 +35,5 @@ logging:
     org:
       springframework:
         web: debug
+my:
+  property: ${DIRECTORY}
