@@ -35,5 +35,6 @@ logging:
     org:
       springframework:
         web: debug
-my:
-  property: ${DIRECTORY}
+custom:
+  upload-path: src\main\resources\static\uploads
+  nombre-sistema: Sistema Gestión Videojuegos
