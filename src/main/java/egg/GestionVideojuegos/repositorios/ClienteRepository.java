@@ -1,7 +1,6 @@
 package egg.GestionVideojuegos.repositorios;
 
 import egg.GestionVideojuegos.entidades.Cliente;
-import egg.GestionVideojuegos.entidades.Empleado;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -19,5 +18,5 @@ public interface ClienteRepository extends JpaRepository<Cliente, Integer> {
 
     @Modifying
     @Query("UPDATE Cliente c SET c.alta = true WHERE c.dni = :dni")
-    void habilitar(@Param("id") Integer dni);
+    void habilitar(@Param("dni") Integer dni);
 }

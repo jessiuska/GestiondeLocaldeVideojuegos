@@ -40,7 +40,7 @@ public class ClienteController {
     }
 
     @GetMapping("/crear")
-    //@PreAuthorize("hasRole('ADMIN')")
+    //@PreAuthorize("hasRole('USER')")
     public ModelAndView crear(HttpServletRequest request) {
         ModelAndView mav = new ModelAndView("cliente-formulario");
         Map<String, ?> flashMap = RequestContextUtils.getInputFlashMap(request);
