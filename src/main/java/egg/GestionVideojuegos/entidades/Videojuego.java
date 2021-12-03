@@ -40,4 +40,9 @@ public class Videojuego {
     
     private Boolean alta;
     
+    @Override
+    public String toString() {
+        return String.format("VIDEOJUEGO (id: %s, nombre: %s, precioFicha: %s, alta: %s)", id, nombre, precioFicha, alta);
+    }
+    
 }
