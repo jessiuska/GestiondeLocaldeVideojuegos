@@ -18,5 +18,5 @@ public interface ClienteRepository extends JpaRepository<Cliente, Integer> {
 
     @Modifying
     @Query("UPDATE Cliente c SET c.alta = true WHERE c.dni = :dni")
-    void habilitar(@Param("id") Integer dni);
+    void habilitar(@Param("dni") Integer dni);
 }

@@ -10,11 +10,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface VideojuegoRepository extends JpaRepository<Videojuego, Integer>{
     
-    boolean existsByVideojuego(String nombre);
-    
-//    @Modifying
-//    @Query("UPDATE Videojuego v SET v.nombre = :nombre, v.recaudacion = :recaudacion, v.image = :image WHERE v.id = :id")
-//    void modificar(@Param("id") String id, @Param("nombre") String nombre, @Param("recaudacion") Double recaudacion, @Param("image") String image);
+    boolean existsByNombre(String nombre);
 
     @Modifying
     @Query("UPDATE Videojuego v SET v.alta = true WHERE v.id = :id")

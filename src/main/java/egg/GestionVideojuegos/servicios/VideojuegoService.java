@@ -21,7 +21,7 @@ public class VideojuegoService {
     
     @Transactional
     public void crear(Videojuego videoJuego, MultipartFile foto) throws SpringException {
-        if (videoJuegoRepository.existsByVideojuego(videoJuego.getNombre())) {
+        if (videoJuegoRepository.existsByNombre(videoJuego.getNombre())) {
             throw new SpringException("Ya existe un videojuego registrado con ese nombre");
         }
         Videojuego videojuego = new Videojuego();
