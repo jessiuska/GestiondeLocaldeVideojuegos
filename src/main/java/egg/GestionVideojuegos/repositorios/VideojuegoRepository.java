@@ -1,22 +1,18 @@
 package egg.GestionVideojuegos.repositorios;
 
-import egg.GestionVideojuegos.entidades.Cliente;
+import egg.GestionVideojuegos.entidades.Videojuego;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
-import java.util.Optional;
-
 @Repository
-public interface ClienteRepository extends JpaRepository<Cliente, Integer> {
-
-    Optional<Cliente> findByDni(Integer dni);
-
-    boolean existsByDni(Integer dni);
+public interface VideojuegoRepository extends JpaRepository<Videojuego, Integer>{
+    
+    boolean existsByNombre(String nombre);
 
     @Modifying
-    @Query("UPDATE Cliente c SET c.alta = true WHERE c.dni = :dni")
-    void habilitar(@Param("dni") Integer dni);
+    @Query("UPDATE Videojuego v SET v.alta = true WHERE v.id = :id")
+    void habilitar(@Param("id") Integer id);
 }
