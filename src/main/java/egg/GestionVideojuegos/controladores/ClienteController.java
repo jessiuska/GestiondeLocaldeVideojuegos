@@ -40,7 +40,7 @@ public class ClienteController {
     }
 
     @GetMapping("/crear")
-    //@PreAuthorize("hasRole('ADMIN')")
+    //@PreAuthorize("hasRole('USER')")
     public ModelAndView crear(HttpServletRequest request) {
         ModelAndView mav = new ModelAndView("cliente-formulario");
         Map<String, ?> flashMap = RequestContextUtils.getInputFlashMap(request);
@@ -58,7 +58,7 @@ public class ClienteController {
     }
 
     @GetMapping("/editar/{dni}")
-    public ModelAndView editar(@PathVariable Integer dni, HttpServletRequest request, HttpSession session, RedirectAttributes attributes) {
+    public ModelAndView editar(@PathVariable Long dni, HttpServletRequest request, HttpSession session, RedirectAttributes attributes) {
         if (!session.getAttribute("dni").equals(dni)) {
             return new ModelAndView(new RedirectView("/home"));
         }
@@ -121,13 +121,13 @@ public class ClienteController {
     }
 
     @PostMapping("/habilitar/{dni}")
-    public RedirectView habilitar(@PathVariable Integer dni) {
+    public RedirectView habilitar(@PathVariable Long dni) {
         clienteService.habilitar(dni);
         return new RedirectView("/cliente");
     }
 
     @PostMapping("/eliminar/{dni}")
-    public RedirectView eliminar(@PathVariable Integer dni) {
+    public RedirectView eliminar(@PathVariable Long dni) {
         clienteService.eliminar(dni);
         return new RedirectView("/cliente");
     }

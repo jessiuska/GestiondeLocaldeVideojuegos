@@ -14,7 +14,7 @@ import java.nio.file.StandardCopyOption;
 @Service
 public class FotoService {
 
-    @Value("${my.property}")
+    @Value("${custom.upload-path}")
     private String directory;
 
     public String copiar(MultipartFile archivo) throws SpringException {
