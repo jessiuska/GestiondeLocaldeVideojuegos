@@ -78,18 +78,18 @@ public class ClienteService {
     }
 
     @Transactional(readOnly = true)
-    public Cliente buscarPorDni(Integer dni) throws SpringException {
+    public Cliente buscarPorDni(Long dni) throws SpringException {
         return clienteRepository.findByDni(dni).orElseThrow(() ->
                 new SpringException(String.format(mensaje, dni)));
     }
 
     @Transactional
-    public void habilitar(Integer dni) {
+    public void habilitar(Long dni) {
         clienteRepository.habilitar(dni);
     }
 
     @Transactional
-    public void eliminar(Integer dni) {
+    public void eliminar(Long dni) {
         clienteRepository.deleteById(dni);
     }
 }

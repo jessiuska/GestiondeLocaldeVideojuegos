@@ -10,13 +10,13 @@ import org.springframework.stereotype.Repository;
 import java.util.Optional;
 
 @Repository
-public interface ClienteRepository extends JpaRepository<Cliente, Integer> {
+public interface ClienteRepository extends JpaRepository<Cliente, Long> {
 
-    Optional<Cliente> findByDni(Integer dni);
+    Optional<Cliente> findByDni(Long dni);
 
-    boolean existsByDni(Integer dni);
+    boolean existsByDni(Long dni);
 
     @Modifying
     @Query("UPDATE Cliente c SET c.alta = true WHERE c.dni = :dni")
-    void habilitar(@Param("dni") Integer dni);
+    void habilitar(@Param("dni") Long dni);
 }
