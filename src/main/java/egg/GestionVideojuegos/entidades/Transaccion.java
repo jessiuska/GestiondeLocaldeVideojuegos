@@ -1,5 +1,6 @@
 package egg.GestionVideojuegos.entidades;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -25,6 +26,9 @@ public class Transaccion {
     @Column(nullable = false)
     private String tipoTransaccion;
     
+    @Column(nullable = true)
+    private Integer idCliente;
+    
     @Column(nullable = false)
     private Integer idEmpleado;
     
@@ -36,4 +40,10 @@ public class Transaccion {
     
     @LastModifiedDate
     private LocalDateTime fechaTransaccion;
+    
+    @Column(nullable = true)
+    private LocalDate fechaDesde;
+    
+    @Column(nullable = true)
+    private LocalDate fechaHasta;
 }
