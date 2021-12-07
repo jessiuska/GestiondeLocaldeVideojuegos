@@ -18,7 +18,7 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 public class Cliente {
 
     @Id
-    private Integer dni;
+    private Long dni;
     
     @Column(nullable = false)
     private String nombre;

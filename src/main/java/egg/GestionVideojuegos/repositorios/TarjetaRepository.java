@@ -1,6 +1,6 @@
 package egg.GestionVideojuegos.repositorios;
 
-import egg.GestionVideojuegos.entidades.Cliente;
+import egg.GestionVideojuegos.entidades.Tarjeta;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -10,13 +10,13 @@ import org.springframework.stereotype.Repository;
 import java.util.Optional;
 
 @Repository
-public interface ClienteRepository extends JpaRepository<Cliente, Long> {
+public interface TarjetaRepository extends JpaRepository<Tarjeta, Integer> {
 
-    Optional<Cliente> findByDni(Long dni);
+    Optional<Tarjeta> findById(Integer id);
 
-    boolean existsByDni(Long dni);
+    boolean existsById(Integer id);
 
     @Modifying
-    @Query("UPDATE Cliente c SET c.alta = true WHERE c.dni = :dni")
-    void habilitar(@Param("dni") Long dni);
+    @Query("UPDATE Tarjeta t SET t.alta = true WHERE t.id = :id")
+    void habilitar(@Param("id") Integer id);
 }
