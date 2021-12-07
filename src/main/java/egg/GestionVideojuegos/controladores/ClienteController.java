@@ -3,6 +3,7 @@ package egg.GestionVideojuegos.controladores;
 import egg.GestionVideojuegos.entidades.Cliente;
 import egg.GestionVideojuegos.excepciones.SpringException;
 import egg.GestionVideojuegos.servicios.ClienteService;
+import egg.GestionVideojuegos.servicios.TarjetaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
@@ -129,6 +130,13 @@ public class ClienteController {
     @PostMapping("/eliminar/{dni}")
     public RedirectView eliminar(@PathVariable Long dni) {
         clienteService.eliminar(dni);
+        return new RedirectView("/cliente");
+    }
+
+    @PostMapping("/cambiar-tarjeta{id}")
+    public RedirectView cambiarTarjeta(@ModelAttribute Cliente cliente) {
+        clienteService.cambiarTarjeta(cliente);
+
         return new RedirectView("/cliente");
     }
 }
