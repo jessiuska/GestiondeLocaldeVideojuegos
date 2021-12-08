@@ -15,7 +15,8 @@ public class TarjetaService {
 
     @Autowired
     private TarjetaRepository tarjetaRepository;
-
+    
+    
     private String mensaje = "No existe ningúna tarjeta asociado con el ID %s";
 
     @Transactional
@@ -33,18 +34,16 @@ public class TarjetaService {
 
     @Transactional
     // precioficha
-    public void consumo(Tarjeta dto) throws SpringException {
-        Tarjeta tarjeta = tarjetaRepository.findById(dto.getId()).orElseThrow(()
-                -> new SpringException(String.format(mensaje, dto.getId())));
+    public void consumo(Tarjeta dto, Double precioFicha) throws SpringException {
+        Tarjeta tarjeta = buscarPorId(dto.getId());
 
-        tarjeta.setSaldo(dto.getSaldo());
+        tarjeta.setSaldo(dto.getSaldo()-precioFicha);
         tarjetaRepository.save(tarjeta);
     }
 
     @Transactional
     public void carga (Tarjeta dto, Double saldo) throws SpringException {
-        Tarjeta tarjeta = tarjetaRepository.findById(dto.getId()).orElseThrow(()
-                -> new SpringException(String.format(mensaje, dto.getId())));
+        Tarjeta tarjeta = buscarPorId(dto.getId());
 
         tarjeta.setSaldo(dto.getSaldo()+saldo);
         
