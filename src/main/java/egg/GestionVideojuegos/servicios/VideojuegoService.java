@@ -4,6 +4,7 @@ import egg.GestionVideojuegos.entidades.Videojuego;
 import egg.GestionVideojuegos.excepciones.SpringException;
 import egg.GestionVideojuegos.repositorios.VideojuegoRepository;
 import java.util.List;
+import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -37,8 +38,8 @@ public class VideojuegoService {
 
     @Transactional
     public void modificar(Videojuego videoJuego, MultipartFile foto) throws SpringException {
-        Videojuego videojuego = videoJuegoRepository.findById(videoJuego.getId()).orElseThrow(() -> new SpringException(String.format(mensaje, videoJuego.getId())));
-                
+        Videojuego videojuego = buscarPorId(videoJuego.getId());
+                     
         videojuego.setNombre(videoJuego.getNombre());
         videojuego.setPrecioFicha(videoJuego.getPrecioFicha());
         videojuego.setRecaudacion(videoJuego.getRecaudacion());
@@ -68,5 +69,15 @@ public class VideojuegoService {
         videoJuegoRepository.deleteById(id);
     }
     
-    
+//    @Transactional(readOnly = true)
+//    public Double consultarPrecio(Videojuego dto) throws SpringException {
+//       Optional<Videojuego> consulta = videoJuegoRepository.findById(dto.getId());
+//       if (consulta.isPresent()) {
+//           return dto.getPrecioFicha();
+//       } else{
+//           throw new SpringException("No existe el videojuego");
+//       }
+//        
+//    }
+
 }
