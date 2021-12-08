@@ -28,6 +28,10 @@ public class ClienteService {
 
     @Autowired
     private ClienteRepository clienteRepository;
+   
+    @Autowired
+    private TarjetaService tarjetaService;
+
     
     @Autowired
     private EmailService emailService;
@@ -99,7 +103,7 @@ public class ClienteService {
 	Double tempSaldo = cliente.getTarjeta().getSaldo();
 
 	//elimino la tarjeta
-	TarjetaService tarjetaService = new TarjetaService();
+	//TarjetaService tarjetaService = new TarjetaService();
         tarjetaService.eliminar(cliente.getTarjeta().getId());
 
 	//creo una nueva tarjeta temporal con el saldo anterior
