@@ -26,17 +26,20 @@ public class Local {
     @Column(nullable = false, updatable = false)
     private LocalDateTime fechaAlta;
     
-    @LastModifiedDate
-    private LocalDateTime fechaModificacion;
+    private LocalDateTime fechaUltimoCierre;
+    
+    private Double precioTarjeta;
+    
     
     @Column(nullable = false)
     private Double recaudacion;
     
-    @OneToMany(mappedBy = "local", fetch = FetchType.EAGER)
+    
+    /*@OneToMany(mappedBy = "local", fetch = FetchType.EAGER)
     private List<Empleado> empleados;
     @OneToMany(mappedBy = "local", fetch = FetchType.EAGER)
     private List<Cliente> clientes;
     @OneToMany(mappedBy = "local", fetch = FetchType.EAGER)
-    private List<Videojuego> videojuegos;
+    private List<Videojuego> videojuegos;*/
     
 }
