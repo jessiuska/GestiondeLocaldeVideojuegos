@@ -1,11 +1,11 @@
 package egg.GestionVideojuegos.servicios;
 
 import egg.GestionVideojuegos.entidades.Cliente;
+import egg.GestionVideojuegos.entidades.Tarjeta;
 import egg.GestionVideojuegos.excepciones.SpringException;
 import egg.GestionVideojuegos.enums.Rol;
 import egg.GestionVideojuegos.repositorios.ClienteRepository;
 
-import java.util.Collections;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -32,7 +32,7 @@ public class ClienteService {
     @Autowired
     private EmailService emailService;
     
-    private String mensaje = "No existe ningún cliente asociado con el ID %s";
+    private String mensaje = "No existe ningún cliente asociado con el DNI %s";
 
     @Transactional
     public void crear(Cliente dto) throws SpringException {
@@ -92,4 +92,21 @@ public class ClienteService {
     public void eliminar(Long dni) {
         clienteRepository.deleteById(dni);
     }
+    
+    @Transactional
+    public void cambiarTarjeta(Cliente cliente) {
+	//guardo el saldo de la tarjeta actual
+	Double tempSaldo = cliente.getTarjeta().getSaldo();
+
+	//elimino la tarjeta
+	TarjetaService tarjetaService = new TarjetaService();
+        tarjetaService.eliminar(cliente.getTarjeta().getId());
+
+	//creo una nueva tarjeta temporal con el saldo anterior
+	Tarjeta tarjeta = new Tarjeta();
+	tarjeta.setSaldo(tempSaldo);
+
+	//le asigno la nueva tarjeta al cliente
+	cliente.setTarjeta(tarjeta);
+}
 }
