@@ -15,4 +15,8 @@ public interface VideojuegoRepository extends JpaRepository<Videojuego, Integer>
     @Modifying
     @Query("UPDATE Videojuego v SET v.alta = true WHERE v.id = :id")
     void habilitar(@Param("id") Integer id);
+    
+   
+    
+    
 }

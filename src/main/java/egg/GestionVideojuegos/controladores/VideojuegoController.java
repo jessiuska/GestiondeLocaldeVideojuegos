@@ -122,5 +122,11 @@ public class VideojuegoController {
         videojuegoService.eliminar(id);
         return new RedirectView("/videojuego");
     }
+    
+//    @PostMapping("/recaudacion")
+//    public RedirectView recaudacionDiaria() {
+//        videojuegoService.recaudacionDiaria();
+//        return new RedirectView("/recaudacion-diaria");
+//    }
 
 }

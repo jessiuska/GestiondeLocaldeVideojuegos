@@ -1,9 +1,11 @@
 package egg.GestionVideojuegos.servicios;
 
+import egg.GestionVideojuegos.entidades.Cliente;
 import egg.GestionVideojuegos.entidades.Videojuego;
 import egg.GestionVideojuegos.excepciones.SpringException;
 import egg.GestionVideojuegos.repositorios.VideojuegoRepository;
 import java.util.List;
+import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -16,6 +18,13 @@ public class VideojuegoService {
 
     @Autowired
     private FotoService fotoService;
+    
+    @Autowired
+    private TarjetaService tarjetaService;
+    
+    @Autowired
+    private ClienteService clienteService;
+    
 
     private String mensaje = "No existe ningún videojuego asociado con el ID %s";
     
@@ -37,8 +46,8 @@ public class VideojuegoService {
 
     @Transactional
     public void modificar(Videojuego videoJuego, MultipartFile foto) throws SpringException {
-        Videojuego videojuego = videoJuegoRepository.findById(videoJuego.getId()).orElseThrow(() -> new SpringException(String.format(mensaje, videoJuego.getId())));
-                
+        Videojuego videojuego = buscarPorId(videoJuego.getId());
+                     
         videojuego.setNombre(videoJuego.getNombre());
         videojuego.setPrecioFicha(videoJuego.getPrecioFicha());
         videojuego.setRecaudacion(videoJuego.getRecaudacion());
@@ -68,5 +77,56 @@ public class VideojuegoService {
         videoJuegoRepository.deleteById(id);
     }
     
+//    @Transactional(readOnly = true)
+//    public Double consultarPrecio(Videojuego dto) throws SpringException {
+//       Optional<Videojuego> consulta = videoJuegoRepository.findById(dto.getId());
+//       if (consulta.isPresent()) {
+//           return dto.getPrecioFicha();
+//       } else{
+//           throw new SpringException("No existe el videojuego");
+//       }
+//        
+//    }
+    public void recaudar(Integer idVideojuego, Double monto) throws SpringException {
+            Videojuego videojuego = buscarPorId(idVideojuego);
+
+            //guardo la recaudación actual
+            Double recaudacionActual = videojuego.getRecaudacion();
+
+            //actualizo la recaudación
+            videojuego.setRecaudacion(recaudacionActual + monto);
+
+            videoJuegoRepository.save(videojuego);
+    }
     
+    public void jugar(Long dniCliente, Integer idVideojuego) throws SpringException{
+        Cliente cliente = clienteService.buscarPorDni(dniCliente);
+	Videojuego videojuego = buscarPorId(idVideojuego);
+
+	//averiguo el precio de la ficha del videojuego
+	double precioFicha = videojuego.getPrecioFicha();
+
+        //se descuenta de la tarjeta el precioFicha para jugar
+	tarjetaService.consumo(cliente.getTarjeta(), precioFicha);
+	
+	//actualizo la recaudación del videojuego
+        recaudar(idVideojuego, precioFicha);
+        
+
+    }
+
+    public Double cerrar(Integer idVideojuego) throws SpringException {
+            Videojuego videojuego = buscarPorId(idVideojuego);
+
+            //guardo recaudación actual
+            Double recaudacion = videojuego.getRecaudacion();
+
+            //pongo la recaudación a 0
+            videojuego.setRecaudacion(0.0);
+
+            videoJuegoRepository.save(videojuego);
+
+            return recaudacion;
+    }
+
 }
