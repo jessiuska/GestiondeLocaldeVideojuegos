@@ -1,5 +1,6 @@
 package egg.GestionVideojuegos.servicios;
 
+import egg.GestionVideojuegos.entidades.Cliente;
 import egg.GestionVideojuegos.entidades.Videojuego;
 import egg.GestionVideojuegos.excepciones.SpringException;
 import egg.GestionVideojuegos.repositorios.VideojuegoRepository;
@@ -17,6 +18,13 @@ public class VideojuegoService {
 
     @Autowired
     private FotoService fotoService;
+    
+    @Autowired
+    private TarjetaService tarjetaService;
+    
+    @Autowired
+    private ClienteService clienteService;
+    
 
     private String mensaje = "No existe ningún videojuego asociado con el ID %s";
     
@@ -79,5 +87,46 @@ public class VideojuegoService {
 //       }
 //        
 //    }
+    public void recaudar(Integer idVideojuego, Double monto) throws SpringException {
+            Videojuego videojuego = buscarPorId(idVideojuego);
+
+            //guardo la recaudación actual
+            Double recaudacionActual = videojuego.getRecaudacion();
+
+            //actualizo la recaudación
+            videojuego.setRecaudacion(recaudacionActual + monto);
+
+            videoJuegoRepository.save(videojuego);
+    }
+    
+    public void jugar(Long dniCliente, Integer idVideojuego) throws SpringException{
+        Cliente cliente = clienteService.buscarPorDni(dniCliente);
+	Videojuego videojuego = buscarPorId(idVideojuego);
+
+	//averiguo el precio de la ficha del videojuego
+	double precioFicha = videojuego.getPrecioFicha();
+
+        //se descuenta de la tarjeta el precioFicha para jugar
+	tarjetaService.consumo(cliente.getTarjeta(), precioFicha);
+	
+	//actualizo la recaudación del videojuego
+        recaudar(idVideojuego, precioFicha);
+        
+
+    }
+
+    public Double cerrar(Integer idVideojuego) throws SpringException {
+            Videojuego videojuego = buscarPorId(idVideojuego);
+
+            //guardo recaudación actual
+            Double recaudacion = videojuego.getRecaudacion();
+
+            //pongo la recaudación a 0
+            videojuego.setRecaudacion(0.0);
+
+            videoJuegoRepository.save(videojuego);
+
+            return recaudacion;
+    }
 
 }
