@@ -112,5 +112,8 @@ public class ClienteService {
 
 	//le asigno la nueva tarjeta al cliente
 	cliente.setTarjeta(tarjeta);
+        //la guardo
+        clienteRepository.save(cliente);
+        
 }
 }
