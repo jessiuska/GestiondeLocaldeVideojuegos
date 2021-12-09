@@ -107,7 +107,7 @@ public class VideojuegoService {
 	double precioFicha = videojuego.getPrecioFicha();
 
         //se descuenta de la tarjeta el precioFicha para jugar
-	tarjetaService.consumo(cliente.getTarjeta(), precioFicha);
+	tarjetaService.consumo(cliente.getTarjeta());
 	
 	//actualizo la recaudación del videojuego
         recaudar(idVideojuego, precioFicha);
