@@ -1,9 +1,12 @@
 package egg.GestionVideojuegos.servicios;
 
 import egg.GestionVideojuegos.entidades.Local;
+import egg.GestionVideojuegos.entidades.Videojuego;
 import egg.GestionVideojuegos.excepciones.SpringException;
 import egg.GestionVideojuegos.repositorios.LocalRepository;
+import egg.GestionVideojuegos.repositorios.VideojuegoRepository;
 import java.time.LocalDateTime;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -13,6 +16,11 @@ public class LocalService {
 
     @Autowired
     private LocalRepository localRepository;
+    
+    @Autowired
+    private VideojuegoService videojuegoService;
+    
+    
     
     /*@Autowired
     private TransaccionService transaccionService;*/
@@ -40,17 +48,28 @@ public class LocalService {
         localRepository.save(local);
     }
     
+  
     @Transactional
-    public void recaudar(Local dto) throws SpringException {
+    public void cerraCaja() throws SpringException {
         LocalDateTime ahora = LocalDateTime.now();
-
-        Local local = localRepository.findById(dto.getId()).orElseThrow(() -> new SpringException(String.format(mensaje, dto.getId())));
-        local.setRecaudacion(localRepository.cierreDeCaja());
-        local.setFechaUltimoCierre(ahora);
         
+        Local local = localRepository.findById(0).orElseThrow(() -> new SpringException(String.format(mensaje, 0)));
+        
+        Double totalRecaudacion = 0.0;
+        
+        List<Videojuego> videojuegos = videojuegoService.buscarTodos();
+        
+        
+        for (Videojuego videojuego : videojuegos) {
+            totalRecaudacion += videojuegoService.cerrar(videojuego.getId());
+            
+        }
+        
+        local.setRecaudacion(totalRecaudacion);
+        local.setFechaUltimoCierre(ahora);
+
         localRepository.save(local);
-    } 
-    
+    }
     
     
     
