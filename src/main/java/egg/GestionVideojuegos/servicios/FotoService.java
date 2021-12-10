@@ -20,7 +20,7 @@ public class FotoService {
     public String copiar(MultipartFile archivo) throws SpringException {
         try {
             String nombreFoto = archivo.getOriginalFilename();
-            Path rutaFoto = Paths.get(directory, nombreFoto).toAbsolutePath();
+            Path rutaFoto = Paths.get(directory, nombreFoto); //.toAbsolutePath();
             Files.copy(archivo.getInputStream(), rutaFoto, StandardCopyOption.REPLACE_EXISTING);
             return nombreFoto;
         } catch (IOException e) {

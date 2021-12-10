@@ -52,8 +52,8 @@ public class EmpleadoService implements UserDetailsService {
         
         if (empleadoRepository.findAll().isEmpty()) {
             empleado.setRol(Rol.ADMIN);
-        } else if (dto.getRol() == null) {
-            empleado.setRol(Rol.CAJERO);
+        /*} else if (dto.getRol() == null) {
+            empleado.setRol(Rol.CAJERO);*/
         } else {
             empleado.setRol(dto.getRol());
         }
@@ -64,8 +64,7 @@ public class EmpleadoService implements UserDetailsService {
 
     @Transactional
     public void modificar(Empleado dto) throws SpringException {
-        Empleado empleado = empleadoRepository.findById(dto.getId()).orElseThrow(() ->
-                new SpringException(String.format(mensaje, dto.getId())));
+        Empleado empleado = buscarPorId(dto.getId());
         
         empleado.setNombre(dto.getNombre());
         empleado.setApellido(dto.getApellido());

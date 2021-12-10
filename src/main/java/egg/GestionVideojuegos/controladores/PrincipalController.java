@@ -1,8 +1,10 @@
 package egg.GestionVideojuegos.controladores;
 
 import egg.GestionVideojuegos.entidades.Empleado;
+import egg.GestionVideojuegos.enums.Rol;
 import egg.GestionVideojuegos.excepciones.SpringException;
 import egg.GestionVideojuegos.servicios.EmpleadoService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,12 +15,12 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.support.RequestContextUtils;
 import org.springframework.web.servlet.view.RedirectView;
+import org.springframework.beans.factory.annotation.Value;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import java.security.Principal;
 import java.util.Map;
-import org.springframework.beans.factory.annotation.Value;
 
 @Controller
 public class PrincipalController {
@@ -72,7 +74,10 @@ public class PrincipalController {
             mav.addObject("error", flashMap.get("error"));
             mav.addObject("empleado", flashMap.get("usuario"));
         } else {
-            mav.addObject("empleado", new Empleado());
+            //mav.addObject("empleado", new Empleado());
+            Empleado empleado  = new Empleado();
+            empleado.setRol(Rol.USER);
+            mav.addObject("empleado", empleado);
         }
 
         return mav;
