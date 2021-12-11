@@ -1,5 +1,6 @@
 package egg.GestionVideojuegos.servicios;
 
+import egg.GestionVideojuegos.entidades.Cliente;
 import egg.GestionVideojuegos.entidades.Local;
 import egg.GestionVideojuegos.entidades.Videojuego;
 import egg.GestionVideojuegos.excepciones.SpringException;
@@ -20,6 +21,8 @@ public class LocalService {
     @Autowired
     private VideojuegoService videojuegoService;
     
+    @Autowired
+    private TarjetaService tarjetaService;
     
     
     /*@Autowired
@@ -50,7 +53,7 @@ public class LocalService {
     
   
     @Transactional
-    public void cerraCaja() throws SpringException {
+    public void cerrarCaja() throws SpringException {
         LocalDateTime ahora = LocalDateTime.now();
         
         Local local = localRepository.findById(0).orElseThrow(() -> new SpringException(String.format(mensaje, 0)));
@@ -69,6 +72,14 @@ public class LocalService {
         local.setFechaUltimoCierre(ahora);
 
         localRepository.save(local);
+    }
+    
+    @Transactional
+    public void cargarTarjeta(Cliente dto, Double monto) throws SpringException {
+        
+        tarjetaService.carga(dto.getTarjeta(), monto);
+        
+        
     }
     
     
