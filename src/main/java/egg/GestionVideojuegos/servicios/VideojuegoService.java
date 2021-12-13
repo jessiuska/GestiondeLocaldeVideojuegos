@@ -4,6 +4,7 @@ import egg.GestionVideojuegos.entidades.Cliente;
 import egg.GestionVideojuegos.entidades.Videojuego;
 import egg.GestionVideojuegos.excepciones.SpringException;
 import egg.GestionVideojuegos.repositorios.VideojuegoRepository;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,9 +18,6 @@ public class VideojuegoService {
     private VideojuegoRepository videoJuegoRepository;
     
     @Autowired
-    private Videojuego videojuego;
-
-    @Autowired
     private FotoService fotoService;
     
     @Autowired
@@ -27,6 +25,9 @@ public class VideojuegoService {
     
     @Autowired
     private ClienteService clienteService;
+    
+    @Autowired
+    private TransaccionService transaccionService;
     
 
     private String mensaje = "No existe ningún videojuego asociado con el ID %s";
@@ -80,16 +81,6 @@ public class VideojuegoService {
         videoJuegoRepository.deleteById(id);
     }
     
-//    @Transactional(readOnly = true)
-//    public Double consultarPrecio(Videojuego dto) throws SpringException {
-//       Optional<Videojuego> consulta = videoJuegoRepository.findById(dto.getId());
-//       if (consulta.isPresent()) {
-//           return dto.getPrecioFicha();
-//       } else{
-//           throw new SpringException("No existe el videojuego");
-//       }
-//        
-//    }
     public void recaudar(Integer idVideojuego, Double monto) throws SpringException {
             Videojuego videojuego = buscarPorId(idVideojuego);
 
@@ -115,6 +106,7 @@ public class VideojuegoService {
 	//actualizo la recaudación del videojuego
         recaudar(idVideojuego, precioFicha);
         
+        transaccionService.crearTransaccion(mensaje, precioFicha, dniCliente, idVideojuego, idVideojuego, LocalDate.MAX, LocalDate.MAX);
 
     }
 
@@ -137,5 +129,7 @@ public class VideojuegoService {
         videojuego.setPrecioFicha(nuevoPrecio);
         videoJuegoRepository.save(videojuego);
     }
+    
+    
 
 }
