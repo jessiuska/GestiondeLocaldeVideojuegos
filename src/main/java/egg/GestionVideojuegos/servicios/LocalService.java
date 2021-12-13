@@ -23,7 +23,7 @@ public class LocalService {
     private VideojuegoService videojuegoService;
 
     @Autowired
-    private Cliente cliente;
+    private ClienteService clienteService;
 
     @Autowired
     private TarjetaService tarjetaService;
@@ -99,21 +99,17 @@ public class LocalService {
     }
 
     public void simularJuegos(Cliente dto, int repetir) throws SpringException {
-        Integer v;
-//        Long min = 10000000; 
-//        Long max = 99999999;
-        Long c;
-        Random rd = new Random();
-//        List<Cliente> clientes = clienteService.buscarTodos();
+        int v, c;
+        
+        List<Cliente> clientes = clienteService.buscarTodos();
         List<Videojuego> videojuegos = videojuegoService.buscarTodos();
-        Videojuego videojuego = new Videojuego();
-
+        
         for (int i = 0; i <= (repetir - 1); i++) {
-            v = (int) Math.random() * videojuegos.size();
-            c = rd.nextLong();
-
-            if (tarjetaService.consumo(c, v) >= videojuego.getPrecioFicha()) {
-                videojuegoService.jugar(c, v);
+            v = (int) Math.random() * (videojuegos.size() + 1);
+            c = (int) Math.random() * (clientes.size() + 1);
+            
+            if (dto.getTarjeta().getSaldo() >= videojuegos.get(v).getPrecioFicha()){
+                videojuegoService.jugar(clientes.get(c).getDni(), videojuegos.get(v).getId());
             }
         }
     }

@@ -50,16 +50,7 @@ public class ClienteService {
         cliente.setDni(dto.getDni());
         cliente.setTarjeta(dto.getTarjeta());
 
-        if (clienteRepository.findAll().isEmpty()) {
-            cliente.setRol(Rol.USER);
-        } else if (dto.getRol() == null) {
-            cliente.setRol(Rol.USER);
-        } else {
-            cliente.setRol(dto.getRol());
-        }
-        cliente.setAlta(true);
-        //emailService.enviarThread(dto.getCorreo());
-        clienteRepository.save(cliente);
+        cliente.setRol(Rol.USER);
     }
 
     @Transactional
