@@ -8,6 +8,7 @@ import egg.GestionVideojuegos.repositorios.LocalRepository;
 import egg.GestionVideojuegos.repositorios.VideojuegoRepository;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Random;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -17,17 +18,18 @@ public class LocalService {
 
     @Autowired
     private LocalRepository localRepository;
-    
+
     @Autowired
     private VideojuegoService videojuegoService;
-    
+
+    @Autowired
+    private ClienteService clienteService;
+
     @Autowired
     private TarjetaService tarjetaService;
-    
-    
+
     /*@Autowired
     private TransaccionService transaccionService;*/
-
     private String mensaje = "No existe ningún local asociado con el ID %s";
 
     @Transactional
@@ -39,7 +41,6 @@ public class LocalService {
         local.setFechaUltimoCierre(local.getFechaAlta());
 
         localRepository.save(local);
-
     }
 
     @Transactional
@@ -50,38 +51,66 @@ public class LocalService {
 
         localRepository.save(local);
     }
-    
-  
+
     @Transactional
     public void cerrarCaja() throws SpringException {
         LocalDateTime ahora = LocalDateTime.now();
-        
+
         Local local = localRepository.findById(0).orElseThrow(() -> new SpringException(String.format(mensaje, 0)));
-        
+
         Double totalRecaudacion = 0.0;
-        
+
         List<Videojuego> videojuegos = videojuegoService.buscarTodos();
-        
-        
+
         for (Videojuego videojuego : videojuegos) {
             totalRecaudacion += videojuegoService.cerrar(videojuego.getId());
-            
         }
-        
+
         local.setRecaudacion(totalRecaudacion);
         local.setFechaUltimoCierre(ahora);
 
         localRepository.save(local);
     }
-    
+
     @Transactional
     public void cargarTarjeta(Cliente dto, Double monto) throws SpringException {
-        
+
         tarjetaService.carga(dto.getTarjeta(), monto);
-        
-        
     }
-    
-    
-    
+
+    public void aumentarFicha(Double porcentaje) throws SpringException {
+
+        List<Videojuego> videojuegos = videojuegoService.buscarTodos();
+
+        for (Videojuego videojuego : videojuegos) {
+            double nuevoPrecio = videojuego.getPrecioFicha() + (videojuego.getPrecioFicha() * porcentaje) / 100;
+            videojuegoService.nuevoPrecioFicha(videojuego.getId(), nuevoPrecio);
+        }
+    }
+
+    public void rebajarFicha(Double porcentaje) throws SpringException {
+
+        List<Videojuego> videojuegos = videojuegoService.buscarTodos();
+
+        for (Videojuego videojuego : videojuegos) {
+            double nuevoPrecio = videojuego.getPrecioFicha() - (videojuego.getPrecioFicha() * porcentaje) / 100;
+            videojuegoService.nuevoPrecioFicha(videojuego.getId(), nuevoPrecio);
+        }
+    }
+
+    public void simularJuegos(Cliente dto, int repetir) throws SpringException {
+        int v, c;
+        
+        List<Cliente> clientes = clienteService.buscarTodos();
+        List<Videojuego> videojuegos = videojuegoService.buscarTodos();
+        
+        for (int i = 0; i <= (repetir - 1); i++) {
+            v = (int) Math.random() * (videojuegos.size() + 1);
+            c = (int) Math.random() * (clientes.size() + 1);
+            
+            if (dto.getTarjeta().getSaldo() >= videojuegos.get(v).getPrecioFicha()){
+                videojuegoService.jugar(clientes.get(c).getDni(), videojuegos.get(v).getId());
+            }
+        }
+    }
 }

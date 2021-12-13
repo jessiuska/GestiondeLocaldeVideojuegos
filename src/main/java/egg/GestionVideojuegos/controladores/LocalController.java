@@ -65,11 +65,22 @@ public class LocalController {
     public RedirectView cierreCaja(RedirectAttributes attributes)  {
         try {
             localService.cerrarCaja();
-            attributes.addFlashAttribute("exito", "El cierre de caja ha sido realizado correctamente");
+            attributes.addFlashAttribute("exito", "El cierre de caja ha sido realizado correctamente.");
         } catch (SpringException e) {
             attributes.addFlashAttribute("error", e.getMessage());
         }
         return new RedirectView("/home");
 
+    }
+    
+    @PostMapping("/cambiar-tarjeta")
+    public RedirectView cambiarTarjeta(@ModelAttribute Cliente cliente, RedirectAttributes attributes)  {
+        try {
+            clienteService.cambiarTarjeta(cliente);
+            attributes.addFlashAttribute("exito", "El cambio de tarjeta ha sido realizado correctamente.");
+        } catch (SpringException e) {
+            attributes.addFlashAttribute("error", e.getMessage());
+        }
+        return new RedirectView("/home");
     }
 }

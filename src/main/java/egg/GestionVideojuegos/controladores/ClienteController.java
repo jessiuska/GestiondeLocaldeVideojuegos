@@ -133,10 +133,14 @@ public class ClienteController {
         return new RedirectView("/cliente");
     }
 
-    @PostMapping("/cambiar-tarjeta{id}")
-    public RedirectView cambiarTarjeta(@ModelAttribute Cliente cliente) {
-        clienteService.cambiarTarjeta(cliente);
-
+    @PostMapping("/cambiar-tarjeta")
+    public RedirectView cambiarTarjeta(@ModelAttribute Cliente cliente, HttpSession session, RedirectAttributes attributes) {
+        try {
+            clienteService.cambiarTarjeta(cliente);
+        } catch (SpringException e) {
+            attributes.addFlashAttribute("cliente", cliente);
+            attributes.addFlashAttribute("error", e.getMessage());
+        }
         return new RedirectView("/cliente");
     }
 }
