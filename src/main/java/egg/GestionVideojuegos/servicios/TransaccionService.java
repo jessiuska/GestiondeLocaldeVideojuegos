@@ -15,7 +15,7 @@ public class TransaccionService {
     private TransaccionRepository transaccionRepository;
         
     @Transactional
-    public void crearTransaccion(String codigoOperacion, Double monto, Long dniCliente, Integer idEmpleado, Integer idVideojuego, LocalDate fechaDesde, LocalDate fechaHasta){
+    public void crearTransaccion(Integer codigoOperacion, Double monto, Long dniCliente, Integer idEmpleado, Integer idVideojuego, LocalDate fechaDesde, LocalDate fechaHasta){
     
         Transaccion transaccion = new Transaccion();
         transaccion.setTipoTransaccion(codigoOperacion);
