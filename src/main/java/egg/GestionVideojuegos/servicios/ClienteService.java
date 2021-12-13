@@ -97,7 +97,7 @@ public class ClienteService {
     }
 
     @Transactional
-    public void cambiarTarjeta(Cliente cliente) {
+    public void cambiarTarjeta(Cliente cliente) throws SpringException {
         //guardo el saldo de la tarjeta actual
         Double tempSaldo = cliente.getTarjeta().getSaldo();
 

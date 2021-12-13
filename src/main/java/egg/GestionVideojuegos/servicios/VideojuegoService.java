@@ -132,7 +132,8 @@ public class VideojuegoService {
             return recaudacion;
     }
 
-    public void nuevoPrecioFicha(Double nuevoPrecio) {
+    public void nuevoPrecioFicha(Integer idVideojuego, Double nuevoPrecio) throws SpringException {
+        Videojuego videojuego = buscarPorId(idVideojuego);
         videojuego.setPrecioFicha(nuevoPrecio);
         videoJuegoRepository.save(videojuego);
     }

@@ -74,7 +74,7 @@ public class LocalController {
     }
     
     @PostMapping("/cambiar-tarjeta")
-    public RedirectView cambiarTarjeta(RedirectAttributes attributes)  {
+    public RedirectView cambiarTarjeta(@ModelAttribute Cliente cliente, RedirectAttributes attributes)  {
         try {
             clienteService.cambiarTarjeta(cliente);
             attributes.addFlashAttribute("exito", "El cambio de tarjeta ha sido realizado correctamente.");

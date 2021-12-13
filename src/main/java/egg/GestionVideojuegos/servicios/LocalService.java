@@ -78,26 +78,27 @@ public class LocalService {
         tarjetaService.carga(dto.getTarjeta(), monto);
     }
 
-    public void aumentarFicha(Double nuevoPrecio) throws SpringException {
-
-        Local local = localRepository.findById(0).orElseThrow(() -> new SpringException(String.format(mensaje, 0)));
+    public void aumentarFicha(Double porcentaje) throws SpringException {
 
         List<Videojuego> videojuegos = videojuegoService.buscarTodos();
 
         for (Videojuego videojuego : videojuegos) {
-            nuevoPrecio += videojuegoService.nuevoPrecioFicha(videojuego.getPrecioFicha());
+            double nuevoPrecio = videojuego.getPrecioFicha() + (videojuego.getPrecioFicha() * porcentaje) / 100;
+            videojuegoService.nuevoPrecioFicha(videojuego.getId(), nuevoPrecio);
         }
-
-        videojuegoService.nuevoPrecioFicha(nuevoPrecio);
-
-        localRepository.save(local);
     }
 
-    public void rebajarFicha(Double nuevoPrecio) {
+    public void rebajarFicha(Double porcentaje) throws SpringException {
 
+        List<Videojuego> videojuegos = videojuegoService.buscarTodos();
+
+        for (Videojuego videojuego : videojuegos) {
+            double nuevoPrecio = videojuego.getPrecioFicha() - (videojuego.getPrecioFicha() * porcentaje) / 100;
+            videojuegoService.nuevoPrecioFicha(videojuego.getId(), nuevoPrecio);
+        }
     }
 
-    public void simularJuegos(int repetir) throws SpringException {
+    public void simularJuegos(Cliente dto, int repetir) throws SpringException {
         Integer v;
 //        Long min = 10000000; 
 //        Long max = 99999999;
@@ -111,7 +112,7 @@ public class LocalService {
             v = (int) Math.random() * videojuegos.size();
             c = rd.nextLong();
 
-            if (tarjetaService.consumo(cliente.getTarjeta(), 0.0) >= videojuego.getPrecioFicha()) {
+            if (tarjetaService.consumo(c, v) >= videojuego.getPrecioFicha()) {
                 videojuegoService.jugar(c, v);
             }
         }
