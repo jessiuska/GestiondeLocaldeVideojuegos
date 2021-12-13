@@ -133,7 +133,7 @@ public class ClienteController {
         return new RedirectView("/cliente");
     }
 
-    @PostMapping("/cambiar-tarjeta{id}")
+    @PostMapping("/cambiar-tarjeta")
     public RedirectView cambiarTarjeta(@ModelAttribute Cliente cliente) {
         clienteService.cambiarTarjeta(cliente);
 

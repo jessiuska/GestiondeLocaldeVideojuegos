@@ -15,6 +15,9 @@ import org.springframework.web.multipart.MultipartFile;
 public class VideojuegoService {
     @Autowired
     private VideojuegoRepository videoJuegoRepository;
+    
+    @Autowired
+    private Videojuego videojuego;
 
     @Autowired
     private FotoService fotoService;
@@ -127,6 +130,11 @@ public class VideojuegoService {
             videoJuegoRepository.save(videojuego);
 
             return recaudacion;
+    }
+
+    public void nuevoPrecioFicha(Double nuevoPrecio) {
+        videojuego.setPrecioFicha(nuevoPrecio);
+        videoJuegoRepository.save(videojuego);
     }
 
 }
