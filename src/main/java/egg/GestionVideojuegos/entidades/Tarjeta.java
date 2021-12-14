@@ -27,7 +27,6 @@ public class Tarjeta {
     private LocalDateTime fechaAlta;
 
     @LastModifiedDate    
-    @Column(nullable = false)
     private LocalDateTime fechaModificacion;
     
     private Boolean alta;
