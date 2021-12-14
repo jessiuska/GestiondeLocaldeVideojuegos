@@ -105,7 +105,7 @@ public class VideojuegoService {
 	//actualizo la recaudación del videojuego
         recaudar(idVideojuego, precioFicha);
         
-        
+        transaccionService.crearTransaccion(2, precioFicha, dniCliente, null, idVideojuego, null, null);
 
     }
 

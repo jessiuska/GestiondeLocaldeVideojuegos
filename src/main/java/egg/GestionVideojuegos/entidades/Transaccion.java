@@ -38,7 +38,7 @@ public class Transaccion {
     @Column(nullable = true)
     private Integer idVideojuego;
     
-    @Column(nullable = false)
+    @Column(nullable = true)
     private Double monto;
     
     @CreatedDate
