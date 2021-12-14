@@ -32,7 +32,7 @@ public class Transaccion {
     @Column(nullable = true)
     private Long dniCliente;
     
-    @Column(nullable = false)
+    @Column(nullable = true)
     private Integer idEmpleado;
     
     @Column(nullable = true)
