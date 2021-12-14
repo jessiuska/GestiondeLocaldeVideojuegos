@@ -1,0 +1,143 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap');
+
+body {
+    font-family: 'Poppins', sans-serif;
+}
+
+nav, footer, .dropdown-menu {
+    background-image: radial-gradient(circle farthest-corner at 10% 20%, rgba(226, 73, 124, 1) 0.1%, rgba(0, 0, 10, 1) 94.2%);
+}
+
+.index-empleados {
+    background-image: url(../img/arcade1.jpg);
+    background-position: left;
+    background-size: cover;
+    background-repeat: no-repeat;
+     width: 33%;
+    height: 200px;
+}
+
+@media (max-width: 992px) {
+    .index-empleados {
+        background-position: top;
+        width: 100%;
+        height: 500px;
+    }
+}
+
+.index-clientes {
+    background-image: url(../img/arcade2.jpg);
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    width: 33%;
+    height: 200px;
+}
+
+@media (max-width: 992px) {
+    .index-clientes {
+        background-position: top;
+        width: 100%;
+        height: 500px;
+    }
+}
+
+.index-transaccion {
+    background-image: url(../img/arcade2.jpg);
+    background-position: right;
+    background-size: cover;
+    background-repeat: no-repeat;
+    width: 33%;
+    height: 200px;
+}
+
+@media (max-width: 992px) {
+    .index-transaccion {
+        background-position: top;
+        width: 100%;
+        height: 500px;
+    }
+}
+
+.index-videojuego {
+    background-image: url(../img/arcade4.jpg);
+    background-position: left;
+    background-size: cover;
+    background-repeat: no-repeat;
+    width: 33%;
+    height: 200px;
+}
+
+@media (max-width: 992px) {
+    .index-videojuego {
+        background-position: top;
+        width: 100%;
+        height: 500px;
+    }
+}
+
+.index-tarjeta {
+    background-image: url(../img/arcade2.jpg);
+    background-position: left;
+    background-size: cover;
+    background-repeat: no-repeat;
+    width: 33%;
+    height: 200px;
+}
+
+@media (max-width: 992px) {
+    .index-tarjeta {
+        background-position: top;
+        width: 100%;
+        height: 500px;
+    }
+}
+
+
+.index-local {
+    background-image: url(../img/arcade2.jpg);
+    background-position: left;
+    background-size: cover;
+    background-repeat: no-repeat;
+    width: 33%;
+    height: 200px;
+}
+
+@media (max-width: 992px) {
+    .index-local {
+        background-position: top;
+        width: 100%;
+        height: 500px;
+    }
+}
+
+
+.clickable-card {
+    transition: all .6s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+.clickable-card:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0 5px 2px rgba(0, 0, 0, .15);
+}
+
+@media (max-width: 992px) {
+    .clickable-card:hover {
+        transform: scale(1.03);
+    }
+}
+
+.clickable-card > a {
+    color: black;
+}
+
+.main {
+    margin-bottom: 4rem !important;
+}
+
+.error {
+    width: 100%;
+    margin-top: 0.25rem;
+    font-size: 0.875em;
+    color: red;
+}

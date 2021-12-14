@@ -1,24 +1,103 @@
 <!DOCTYPE html>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
-<html xmlns:th="http://www.thymeleaf.org" 
-      xmlns="http://www.w3.org/1999/xhtml">
-    <head th:fragment="head">
-        <title>Plantilla</title>
-        <meta charset="UTF-8"/>
-        <link rel="stylesheet" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}"/>
-        <link rel="stylesheet" th:href="@{/webjars/font-awesome/css/all.css}"/>
-        <script th:src="@{/webjars/jquery/jquery.min.js}"></script>
-
+<html lang="es" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
     <head>
-        <title>TODO supply a title</title>
+    <head>
+        <title>Inicio6</title>
         <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <!-- BOOTSTRAP -->
+        <link rel="stylesheet" th:href="@{/assets/bootstrap.min.css}"/>
+        <!-- CSS -->
+        <link rel="stylesheet" th:href="@{/css/style.css}"/>
     </head>
     <body>
-        <div>Hola mundo desde index</div>
+        <nav th:replace="fragments/navbar :: navbar"></nav>
+
+        <div class="container mt-5 main">
+            <div class="row my-auto g-4 justify-content-evenly">
+                <div class="card col-lg-5 p-0 clickable-card">
+                    <a class="text-decoration-none" th:href="@{/empleado}">
+                        <div class="row g-0">
+                            <div class="col-md-4 index-empleados"></div>
+                            <div class="col-md-8">
+                                <div class="card-body">
+                                    <h5 class="card-title">EMPLEADOS</h5>
+                                    <p class="card-text">Acceda a la página de empleados</p>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="card col-lg-5 p-0 clickable-card">
+                    <a class="text-decoration-none" th:href="@{/cliente}">
+                        <div class="row g-0">
+                            <div class="col-md-4 index-clientes"></div>
+                            <div class="col-md-8">
+                                <div class="card-body">
+                                    <h5 class="card-title">CLIENTES</h5>
+                                    <p class="card-text">Acceda a la página de clientes</p>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div class="card col-lg-5 p-0 clickable-card">
+                    <a class="text-decoration-none" th:href="@{/transaccion}">
+                        <div class="row g-0">
+                            <div class="col-md-4 index-transaccion"></div>
+                            <div class="col-md-8">
+                                <div class="card-body">
+                                    <h5 class="card-title">TRANSACCION</h5>
+                                    <p class="card-text">Acceda a la página de transaccion</p>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div class="card col-lg-5 p-0 clickable-card">
+                    <a class="text-decoration-none" th:href="@{/videojuego}">
+                        <div class="row g-0">
+                            <div class="col-md-4 index-videojuego"></div>
+                            <div class="col-md-8">
+                                <div class="card-body">
+                                    <h5 class="card-title">VIDEOJUEGOS</h5>
+                                    <p class="card-text">Acceda a la página de videojuegos</p>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div class="card col-lg-5 p-0 clickable-card">
+                    <a class="text-decoration-none" th:href="@{/tarjeta}">
+                        <div class="row g-0">
+                            <div class="col-md-4 index-tarjeta"></div>
+                            <div class="col-md-8">
+                                <div class="card-body">
+                                    <h5 class="card-title">TARJETA</h5>
+                                    <p class="card-text">Acceda a la página de tarjeta</p>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </div><!-- comment -->
+                <div class="card col-lg-5 p-0 clickable-card">
+                    <a class="text-decoration-none" th:href="@{/local}">
+                        <div class="row g-0">
+                            <div class="col-md-4 index-local"></div>
+                            <div class="col-md-8">
+                                <div class="card-body">
+                                    <h5 class="card-title">LOCAL</h5>
+                                    <p class="card-text">Acceda a la página de Local</p>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <footer th:replace="fragments/footer :: footer"></footer>        
+        <script th:src="@{/assets/bootstrap.bundle.min.js}"></script>
     </body>
 </html>
