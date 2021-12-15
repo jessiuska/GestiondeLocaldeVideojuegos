@@ -4,6 +4,8 @@ import egg.GestionVideojuegos.entidades.Cliente;
 import egg.GestionVideojuegos.excepciones.SpringException;
 import egg.GestionVideojuegos.servicios.ClienteService;
 import egg.GestionVideojuegos.servicios.LocalService;
+import egg.GestionVideojuegos.servicios.TransaccionService;
+import egg.GestionVideojuegos.servicios.VideojuegoService;
 import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +30,12 @@ public class LocalController {
 
     @Autowired
     private ClienteService clienteService;
+    
+    @Autowired
+    private VideojuegoService videojuegoService;
+    
+    @Autowired
+    private TransaccionService transaccionService;
 
     @GetMapping("/carga")
     public ModelAndView cargaSaldo(HttpServletRequest request) {
@@ -74,7 +82,7 @@ public class LocalController {
     }
     
     @PostMapping("/cambiar-tarjeta")
-    public RedirectView cambiarTarjeta(RedirectAttributes attributes)  {
+    public RedirectView cambiarTarjeta(@ModelAttribute Cliente cliente, RedirectAttributes attributes)  {
         try {
             clienteService.cambiarTarjeta(cliente);
             attributes.addFlashAttribute("exito", "El cambio de tarjeta ha sido realizado correctamente.");
@@ -83,4 +91,50 @@ public class LocalController {
         }
         return new RedirectView("/home");
     }
+    
+    @GetMapping("/jugar")
+    public ModelAndView simulacionJugada(HttpServletRequest request) {
+        ModelAndView mav = new ModelAndView("simulador");
+
+        Map<String, ?> flashMap = RequestContextUtils.getInputFlashMap(request);
+
+        if (flashMap != null) {
+            mav.addObject("exito", flashMap.get("exito"));
+            mav.addObject("error", flashMap.get("error"));
+        }
+
+        mav.addObject("clientes", clienteService.buscarTodos());
+        mav.addObject("videojuegos", videojuegoService.buscarTodos());
+        return mav;
+
+    }
+    
+    @PostMapping("/simular")
+    public RedirectView simularJugada(Long dniCliente,Integer idVideojuego, RedirectAttributes attributes)  {
+        try {
+            videojuegoService.jugar(dniCliente, idVideojuego);
+            attributes.addFlashAttribute("exito", "La partida ha sido exitosa.");
+        } catch (SpringException e) {
+            attributes.addFlashAttribute("error", e.getMessage());
+        }
+        return new RedirectView("/simulador");
+    }
+    
+     @GetMapping("/cierres")
+    public ModelAndView consultaCierres(HttpServletRequest request) {
+        ModelAndView mav = new ModelAndView("cierres");
+
+        Map<String, ?> flashMap = RequestContextUtils.getInputFlashMap(request);
+
+        if (flashMap != null) {
+            mav.addObject("exito", flashMap.get("exito"));
+            mav.addObject("error", flashMap.get("error"));
+        }
+       
+        mav.addObject("transacciones", transaccionService.buscarTodos());
+        
+        return mav;
+    }
+    
+    
 }

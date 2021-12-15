@@ -34,20 +34,19 @@ public class TarjetaService {
 
     @Transactional
     // precioficha
-    public void consumo(Tarjeta dto, Double precioFicha) throws SpringException {
-        Tarjeta tarjeta = buscarPorId(dto.getId());
-
-        tarjeta.setSaldo(dto.getSaldo()-precioFicha);
-        tarjetaRepository.save(tarjeta);
+    public boolean consumo(Tarjeta dto, Double precioFicha) throws SpringException {
+        
+        if (dto.getSaldo()<precioFicha) return false;
+        dto.setSaldo(dto.getSaldo()-precioFicha);
+        tarjetaRepository.save(dto);
+        return true;
     }
 
     @Transactional
     public void carga (Tarjeta dto, Double saldo) throws SpringException {
-        Tarjeta tarjeta = buscarPorId(dto.getId());
-
-        tarjeta.setSaldo(dto.getSaldo()+saldo);
+        dto.setSaldo(dto.getSaldo()+saldo);
         
-        tarjetaRepository.save(tarjeta);
+        tarjetaRepository.save(dto);
     }
 
     @Transactional(readOnly = true)

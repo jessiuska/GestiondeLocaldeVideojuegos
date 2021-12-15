@@ -27,19 +27,18 @@ public class Transaccion {
     private Integer id;
     
     @Column(nullable = false)
-    @Enumerated(EnumType.STRING)
-    private String tipoTransaccion;
+    private Integer tipoTransaccion;
     
     @Column(nullable = true)
     private Long dniCliente;
     
-    @Column(nullable = false)
+    @Column(nullable = true)
     private Integer idEmpleado;
     
     @Column(nullable = true)
     private Integer idVideojuego;
     
-    @Column(nullable = false)
+    @Column(nullable = true)
     private Double monto;
     
     @CreatedDate

@@ -3,6 +3,7 @@ package egg.GestionVideojuegos.servicios;
 import egg.GestionVideojuegos.entidades.Transaccion;
 import egg.GestionVideojuegos.repositorios.TransaccionRepository;
 import java.time.LocalDate;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -15,7 +16,7 @@ public class TransaccionService {
     private TransaccionRepository transaccionRepository;
         
     @Transactional
-    public void crearTransaccion(String codigoOperacion, Double monto, Long dniCliente, Integer idEmpleado, Integer idVideojuego, LocalDate fechaDesde, LocalDate fechaHasta){
+    public void crearTransaccion(Integer codigoOperacion, Double monto, Long dniCliente, Integer idEmpleado, Integer idVideojuego, LocalDate fechaDesde, LocalDate fechaHasta){
     
         Transaccion transaccion = new Transaccion();
         transaccion.setTipoTransaccion(codigoOperacion);
@@ -39,5 +40,11 @@ public class TransaccionService {
         
         transaccionRepository.save(transaccion);
     } 
+    
+    @Transactional(readOnly = true)
+    public List<Transaccion> buscarTodos() {
+        return transaccionRepository.findAll();
+    }
+
     
 }
