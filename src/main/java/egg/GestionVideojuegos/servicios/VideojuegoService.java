@@ -98,15 +98,17 @@ public class VideojuegoService {
 
 	//averiguo el precio de la ficha del videojuego
 	double precioFicha = videojuego.getPrecioFicha();
-
-        //se descuenta de la tarjeta el precioFicha para jugar
-	tarjetaService.consumo(cliente.getTarjeta(), precioFicha);
 	
-	//actualizo la recaudación del videojuego
-        recaudar(idVideojuego, precioFicha);
-        
-        transaccionService.crearTransaccion(2, precioFicha, dniCliente, null, idVideojuego, null, null);
+        if (tarjetaService.consumo(cliente.getTarjeta(), precioFicha)) {
+            //actualizo la recaudación del videojuego
+            recaudar(idVideojuego, precioFicha);
 
+            transaccionService.crearTransaccion(2, precioFicha, dniCliente, null, idVideojuego, null, null);
+
+        } else {
+            throw new SpringException("La tarjeta no tiene saldo suficiente");
+        }
+	
     }
 
     public Double cerrar(Integer idVideojuego) throws SpringException {
