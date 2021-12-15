@@ -28,8 +28,9 @@ public class LocalService {
     @Autowired
     private TarjetaService tarjetaService;
 
-    /*@Autowired
-    private TransaccionService transaccionService;*/
+    @Autowired
+    private TransaccionService transaccionService;
+    
     private String mensaje = "No existe ningún local asociado con el ID %s";
 
     @Transactional
@@ -70,12 +71,16 @@ public class LocalService {
         local.setFechaUltimoCierre(ahora);
 
         localRepository.save(local);
+        
+        transaccionService.crearTransaccion(4, totalRecaudacion, null,0, null, null, null);
     }
 
     @Transactional
     public void cargarTarjeta(Cliente dto, Double monto) throws SpringException {
 
         tarjetaService.carga(dto.getTarjeta(), monto);
+        
+        transaccionService.crearTransaccion(1, monto, dto.getDni(),0 , null, null, null);
     }
 
     public void aumentarFicha(Double porcentaje) throws SpringException {
@@ -105,8 +110,8 @@ public class LocalService {
         List<Videojuego> videojuegos = videojuegoService.buscarTodos();
         
         for (int i = 0; i <= (repetir - 1); i++) {
-            v = (int) Math.random() * (videojuegos.size() + 1);
-            c = (int) Math.random() * (clientes.size() + 1);
+            v = (int) (Math.random() * videojuegos.size() + 1);
+            c = (int) (Math.random() * clientes.size() + 1);
             
             if (dto.getTarjeta().getSaldo() >= videojuegos.get(v).getPrecioFicha()){
                 videojuegoService.jugar(clientes.get(c).getDni(), videojuegos.get(v).getId());
