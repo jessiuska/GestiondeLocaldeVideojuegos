@@ -30,10 +30,10 @@ public class LocalController {
 
     @Autowired
     private ClienteService clienteService;
-    
+
     @Autowired
     private VideojuegoService videojuegoService;
-    
+
     @Autowired
     private TransaccionService transaccionService;
 
@@ -48,6 +48,7 @@ public class LocalController {
             mav.addObject("error", flashMap.get("error"));
         }
 
+        mav.addObject("title", "Carga de saldo");
         mav.addObject("clientes", clienteService.buscarTodos());
         return mav;
 
@@ -70,7 +71,7 @@ public class LocalController {
     }
 
     @PostMapping("/cierre")
-    public RedirectView cierreCaja(RedirectAttributes attributes)  {
+    public RedirectView cierreCaja(RedirectAttributes attributes) {
         try {
             localService.cerrarCaja();
             attributes.addFlashAttribute("exito", "El cierre de caja ha sido realizado correctamente.");
@@ -80,9 +81,9 @@ public class LocalController {
         return new RedirectView("/home");
 
     }
-    
+
     @PostMapping("/cambiar-tarjeta")
-    public RedirectView cambiarTarjeta(@ModelAttribute Cliente cliente, RedirectAttributes attributes)  {
+    public RedirectView cambiarTarjeta(@ModelAttribute Cliente cliente, RedirectAttributes attributes) {
         try {
             clienteService.cambiarTarjeta(cliente);
             attributes.addFlashAttribute("exito", "El cambio de tarjeta ha sido realizado correctamente.");
@@ -91,7 +92,7 @@ public class LocalController {
         }
         return new RedirectView("/home");
     }
-    
+
     @GetMapping("/jugar")
     public ModelAndView simulacionJugada(HttpServletRequest request) {
         ModelAndView mav = new ModelAndView("simulador");
@@ -103,14 +104,15 @@ public class LocalController {
             mav.addObject("error", flashMap.get("error"));
         }
 
+        mav.addObject("title", "Simular juego");
         mav.addObject("clientes", clienteService.buscarTodos());
         mav.addObject("videojuegos", videojuegoService.buscarTodos());
         return mav;
 
     }
-    
+
     @PostMapping("/simular")
-    public RedirectView simularJugada(Long dniCliente,Integer idVideojuego, RedirectAttributes attributes)  {
+    public RedirectView simularJugada(Long dniCliente, Integer idVideojuego, RedirectAttributes attributes) {
         try {
             videojuegoService.jugar(dniCliente, idVideojuego);
             attributes.addFlashAttribute("exito", "La partida ha sido exitosa.");
@@ -119,8 +121,8 @@ public class LocalController {
         }
         return new RedirectView("/simulador");
     }
-    
-     @GetMapping("/cierres")
+
+    @GetMapping("/cierres")
     public ModelAndView consultaCierres(HttpServletRequest request) {
         ModelAndView mav = new ModelAndView("cierres");
 
@@ -130,11 +132,11 @@ public class LocalController {
             mav.addObject("exito", flashMap.get("exito"));
             mav.addObject("error", flashMap.get("error"));
         }
-       
-        mav.addObject("transacciones", transaccionService.buscarTodos());
-        
+
+        mav.addObject("title", "Recaudación - Lista de cierres de caja");
+        mav.addObject("cierres", transaccionService.buscarTodos());
+
         return mav;
     }
-    
-    
+
 }
