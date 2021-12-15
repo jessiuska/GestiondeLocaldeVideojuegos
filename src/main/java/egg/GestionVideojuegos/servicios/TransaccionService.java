@@ -3,6 +3,7 @@ package egg.GestionVideojuegos.servicios;
 import egg.GestionVideojuegos.entidades.Transaccion;
 import egg.GestionVideojuegos.repositorios.TransaccionRepository;
 import java.time.LocalDate;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -39,5 +40,11 @@ public class TransaccionService {
         
         transaccionRepository.save(transaccion);
     } 
+    
+    @Transactional(readOnly = true)
+    public List<Transaccion> buscarTodos() {
+        return transaccionRepository.findAll();
+    }
+
     
 }
