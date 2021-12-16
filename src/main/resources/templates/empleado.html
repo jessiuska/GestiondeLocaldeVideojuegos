@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security"></html>
+    <head>
+        <meta charset="UTF-8"/>
+        <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+        <meta content="ie=edge" http-equiv="X-UA-Compatible"/>
+        
+        <title>Videojuegos </title>
+        
+        <!-- BOOTSTRAP -->
+        <link rel="stylesheet" th:href="@{/assets/bootstrap.min.css}"/>
+        <!-- CSS -->
+        <link rel="stylesheet" th:href="@{/css/style2.css}"/>
+        
+    </head>
+    
+    <body>
+        <nav th:replace="fragments/navbar :: navbar"></nav>
+
+        <div class="container mt-5 main">
+            <div class="alert alert-success" th:if="${exito}" th:text="${exito}"></div>
+            <div class="alert alert-danger col-xl-6" th:if="${error}" th:text="${error}"></div>
+            <h1>Listado de Empleados</h1>
+            <hr class="mb-4"/>
+            <div th:if="${empleados.isEmpty()}">
+             <!--USAR ESTE NETBEANS   <h5>Todavía no hay empleados cargados.  <a th:href="@{/empleado/crear}">Cargar Empleado.</a></h5>  -->  
+             <h5>Todavía no hay empleados cargados.  <a href="empleado-formulario.html">Cargar Empleado.</a></h5> 
+            </div>
+
+            <a th:href="@{/empleado/crear}" th:unless="${empleados.isEmpty()}" class="btn btn-success mb-4">Ingresar Empleados</a>
+            <div class="row" th:unless="${empleados.isEmpty()}">
+                <div class="col-3" th:each="empleado : ${empleados}">
+                    <div class="card mb-4 shadow">
+                        <div class="card-body text-center my-2">
+                            <img class="rounded-circle"
+                                 th:src="${empleado.image != null} ? @{/uploads/__${autor.image}__} : @{/uploads/foto-no-disponible.png}"
+                                 width="165">
+                        </div>
+                        <div class="card-footer">
+                            <div th:text="|Nombre ${empleado.nombre}|">Nombre</div>
+                            <div th:text="|Apellido ${empleado.apellido}|">Apellido</div>
+                            <div th:text="|Usuario ${empleado.usuario}|">Usuario</div>
+                            <div th:text="|Alta ${empleado.alta}|">Alta</div>
+                            <div class="d-flex justify-content-start my-2">
+                                <a class="btn btn-warning btn-sm me-2" th:href="@{/empleado/editar/__${empleado.id}__}">Editar</a>
+                                <form th:action="${empleado.alta} ? @{/empleado/eliminar/__${empleado.id}__} : @{/empleado/habilitar/__${empleado.id}__}"
+                                      method="POST">
+                                    <button th:class="${empleado.alta} ? 'btn btn-danger btn-sm' : 'btn btn-primary btn-sm'"
+                                            type="submit" th:text="${empleado.alta} ? 'Eliminar' : 'Habilitar'">
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <footer th:replace="fragments/footer :: footer"></footer>
+
+        <!-- JS -->
+        <script th:src="@{/assets/bootstrap.bundle.min.js}"></script>
+    </body>
+</html>
