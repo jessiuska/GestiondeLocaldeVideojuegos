@@ -60,6 +60,9 @@
                                 <form th:unless="${cliente.alta}" method="post" th:action="@{/cliente/habilitar/__${cliente.dni}__}">
                                     <button class="btn btn-success btn-sm" type="submit">Habilitar</button>
                                 </form>
+                                <form method="post" th:action="@{/cliente/cambiar-tarjeta/__${cliente}__}">
+                                    <button class="btn btn-warning btn-sm" type="submit">Cambiar tarjeta</button>
+                                </form>
                             </td>
                         </tr>
                     </tbody>

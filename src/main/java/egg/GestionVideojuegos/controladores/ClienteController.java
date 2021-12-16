@@ -138,6 +138,7 @@ public class ClienteController {
         try {
             clienteService.cambiarTarjeta(cliente);
             attributes.addFlashAttribute("exito", "El cambio de tarjeta se realizó correctamente");
+            System.out.println("Se cambia tarjeta con ID=" + cliente.getTarjeta().getId() + " para cliente DNI=" + cliente.getDni());
         } catch (SpringException e) {
             attributes.addFlashAttribute("cliente", cliente);
             attributes.addFlashAttribute("error", e.getMessage());

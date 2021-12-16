@@ -73,6 +73,12 @@
                         <li>
                             <a class="dropdown-item text-white" th:href="@{/videojuego/ranking}">Ranking </a>
                         </li>
+                        <li>
+                            <form action="/videojuego/simular-varios" method="POST">
+                                <input name="repetir" value="10" type="hidden"/>
+                                <button class="dropdown-item text-white" type="submit">Simular 10 juegos</button>
+                            </form>
+                        </li>
                     </ul>
                 </li>
                 

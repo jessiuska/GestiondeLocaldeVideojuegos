@@ -112,35 +112,4 @@ public class LocalController {
         return new RedirectView("/home");
     }
 
-    @GetMapping("/jugar")
-    public ModelAndView simulacionJugada(HttpServletRequest request) {
-        ModelAndView mav = new ModelAndView("simulador");
-
-        Map<String, ?> flashMap = RequestContextUtils.getInputFlashMap(request);
-
-        if (flashMap != null) {
-            mav.addObject("exito", flashMap.get("exito"));
-            mav.addObject("error", flashMap.get("error"));
-        }
-
-        mav.addObject("title", "Simular juego");
-        mav.addObject("clientes", clienteService.buscarTodos());
-        mav.addObject("videojuegos", videojuegoService.buscarTodos());
-        return mav;
-
-    }
-
-    @PostMapping("/simular")
-    public RedirectView simularJugada(Long dniCliente, Integer idVideojuego, RedirectAttributes attributes) {
-        try {
-            videojuegoService.jugar(dniCliente, idVideojuego);
-            attributes.addFlashAttribute("exito", "La partida ha sido exitosa.");
-        } catch (SpringException e) {
-            attributes.addFlashAttribute("error", e.getMessage());
-        }
-        return new RedirectView("/simulador");
-    }
-
-
-
 }

@@ -98,21 +98,5 @@ public class LocalService {
             videojuegoService.nuevoPrecioFicha(videojuego.getId(), nuevoPrecio);
         }
     }
-
-    public void simularJuegos(Cliente dto, int repetir) throws SpringException {
-        int v, c;
-        
-        List<Cliente> clientes = clienteService.buscarTodos();
-        List<Videojuego> videojuegos = videojuegoService.buscarTodos();
-        
-        for (int i = 0; i <= (repetir - 1); i++) {
-            v = (int) (Math.random() * videojuegos.size() + 1);
-            c = (int) (Math.random() * clientes.size() + 1);
-            
-            if (dto.getTarjeta().getSaldo() >= videojuegos.get(v).getPrecioFicha()){
-                videojuegoService.jugar(clientes.get(c).getDni(), videojuegos.get(v).getId());
-            }
-        }
-    }
     
 }

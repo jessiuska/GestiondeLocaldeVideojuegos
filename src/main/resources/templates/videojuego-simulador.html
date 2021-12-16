@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+    <head th:replace="fragments/head :: head"></head>
+
+    <body>
+        <nav th:replace="fragments/navbar :: navbar"></nav>
+
+        <!-- Mensajes de error y éxito -->
+        <div th:if="${error}" class="container d-flex justify-content-center">
+            <div class="row col-md-4 mx-auto position-fixed" style="padding-top: 5%;">
+                <div th:text="${error}" class="alert alert-danger m-0 shadow"></div>
+            </div>
+        </div>
+
+        <div th:if="${exito}" class="container d-flex justify-content-center">
+            <div class="row col-md-4 mx-auto position-fixed" style="padding-top: 5%;">
+                <div th:text="${exito}" class="alert alert-success m-0 shadow"></div>
+            </div>
+        </div>
+
+        <!-- main container -->
+        <div class="container mt-5 main">
+            <h1 th:text="${title}"></h1>
+            <hr class="mb-5 col-xl-12"/>
+            <form autocomplete="off" class="needs-validation" id="formulario" method="POST"
+                  novalidate action="/videojuego/simular">
+
+                <div class="form-floating mb-3 col-xl-6">
+                    <select aria-label="Elegir cliente" class="form-select" id="cliente" name="dnicliente" required>
+                        <option selected value="">Elegir cliente</option>
+                        <option th:each="cliente : ${clientes}" th:text="|${cliente.nombre} ${cliente.apellido}|"
+                                th:value="${cliente.dni}"></option>
+                    </select>
+                    <label for="cliente">Cliente</label>
+                    <div class="invalid-feedback">El cliente es obligatorio</div>
+                </div>
+
+                <div class="form-floating mb-3 col-xl-6">
+                    <select aria-label="Elegir videojuego" class="form-select" id="videojuego" name="idvideojuego" required>
+                        <option selected value="">Elegir videojuego</option>
+                        <option th:each="videojuego : ${videojuegos}" th:text="|${videojuego.nombre} ($ ${videojuego.precioFicha})|"
+                                th:value="${videojuego.id}"></option>
+                    </select>
+                    <label for="videojuego">Videojuego</label>
+                    <div class="invalid-feedback">El videojuego es obligatorio</div>
+                </div>
+
+                <div class="row">
+                    <div class="col-xl-3">
+                        <button class="btn btn-success" type="submit">Jugar</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+        <!-- footer -->
+        <footer th:replace="fragments/footer :: footer"></footer>
+    </body>
+</html>
