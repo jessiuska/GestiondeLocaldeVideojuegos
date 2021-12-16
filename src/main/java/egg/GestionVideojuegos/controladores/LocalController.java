@@ -8,6 +8,7 @@ import egg.GestionVideojuegos.servicios.TransaccionService;
 import egg.GestionVideojuegos.servicios.VideojuegoService;
 import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -70,10 +71,28 @@ public class LocalController {
         return redirectView;
     }
 
+    @GetMapping("/cierres")
+    public ModelAndView consultaCierres(HttpServletRequest request) {
+        ModelAndView mav = new ModelAndView("cierres");
+
+        Map<String, ?> flashMap = RequestContextUtils.getInputFlashMap(request);
+
+        if (flashMap != null) {
+            mav.addObject("exito", flashMap.get("exito"));
+            mav.addObject("error", flashMap.get("error"));
+        }
+
+        mav.addObject("title", "Recaudación - Lista de cierres de caja");
+        mav.addObject("cierres", transaccionService.buscarTodos());
+
+        return mav;
+    }
+    
     @PostMapping("/cierre")
-    public RedirectView cierreCaja(RedirectAttributes attributes) {
+    public RedirectView cierreCaja(HttpSession session, RedirectAttributes attributes) {
         try {
-            localService.cerrarCaja();
+            int idEmpleado = Integer.valueOf(session.getId()); //Es un string
+            localService.cerrarCaja(idEmpleado);
             attributes.addFlashAttribute("exito", "El cierre de caja ha sido realizado correctamente.");
         } catch (SpringException e) {
             attributes.addFlashAttribute("error", e.getMessage());
@@ -122,21 +141,6 @@ public class LocalController {
         return new RedirectView("/simulador");
     }
 
-    @GetMapping("/cierres")
-    public ModelAndView consultaCierres(HttpServletRequest request) {
-        ModelAndView mav = new ModelAndView("cierres");
 
-        Map<String, ?> flashMap = RequestContextUtils.getInputFlashMap(request);
-
-        if (flashMap != null) {
-            mav.addObject("exito", flashMap.get("exito"));
-            mav.addObject("error", flashMap.get("error"));
-        }
-
-        mav.addObject("title", "Recaudación - Lista de cierres de caja");
-        mav.addObject("cierres", transaccionService.buscarTodos());
-
-        return mav;
-    }
 
 }

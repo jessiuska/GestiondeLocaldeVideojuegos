@@ -5,10 +5,8 @@ import egg.GestionVideojuegos.entidades.Local;
 import egg.GestionVideojuegos.entidades.Videojuego;
 import egg.GestionVideojuegos.excepciones.SpringException;
 import egg.GestionVideojuegos.repositorios.LocalRepository;
-import egg.GestionVideojuegos.repositorios.VideojuegoRepository;
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.Random;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -54,11 +52,12 @@ public class LocalService {
     }
 
     @Transactional
-    public void cerrarCaja() throws SpringException {
-        LocalDateTime ahora = LocalDateTime.now();
-
+    public void cerrarCaja(int idEmpleado) throws SpringException {
         Local local = localRepository.findById(0).orElseThrow(() -> new SpringException(String.format(mensaje, 0)));
 
+        LocalDateTime desde = local.getFechaUltimoCierre(); //la fecha del último cierre va a pasar a ser la anterior para el nuevo cierre
+        LocalDateTime ahora = LocalDateTime.now();
+        
         Double totalRecaudacion = 0.0;
 
         List<Videojuego> videojuegos = videojuegoService.buscarTodos();
@@ -68,23 +67,21 @@ public class LocalService {
         }
 
         local.setRecaudacion(totalRecaudacion);
-        local.setFechaUltimoCierre(ahora);
+        local.setFechaUltimoCierre(ahora); //ahora es la fecha del último cierre
 
         localRepository.save(local);
-        
-        transaccionService.crearTransaccion(4, totalRecaudacion, null,0, null, null, null);
+
+        //tipo, monto, dnicliente, idempleado, idvideojuego, fechadesde, fechahasta
+        transaccionService.crearTransaccion(4, totalRecaudacion, null, idEmpleado, null, desde, ahora);
     }
 
     @Transactional
     public void cargarTarjeta(Cliente dto, Double monto) throws SpringException {
-
         tarjetaService.carga(dto.getTarjeta(), monto);
-        
         transaccionService.crearTransaccion(1, monto, dto.getDni(),0 , null, null, null);
     }
 
     public void aumentarFicha(Double porcentaje) throws SpringException {
-
         List<Videojuego> videojuegos = videojuegoService.buscarTodos();
 
         for (Videojuego videojuego : videojuegos) {
@@ -94,7 +91,6 @@ public class LocalService {
     }
 
     public void rebajarFicha(Double porcentaje) throws SpringException {
-
         List<Videojuego> videojuegos = videojuegoService.buscarTodos();
 
         for (Videojuego videojuego : videojuegos) {
@@ -118,4 +114,5 @@ public class LocalService {
             }
         }
     }
+    
 }
