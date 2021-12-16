@@ -47,12 +47,12 @@
                             <th class="col-md-1 px-md-2 text-center" scope="row" th:text="${cliente.dni}"></th>
                             <td class="col-md-1 px-md-2" th:text="|${cliente.nombre} ${cliente.apellido}|"></td>
                             <td class="col-md-3 px-md-2" th:text="${#temporals.format(cliente.fechaAlta, 'dd/MM/yyyy')}"></td>
-                            <td class="col-md-1 px-md-1 text-center"><i class="bi" th:classappend="${usuario.alta ? 'bi-check-circle-fill' : 'bi-x-circle-fill'}"></i></td>
+                            <td class="col-md-1 px-md-1 text-center"><i class="bi" th:classappend="${cliente.alta ? 'bi-check-circle-fill' : 'bi-x-circle-fill'}"></i></td>
                             
                             <!--<td sec:authorize="hasRole('ADMIN')" class="col-md-1 px-md-1 d-flex justify-content-around w-100">-->
                             <!-- CAMBIAR -->
                             <td class="col-md-1 px-md-1 d-flex justify-content-around w-100">
-                                <a class="btn btn-primary btn-sm" th:href="@{/cliente/editar/__${usuario.dni}__}">Editar</a>
+                                <a class="btn btn-primary btn-sm" th:href="@{/cliente/editar/__${cliente.dni}__}">Editar</a>
 
                                 <form th:if="${cliente.alta}" method="post" th:action="@{/cliente/eliminar/__${cliente.dni}__}">
                                     <button class="btn btn-danger btn-sm" type="submit">Eliminar</button>
