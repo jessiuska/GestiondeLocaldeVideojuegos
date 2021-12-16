@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+    <head th:replace="fragments/head :: head"></head>
+
+    <body>
+        <nav th:replace="fragments/navbar :: navbar"></nav>
+
+        <!-- Mensajes de error y éxito -->
+        <div th:if="${error}" class="container d-flex justify-content-center">
+            <div class="row col-md-4 mx-auto position-fixed" style="padding-top: 5%;">
+                <div th:text="${error}" class="alert alert-danger m-0 shadow"></div>
+            </div>
+        </div>
+
+        <div th:if="${exito}" class="container d-flex justify-content-center">
+            <div class="row col-md-4 mx-auto position-fixed" style="padding-top: 5%;">
+                <div th:text="${exito}" class="alert alert-success m-0 shadow"></div>
+            </div>
+        </div>
+        
+        <!-- main container -->
+        <div class="container my-5 py-5 main">
+            <h1>Listado de clientes</h1>
+            <hr class="mb-5" />
+            <!-- si clientes viene vacío -->
+            <div th:if="${clientes.isEmpty()}">
+                <h5>No hay clientes cargados. <a th:href="@{/cliente/crear}">Crear cliente.</a></h5>
+            </div>
+            <!-- si clientes NO viene vacío -->
+            <div class="table-responsive" th:unless="${clientes.isEmpty()}">
+                <table class="table table-hover table-sm table-bordered align-middle">
+                    <thead class="table-secondary text-center">
+                        <tr>
+                            <th class="col-md-1 ps-2" scope="col">DNI</th>
+                            <th class="col-md-1 px-md-2" scope="col">Nombre</th>
+                            <!--<th class="col-md-1 px-md-2" scope="col">Apellido</th>-->
+                            <!--<th class="col-md-1 px-md-2" scope="col">Rol</th>-->
+                            <th class="col-md-1 px-md-2" scope="col">Fecha alta</th>
+                            <th class="col-md-1 px-md-1" scope="col">Activo</th>
+                            <!--<th sec:authorize="hasRole('ADMIN')" class="col-md-1 px-md-1" scope="col">Acciones</th>-->
+                            <!--CAMBIAR-->
+                            <th class="col-md-1 px-md-1" scope="col">Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="cliente : ${clientes}">
+                            <th class="col-md-1 px-md-2 text-center" scope="row" th:text="${cliente.dni}"></th>
+                            <td class="col-md-1 px-md-2" th:text="|${cliente.nombre} ${cliente.apellido}|"></td>
+                            <td class="col-md-3 px-md-2" th:text="${#temporals.format(cliente.fechaAlta, 'dd/MM/yyyy')}"></td>
+                            <td class="col-md-1 px-md-1 text-center"><i class="bi" th:classappend="${usuario.alta ? 'bi-check-circle-fill' : 'bi-x-circle-fill'}"></i></td>
+                            
+                            <!--<td sec:authorize="hasRole('ADMIN')" class="col-md-1 px-md-1 d-flex justify-content-around w-100">-->
+                            <!-- CAMBIAR -->
+                            <td class="col-md-1 px-md-1 d-flex justify-content-around w-100">
+                                <a class="btn btn-primary btn-sm" th:href="@{/cliente/editar/__${usuario.dni}__}">Editar</a>
+
+                                <form th:if="${cliente.alta}" method="post" th:action="@{/cliente/eliminar/__${cliente.dni}__}">
+                                    <button class="btn btn-danger btn-sm" type="submit">Eliminar</button>
+                                </form>
+                                <form th:unless="${cliente.alta}" method="post" th:action="@{/cliente/habilitar/__${cliente.dni}__}">
+                                    <button class="btn btn-success btn-sm" type="submit">Habilitar</button>
+                                </form>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- footer -->
+        <footer th:replace="fragments/footer :: footer"></footer>
+    </body>
+</html>

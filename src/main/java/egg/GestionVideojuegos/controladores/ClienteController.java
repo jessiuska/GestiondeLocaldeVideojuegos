@@ -91,7 +91,7 @@ public class ClienteController {
 
         try {
             clienteService.crear(cliente);
-            attributes.addFlashAttribute("exito", "La creación ha sido realizada satisfactoriamente");
+            attributes.addFlashAttribute("exito", "El cliente se creó con éxito");
         } catch (SpringException e) {
             attributes.addFlashAttribute("cliente", cliente);
             attributes.addFlashAttribute("error", e.getMessage());
@@ -111,7 +111,7 @@ public class ClienteController {
 
         try {
             clienteService.modificar(cliente);
-            attributes.addFlashAttribute("exito", "La actualización ha sido realizada satisfactoriamente");
+            attributes.addFlashAttribute("exito", "El cliente se modificó correctamente");
         } catch (SpringException e) {
             attributes.addFlashAttribute("cliente", cliente);
             attributes.addFlashAttribute("error", e.getMessage());
@@ -137,6 +137,7 @@ public class ClienteController {
     public RedirectView cambiarTarjeta(@ModelAttribute Cliente cliente, HttpSession session, RedirectAttributes attributes) {
         try {
             clienteService.cambiarTarjeta(cliente);
+            attributes.addFlashAttribute("exito", "El cambio de tarjeta se realizó correctamente");
         } catch (SpringException e) {
             attributes.addFlashAttribute("cliente", cliente);
             attributes.addFlashAttribute("error", e.getMessage());

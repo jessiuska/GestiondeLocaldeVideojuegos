@@ -37,7 +37,7 @@ public class Cliente {
     private Tarjeta tarjeta;
 
     @Enumerated(EnumType.STRING)
-    @Column(nullable = false)
+    //@Column(nullable = false)
     private Rol rol;
     
     private Boolean alta;

@@ -62,7 +62,8 @@ public class ClienteService {
         cliente.setNombre(dto.getNombre());
         cliente.setApellido(dto.getApellido());
         cliente.setTarjeta(dto.getTarjeta());
-        cliente.setRol(dto.getRol());
+        //cliente.setRol(dto.getRol());
+        cliente.setRol(Rol.USER); //por las dudas, ya que siempre va a ser USER
         clienteRepository.save(cliente);
     }
 
