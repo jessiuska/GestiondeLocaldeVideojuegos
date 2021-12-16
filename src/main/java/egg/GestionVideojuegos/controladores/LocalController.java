@@ -82,8 +82,8 @@ public class LocalController {
             mav.addObject("error", flashMap.get("error"));
         }
 
-        mav.addObject("title", "Recaudación - Lista de cierres de caja");
-        mav.addObject("cierres", transaccionService.buscarTodos());
+        mav.addObject("title", "Recaudaciones");
+        mav.addObject("cierres", transaccionService.buscarCierres());
 
         return mav;
     }

@@ -38,3 +38,8 @@ logging:
 custom:
   upload-path: src\main\resources\static\uploads
   nombre-sistema: Sistema Gestión Videojuegos
+#server:
+#    error:
+#        path: /error
+#        whitelabel:
+#            enabled: false
