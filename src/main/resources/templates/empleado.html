@@ -5,7 +5,7 @@
         <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
         <meta content="ie=edge" http-equiv="X-UA-Compatible"/>
         
-        <title>Videojuegos </title>
+        <title>Empleados </title>
         
         <!-- BOOTSTRAP -->
         <link rel="stylesheet" th:href="@{/assets/bootstrap.min.css}"/>
@@ -24,18 +24,14 @@
             <hr class="mb-4"/>
             <div th:if="${empleados.isEmpty()}">
              <!--USAR ESTE NETBEANS   <h5>Todavía no hay empleados cargados.  <a th:href="@{/empleado/crear}">Cargar Empleado.</a></h5>  -->  
-             <h5>Todavía no hay empleados cargados.  <a href="empleado-formulario.html">Cargar Empleado.</a></h5> 
+             <h5>Todavía no hay empleados cargados.  <a th:href="empleado-formulario.html">Cargar Empleado.</a></h5> 
             </div>
 
             <a th:href="@{/empleado/crear}" th:unless="${empleados.isEmpty()}" class="btn btn-success mb-4">Ingresar Empleados</a>
             <div class="row" th:unless="${empleados.isEmpty()}">
                 <div class="col-3" th:each="empleado : ${empleados}">
                     <div class="card mb-4 shadow">
-                        <div class="card-body text-center my-2">
-                            <img class="rounded-circle"
-                                 th:src="${empleado.image != null} ? @{/uploads/__${autor.image}__} : @{/uploads/foto-no-disponible.png}"
-                                 width="165">
-                        </div>
+                        
                         <div class="card-footer">
                             <div th:text="|Nombre ${empleado.nombre}|">Nombre</div>
                             <div th:text="|Apellido ${empleado.apellido}|">Apellido</div>
