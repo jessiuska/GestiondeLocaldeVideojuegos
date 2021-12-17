@@ -14,7 +14,7 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 @Getter
 @Setter
 @EntityListeners(AuditingEntityListener.class)
-@SQLDelete(sql = "UPDATE cliente SET alta = false WHERE id = ?")
+@SQLDelete(sql = "UPDATE cliente SET alta = false WHERE dni = ?")
 public class Cliente {
 
     @Id

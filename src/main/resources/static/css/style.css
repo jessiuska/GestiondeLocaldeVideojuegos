@@ -152,3 +152,11 @@ nav, footer, .dropdown-menu {
     font-size: 0.875em;
     color: red;
 }
+
+/* Colores tildes y cruces en listas */
+.bi-check-circle-fill {
+  color: green;
+}
+.bi-x-circle-fill {
+  color: red;
+}

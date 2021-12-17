@@ -1,5 +1,5 @@
 <footer th:fragment="footer" class="footer py-3 bg-dark fixed-bottom">
     <div class="container d-flex justify-content-center text-white">
-      <span class="text-muted text-reset" comment th:text="${session.id != null} ? |${session.nombre} ${session.apellido} - ${session.rol}| : 'BASICGAMES - 2021'"></span>
+      <span class="text-muted text-reset" comment th:text="${session.id != null} ? | Bienvenido ${session.nombre} ${session.apellido} [${session.rol}]| : 'BASICGAMES/2021'"></span>
     </div>
 </footer>

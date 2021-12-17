@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+    <head th:replace="fragments/head :: head"></head>
+    <body>
+        <nav th:replace="fragments/navbar :: navbar"></nav>
+
+
+        <div class="container mt-5 main">
+            <div class="alert alert-success" th:if="${exito}" th:text="${exito}"></div>
+            <div class="alert alert-danger col-xl-6" th:if="${error}" th:text="${error}"></div>
+            <h1 th:text="${title}"></h1>
+
+            <hr class="mb-4 col-xl-12"/>
+
+            <form autocomplete="off" class="needs-validation" id="formulario" method="POST" novalidate action="/local/cargar">
+
+                <div class="form-floating mb-3 col-xl-6">
+                    <select aria-label="Elegir cliente" class="form-select" id="cliente" required name="dnicliente">
+                        <option selected value="">Elegir cliente</option>
+                        <option th:each="cliente : ${clientes}" th:text="|${cliente.nombre} ${cliente.apellido} (DNI ${cliente.dni})|" th:value="${cliente.dni}"></option>
+                    </select>
+                    <label for="cliente">Cliente</label>
+                    <div class="invalid-feedback">El cliente es obligatorio</div>
+                </div>
+
+                <div class="form-floating mb-3 col-xl-6">
+                    <input class="form-control" id="monto" placeholder="Monto" required name="monto" type="number" min="0.00" max="10000.00" step="0.01" />
+                    <label for="monto">Monto</label>
+                    <div class="invalid-feedback">El monto a cargar es obligatorio</div>
+                </div>
+
+                <div class="row">
+                    <div class="col-xl-3">
+                        <button class="btn btn-success" type="submit">Cargar saldo</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+
+        <footer th:replace="fragments/footer :: footer"></footer>        
+        <script th:src="@{/assets/bootstrap.bundle.min.js}"></script>
+    </body>
+
+    <script>
+        (function () {
+            'use strict'
+
+            // Fetch all the forms we want to apply custom Bootstrap validation styles to
+            var forms = document.querySelectorAll('.needs-validation')
+
+            // Loop over them and prevent submission
+            Array.prototype.slice.call(forms)
+                    .forEach(function (form) {
+                        form.addEventListener('submit', function (event) {
+                            if (!form.checkValidity()) {
+                                event.preventDefault()
+                                event.stopPropagation()
+                            }
+
+                            form.classList.add('was-validated')
+                        }, false)
+                    })
+        })()
+
+        var y = new Date().getFullYear();
+        document.getElementById('anio').innerHTML = y
+    </script>
+</html>

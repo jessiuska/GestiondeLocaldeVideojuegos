@@ -42,7 +42,7 @@ logging:
         web: debug
 custom:
   upload-path: src/main/resources/static/uploads
-  nombre-sistema: Sistema Gestión Videojuegos
+  nombre-sistema: BasicGames
 
 #server:
 #    error:

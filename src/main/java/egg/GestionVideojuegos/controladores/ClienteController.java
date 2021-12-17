@@ -36,6 +36,7 @@ public class ClienteController {
             mav.addObject("error", flashMap.get("error"));
         }
 
+        mav.addObject("title", "Listado de clientes");
         mav.addObject("clientes", clienteService.buscarTodos());
         return mav;
     }
@@ -133,14 +134,14 @@ public class ClienteController {
         return new RedirectView("/cliente");
     }
 
-    @PostMapping("/cambiar-tarjeta")
-    public RedirectView cambiarTarjeta(@ModelAttribute Cliente cliente, HttpSession session, RedirectAttributes attributes) {
+    @PostMapping("/cambiar-tarjeta/{dni}")
+    public RedirectView cambiarTarjeta(HttpSession session, @PathVariable Long dni, RedirectAttributes attributes) {
         try {
-            clienteService.cambiarTarjeta(cliente);
+            clienteService.cambiarTarjeta(dni);
             attributes.addFlashAttribute("exito", "El cambio de tarjeta se realizó correctamente");
-            System.out.println("Se cambia tarjeta con ID=" + cliente.getTarjeta().getId() + " para cliente DNI=" + cliente.getDni());
+            //System.out.println("Se cambia tarjeta con ID=" + cliente.getTarjeta().getId() + " para cliente DNI=" + cliente.getDni());
         } catch (SpringException e) {
-            attributes.addFlashAttribute("cliente", cliente);
+            //attributes.addFlashAttribute("cliente", cliente);
             attributes.addFlashAttribute("error", e.getMessage());
         }
         return new RedirectView("/cliente");

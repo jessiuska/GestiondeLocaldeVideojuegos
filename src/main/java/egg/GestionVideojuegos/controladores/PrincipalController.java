@@ -31,6 +31,13 @@ public class PrincipalController {
     @Autowired
     private EmpleadoService empleadoService;
 
+    //TEST
+    @GetMapping("/")
+    public RedirectView preInicio() {
+        return new RedirectView("/home");
+    }
+    //TEST
+    
     @GetMapping("/home")
     public ModelAndView inicio() {
         //return new ModelAndView("index");

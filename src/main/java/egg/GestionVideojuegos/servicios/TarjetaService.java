@@ -20,16 +20,12 @@ public class TarjetaService {
     private String mensaje = "No existe ningúna tarjeta asociado con el ID %s";
 
     @Transactional
-    public void crear(Tarjeta dto) throws SpringException {
-        if (tarjetaRepository.existsById(dto.getId())) {
-            throw new SpringException("Ya existe una Tarjeta con este numero de ID");
-        }
-
+    public Tarjeta crear() throws SpringException {
         Tarjeta tarjeta = new Tarjeta();
         tarjeta.setSaldo(0.0);
         tarjeta.setAlta(true);
-
         tarjetaRepository.save(tarjeta);
+        return tarjeta;
     }
 
     @Transactional

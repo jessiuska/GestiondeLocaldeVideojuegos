@@ -152,14 +152,14 @@ public class VideojuegoController {
     }
     
     @PostMapping("/simular")
-    public RedirectView simularJugada(@RequestParam Long dnicliente, @RequestParam Integer idvideojuego, RedirectAttributes attributes) {
+    public RedirectView simularJugada(@RequestParam("dnicliente") Long dnicliente, @RequestParam("idvideojuego") Integer idvideojuego, RedirectAttributes attributes) {
         try {
             videojuegoService.jugar(dnicliente, idvideojuego);
             attributes.addFlashAttribute("exito", "La partida ha sido exitosa.");
         } catch (SpringException e) {
             attributes.addFlashAttribute("error", e.getMessage());
         }
-        return new RedirectView("/videojuego-simulador");
+        return new RedirectView("/videojuego/jugar");
     }
     
     @PostMapping("/simular-varios")
