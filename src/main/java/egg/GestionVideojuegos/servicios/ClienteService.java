@@ -51,6 +51,7 @@ public class ClienteService {
         cliente.setTarjeta(dto.getTarjeta());
 
         cliente.setRol(Rol.USER);
+        clienteRepository.save(cliente);
     }
 
     @Transactional
