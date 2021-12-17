@@ -28,7 +28,7 @@ public class ClienteController {
     @GetMapping
     //@PreAuthorize("hasAnyRole('USER')")
     public ModelAndView mostrar(HttpServletRequest request) {
-        ModelAndView mav = new ModelAndView("clientes");
+        ModelAndView mav = new ModelAndView("cliente");
         Map<String, ?> flashMap = RequestContextUtils.getInputFlashMap(request);
 
         if (flashMap != null) {
@@ -95,7 +95,7 @@ public class ClienteController {
         } catch (SpringException e) {
             attributes.addFlashAttribute("cliente", cliente);
             attributes.addFlashAttribute("error", e.getMessage());
-            redirectView.setUrl("/cliente/crear");
+            redirectView.setUrl("/cliente");
         }
 
         return redirectView;

@@ -26,7 +26,7 @@ public class Videojuego {
     @Column(nullable = false)
     private Double precioFicha;
     
-    @Column(nullable = false)
+    @Column(nullable = true)
     private Double recaudacion;
 
     private String image;

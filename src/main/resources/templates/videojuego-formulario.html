@@ -24,29 +24,23 @@
                     <div class="form-group">
                         <h1>Ingrese Juego</h1>
                     </div>
-                    <div class="form-group">
-                        <input type="text" class="form-control item" id="username" placeholder="Nombre del videojuego">
-                    </div>
 
                     <input th:field="*{id}" type="hidden"/>
 
-                    <div class="form-floating mb-3 col-xl-6">
-                        <input class="form-control" id="nombre" placeholder="Nombre del videojuego" th:field="*{nombre}" type="text"/>
-                        <label for="nombre">Nombre del videojuego</label>
-                        <div class="error text-start" th:if="${#fields.hasErrors('nombre')}"
-                             th:errors="*{nombre}"></div>
+                    <div class="form-group">
+                        <input class="form-control item" id="nombre" placeholder="Nombre del videojuego" th:field="*{nombre}" type="text"/>
+                        <!-- <label for="nombre">Nombre del videojuego</label> -->
+                        <div class="error text-start" th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}"></div>
                     </div>
 
-                    <div class="form-floating mb-3 col-xl-6">
-                        <input type="number" min="1" step="any" class="form-control" id="precio" th:field="*{precioFicha}" placeholder="Precio ficha"/>
-                        <label for="precio">Precio ficha</label>
-                        <div class="error text-start" th:if="${#fields.hasErrors('nombre')}"
-                             th:errors="*{precioFicha}"></div>
+                    <div class="form-group">
+                        <input type="number" min="1" step="any" class="form-control item" id="precio" th:field="*{precioFicha}" placeholder="Precio ficha"/>
+                        <!-- <label for="precio">Precio ficha</label> -->
+                        <div class="error text-start" th:if="${#fields.hasErrors('nombre')}" th:errors="*{precioFicha}"></div>
                     </div>
                     
                     <div class="mb-3 col-xl-12">
-                        <label for="foto">Imagen</label>
-                        <input class="form-control mt-2" type="file" th:field="*{image}" accept="image/*">
+                        <input class="form-control mt-2" type="file" name="foto" accept="image/*">
                     </div>
 
                     <div class="row">

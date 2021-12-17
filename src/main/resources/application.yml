@@ -30,14 +30,20 @@ spring:
             enable: true
           ssl:
             trust: smtp.gmail.com
+  servlet:
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 10MB
+
 logging:
   level:
     org:
       springframework:
         web: debug
 custom:
-  upload-path: src\main\resources\static\uploads
+  upload-path: src/main/resources/static/uploads
   nombre-sistema: Sistema Gestión Videojuegos
+
 #server:
 #    error:
 #        path: /error
