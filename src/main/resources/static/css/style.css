@@ -5,7 +5,18 @@ body {
 }
 
 nav, footer, .dropdown-menu {
-    background-image: radial-gradient(circle farthest-corner at 10% 20%, rgba(226, 73, 124, 1) 0.1%, rgba(0, 0, 10, 1) 94.2%);
+    background-image: radial-gradient(circle farthest-corner at 10% 20%, rgba(49, 15, 64, 1) 0.1%, rgba(226, 73, 124, 1) 94%);
+}
+.img-body{
+    background-image:url(../img/arcade2.jpg);
+    background-position: bottom;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+.body-login{
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .index-empleados {
@@ -13,7 +24,7 @@ nav, footer, .dropdown-menu {
     background-position: left;
     background-size: cover;
     background-repeat: no-repeat;
-     width: 33%;
+    width: 33%;
     height: 200px;
 }
 
@@ -132,7 +143,7 @@ nav, footer, .dropdown-menu {
 }
 
 .main {
-    margin-bottom: 4rem !important;
+    margin-bottom: 4rem;
 }
 
 .error {

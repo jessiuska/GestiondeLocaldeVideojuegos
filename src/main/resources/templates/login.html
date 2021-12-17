@@ -12,8 +12,8 @@
     <link rel="stylesheet" th:href="@{/css/style.css}"/>
 </head>
 
-<body>
-    <div class="body-login">
+<body class="img-body">
+    <!--
         <nav class="navbar navbar-expand-md navbar-dark bg-dark sticky-top">
             <div class="container">
                 <a class="navbar-brand" th:href="@{/login}"><img th:src="@{/img/joystick.png}" width="45" /></a>
@@ -25,12 +25,13 @@
                 <div class="text-end">
                     <!-- <a class="btn btn-light me-1" th:href="@{/login}">Ingresar</a> -->
                     <!-- <a class="btn btn-warning" th:href="@{/signup}">Registrarse</a> -->
-                </div>
+           <!--     </div>
             </div>
-        </nav>
+        </nav> 
+        -->
+    <div class="body-login">
 
-
-        <div class="registration-form">
+        <div class="registration-form container">
             
             <div th:if="${error}" class="container text-center">
                 <div class="row">
@@ -44,7 +45,7 @@
                 </div>
             </div>
             <form th:action="@{/logincheck}" method="post" class="needs-validation" novalidate>
-                <div class="form-group">
+                <div class="form-group form-title">
                     <h1>iniciar sesion</h1>
                 </div>
                 <div class="form-group">
@@ -60,14 +61,18 @@
                 </div>
 
                 <div class="form-group text-center">
-                    <button type="submit" class="btn btn-block create-account">ingresar</button>
+                    <button type="submit" class="btn btn-block create-account">Ingresar</button>
                 </div>
             </form>
         </div>
 
-
-    </div>
+   
+    
+    
+    </div> 
+    <!--
     <footer th:replace="fragments/footer :: footer"></footer>
+    -->
     <!-- JS -->
     <script th:src="@{/assets/bootstrap.bundle.min.js}"></script>
     <script>
