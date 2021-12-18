@@ -79,7 +79,7 @@ public class PrincipalController {
 
         if (flashMap != null) {
             mav.addObject("error", flashMap.get("error"));
-            mav.addObject("empleado", flashMap.get("usuario"));
+            mav.addObject("empleado", flashMap.get("empleado"));
         } else {
             //mav.addObject("empleado", new Empleado());
             Empleado empleado  = new Empleado();
