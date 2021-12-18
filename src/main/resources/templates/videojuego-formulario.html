@@ -5,26 +5,17 @@
     <body>
         <nav th:replace="fragments/navbar :: navbar"></nav>
 
-        <!-- Mensajes de error y éxito -->
-        <div th:if="${error}" class="container d-flex justify-content-center">
-            <div class="row col-md-4 mx-auto position-fixed" style="padding-top: 5%;">
-                <div th:text="${error}" class="alert alert-danger m-0 shadow"></div>
-            </div>
-        </div>
-
-        <div th:if="${exito}" class="container d-flex justify-content-center">
-            <div class="row col-md-4 mx-auto position-fixed" style="padding-top: 5%;">
-                <div th:text="${exito}" class="alert alert-success m-0 shadow"></div>
-            </div>
-        </div>
-
         <div class="body-imagen">
+            <div class="alert alert-success" th:if="${exito}" th:text="${exito}"></div>
+            <div class="alert alert-danger col-xl-6" th:if="${error}" th:text="${error}"></div>
+            <h1 th:text="${title}"></h1>
+            
             <div class="registration-form">
                 <form class="mb-4" th:action="@{/videojuego/__${action}__}" th:object="${videojuego}" method="POST" enctype="multipart/form-data" autocomplete="off">
                     <div class="form-group">
                         <h1>Ingrese Juego</h1>
                     </div>
-                    
+
                     <input th:field="*{id}" type="hidden"/>
 
                     <div class="form-group">
@@ -38,7 +29,7 @@
                         <div class="error text-start" th:if="${#fields.hasErrors('nombre')}"
                              th:errors="*{precioFicha}"></div>
                     </div>
-                    
+
                     <div class="mb-3 col-xl-12">
                         <input class="form-control item mt-2" type="file" name="foto" accept="image/*">
                     </div>

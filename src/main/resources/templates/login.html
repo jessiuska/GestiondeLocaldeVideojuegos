@@ -1,90 +1,65 @@
 <!DOCTYPE html>
 <html lang="es" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+    <head th:replace="fragments/head :: head"></head>
 
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <body class="img-body">
+        <nav th:replace="fragments/navbar :: navbar"></nav>
+
+        <div class="body-login">
+
+            <div class="registration-form container">
 
 
-    <link rel="stylesheet" href="assets/bootstrap.min.css">
-    <link rel="stylesheet" href="css/style2.css" />
-    <link rel="stylesheet" th:href="@{/css/style.css}"/>
-    <title>Login</title>
-</head>
+                <form th:action="@{/logincheck}" method="post" class="needs-validation" novalidate>
+                    <div class="form-group form-title">
+                        <h1>iniciar sesion</h1>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" class="form-control" name="usuario" id="usuario" placeholder="Ingresar usuario" required>
+                        <div class="valid-feedback"></div> 
+                        <div class="invalid-feedback">Ingresar usuario valido</div>
+                    </div>
+                    <br>
+                    <div class="form-group">
+                        <input type="password" class="form-control" name="clave" id="clave" placeholder="Ingresar clave" required>
+                        <div class="valid-feedback"></div> 
+                        <div class="invalid-feedback">Ingresar clave valida</div>
+                    </div>
 
-<body class="img-body">
-    
-        
-            <div class="container">
-                <a class="navbar-brand" th:href="@{/login}"><img th:src="@{/img/joystick.png}" width="45" /></a>
-                <button aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"
-                    class="navbar-toggler" data-bs-target="#navbarSupportedContent" data-bs-toggle="collapse"
-                    type="button">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="text-end">
-
-                    <a class="btn btn-warning" th:href="@{/signup}">Registrarse</a> 
-                  </div>
+                    <div class="form-group text-center">
+                        <button type="submit" class="btn btn-block create-account">Ingresar</button>
+                    </div>
+                </form>
             </div>
-        </nav> 
-        
-    <div class="body-login">
 
-        <div class="registration-form container">
-            
-            
-            <form th:action="@{/logincheck}" method="post" class="needs-validation" novalidate>
-                <div class="form-group form-title">
-                    <h1>iniciar sesion</h1>
-                </div>
-                <div class="form-group">
-                    <input type="text" class="form-control" name="usuario" id="usuario" placeholder="Ingresar usuario" required>
-                    <div class="valid-feedback"></div> 
-                    <div class="invalid-feedback">Ingresar usuario valido</div>
-                </div>
-                <br>
-                <div class="form-group">
-                    <input type="password" class="form-control" name="clave" id="clave" placeholder="Ingresar clave" required>
-                    <div class="valid-feedback"></div> 
-                    <div class="invalid-feedback">Ingresar clave valida</div>
-                </div>
+        </div> 
 
-                <div class="form-group text-center">
-                    <button type="submit" class="btn btn-block create-account">Ingresar</button>
-                </div>
-            </form>
-        </div>
+        <footer th:replace="fragments/footer :: footer"></footer>
+        <script th:src="@{/assets/bootstrap.bundle.min.js}"></script>
 
-    </div> 
-    
-    
-    
-    <!-- JS -->
-    <script th:src="@{/assets/bootstrap.bundle.min.js}"></script>
-    <script>
-        (function () {
-        'use strict'
-    
-        // Fetch all the forms we want to apply custom Bootstrap validation styles to
-        var forms = document.querySelectorAll('.needs-validation')
-    
-        // Loop over them and prevent submission
-        Array.prototype.slice.call(forms)
-        .forEach(function (form) {
+        <!-- JS -->
+        <script>
+            (function () {
+            'use strict'
+
+            // Fetch all the forms we want to apply custom Bootstrap validation styles to
+            var forms = document.querySelectorAll('.needs-validation')
+
+            // Loop over them and prevent submission
+            Array.prototype.slice.call(forms)
+            .forEach(function (form) {
             form.addEventListener('submit', function (event) {
             if (!form.checkValidity()) {
-                event.preventDefault()
-                event.stopPropagation()
+            event.preventDefault()
+            event.stopPropagation()
             }
-    
+
             form.classList.add('was-validated')
             }, false)
-        })
-        })()
-    </script>
+            })
+            })()
+        </script>
 
-</body>
+    </body>
 
 </html>

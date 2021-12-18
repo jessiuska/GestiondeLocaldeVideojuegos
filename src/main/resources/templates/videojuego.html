@@ -1,18 +1,6 @@
 <!DOCTYPE html>
 <html lang="es" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security"></html>
-    <head>
-        <meta charset="UTF-8"/>
-        <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-        <meta content="ie=edge" http-equiv="X-UA-Compatible"/>
-        
-        <title>Videojuegos </title>
-        
-        <!-- BOOTSTRAP -->
-        <link rel="stylesheet" th:href="@{/assets/bootstrap.min.css}"/>
-        <!-- CSS -->
-        <link rel="stylesheet" th:href="@{/css/style2.css}"/>
-        
-    </head>
+    <head th:replace="fragments/head :: head"></head>
     
     <body>
         <nav th:replace="fragments/navbar :: navbar"></nav>
@@ -23,8 +11,7 @@
             <h1>Listado de Videojuegos</h1>
             <hr class="mb-4"/>
             <div th:if="${videojuegos.isEmpty()}">
-             <!--USAR ESTE NETBEANS   <h5>Todavía no hay videojuegos cargados.  <a th:href="@{/videojuego/crear}">Cargar Videojuego.</a></h5>  -->  
-             <h5>Todavía no hay videojuegos cargados.  <a href="videojuego-formulario.html">Cargar Videojuego.</a></h5> 
+             <h5>Todavía no hay videojuegos cargados. <a th:href="@{/videojuego/crear}">Crear videojuego.</a></h5> 
             </div>
 
             <a th:href="@{/videojuego/crear}" th:unless="${videojuegos.isEmpty()}" class="btn btn-success mb-4">Ingresar Videojuego</a>

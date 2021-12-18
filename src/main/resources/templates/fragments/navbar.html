@@ -95,11 +95,15 @@
                                 <button class="dropdown-item text-white" type="submit">Simular 100 clientes jugando</button>
                             </form>
                         </li>
+                    </ul>
                 </li>
             </ul>
         </div>
         <div th:if="${session.id != null}" class="text-end">
             <a class="btn btn-light" th:href="@{/logout}">Finalizar sesión</a>
+        </div>
+        <div th:unless="${session.id != null}" class="text-end">
+            <a class="btn btn-warning" th:href="@{/signup}">Registrarse</a>
         </div>
     </div>
 </nav>
