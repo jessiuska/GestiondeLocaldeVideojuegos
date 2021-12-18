@@ -154,6 +154,132 @@ nav, footer, .dropdown-menu {
     color: red;
 }
 
+/** formulario  videojuego**/
+
+.body-imagen{
+    /**background-image: url(../img/montaÃ±a.jpeg); **/
+    background-color: rgba(65, 9, 35, 0.699);
+    background-position: left;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+    @font-face {
+        font-family: arcade;
+        src: url(ka1.ttf);
+    }
+
+    h1{
+        font-family: arcade;
+        text-align: center;
+    }
+.registration-form{
+	padding: 70px;    
+        display: flex;
+        justify-content: center;
+        align-content: center;
+}
+.form-title {
+    margin-bottom: 25px;
+}
+
+.container{
+    /*margin-top: 5%;*/
+}
+
+.registration-form form{
+    background-color: rgba(255, 255, 255, 0.7);
+    max-width: 500px;
+    margin: auto;
+    padding: 30px 75px;
+    border-top-left-radius: 40px;
+    border-top-right-radius: 40px;
+    border-bottom-left-radius: 40px;
+    border-bottom-right-radius: 40px;
+    box-shadow: 0px 2px 50px rgba(209, 32, 100, 0.884); /** neon formulario **/
+}
+
+.registration-form .form-icon{
+    text-align: center;
+    background-color: #5891ff;
+    border-radius: 50%;
+    font-size: 40px;
+    color: white;
+    width: 100px;
+    height: 100px;
+    margin: auto;
+    margin-bottom: 45px;
+    line-height: 100px;
+}
+
+.registration-form .item{
+    border-radius: 20px;
+    margin-bottom: 25px;
+    padding: 10px 20px;
+}
+
+.registration-form .create-account{
+    border-radius: 30px;
+    padding: 10px 20px;
+    font-size: 18px;
+    font-weight: bold;
+    background-color: #cc2e70; /** color boton **/
+    border: none;
+    color: white;
+    margin-top: 20px;
+    
+}
+
+
+.registration-form a:hover{
+    text-decoration: none;
+    opacity: 0.8;
+    
+}
+
+@media (max-width: 576px) {
+    .registration-form form{
+        padding: 50px 20px;
+    }
+
+}
+/**   -------------------  recaudacion-----------------------------**/
+
+.img-recaudacion{
+    background-image: url(../img/coin.jpg); 
+    background-color: rgba(65, 9, 35, 0.699);
+    background-position: left;
+    background-size: cover;
+    background-repeat: no-repeat;
+
+    
+}
+.order-card {
+    color: rgb(95, 31, 1);
+}
+
+
+.bg-c-yellow {
+    background: linear-gradient(45deg,#FFB64D,#ffcb80);
+}
+
+.card {
+    
+    max-width: 400px;
+    margin: auto;
+    border-radius: 20px;
+    -webkit-box-shadow: 0 1px 2.94px 0.06px rgba(4,26,55,0.16);
+    box-shadow: 0 1px 2.94px 0.06px rgba(4,26,55,0.16);
+    border: none;
+    margin-bottom: 30px;
+    -webkit-transition: all 0.3s ease-in-out;
+    transition: all 0.3s ease-in-out;
+    
+}
+.card .card-block {
+    padding: 25px;
+}
+
 /* Colores tildes y cruces en listas */
 .bi-check-circle-fill {
   color: green;
