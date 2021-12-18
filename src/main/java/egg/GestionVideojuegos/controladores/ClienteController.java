@@ -28,7 +28,7 @@ public class ClienteController {
     @GetMapping
     //@PreAuthorize("hasAnyRole('USER')")
     public ModelAndView mostrar(HttpServletRequest request) {
-        ModelAndView mav = new ModelAndView("clientes");
+        ModelAndView mav = new ModelAndView("cliente");
         Map<String, ?> flashMap = RequestContextUtils.getInputFlashMap(request);
 
         if (flashMap != null) {
@@ -36,6 +36,7 @@ public class ClienteController {
             mav.addObject("error", flashMap.get("error"));
         }
 
+        mav.addObject("title", "Listado de clientes");
         mav.addObject("clientes", clienteService.buscarTodos());
         return mav;
     }
@@ -91,11 +92,11 @@ public class ClienteController {
 
         try {
             clienteService.crear(cliente);
-            attributes.addFlashAttribute("exito", "La creación ha sido realizada satisfactoriamente");
+            attributes.addFlashAttribute("exito", "El cliente se creó con éxito");
         } catch (SpringException e) {
             attributes.addFlashAttribute("cliente", cliente);
             attributes.addFlashAttribute("error", e.getMessage());
-            redirectView.setUrl("/cliente/crear");
+            redirectView.setUrl("/cliente");
         }
 
         return redirectView;
@@ -111,7 +112,7 @@ public class ClienteController {
 
         try {
             clienteService.modificar(cliente);
-            attributes.addFlashAttribute("exito", "La actualización ha sido realizada satisfactoriamente");
+            attributes.addFlashAttribute("exito", "El cliente se modificó correctamente");
         } catch (SpringException e) {
             attributes.addFlashAttribute("cliente", cliente);
             attributes.addFlashAttribute("error", e.getMessage());
@@ -133,12 +134,14 @@ public class ClienteController {
         return new RedirectView("/cliente");
     }
 
-    @PostMapping("/cambiar-tarjeta")
-    public RedirectView cambiarTarjeta(@ModelAttribute Cliente cliente, HttpSession session, RedirectAttributes attributes) {
+    @PostMapping("/cambiar-tarjeta/{dni}")
+    public RedirectView cambiarTarjeta(HttpSession session, @PathVariable Long dni, RedirectAttributes attributes) {
         try {
-            clienteService.cambiarTarjeta(cliente);
+            clienteService.cambiarTarjeta(dni);
+            attributes.addFlashAttribute("exito", "El cambio de tarjeta se realizó correctamente");
+            //System.out.println("Se cambia tarjeta con ID=" + cliente.getTarjeta().getId() + " para cliente DNI=" + cliente.getDni());
         } catch (SpringException e) {
-            attributes.addFlashAttribute("cliente", cliente);
+            //attributes.addFlashAttribute("cliente", cliente);
             attributes.addFlashAttribute("error", e.getMessage());
         }
         return new RedirectView("/cliente");
