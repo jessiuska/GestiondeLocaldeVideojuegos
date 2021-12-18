@@ -10,12 +10,12 @@
     <link rel="stylesheet" href="assets/bootstrap.min.css">
     <link rel="stylesheet" href="css/style2.css" />
     <link rel="stylesheet" th:href="@{/css/style.css}"/>
-    <title>Login</title>
+    <title>Sign Up</title>
 </head>
 
 <body class="img-body">
     
-        <nav class="navbar navbar-expand-sm navbar-dark bg-dark sticky-top">
+        <nav class="navbar navbar-expand-md navbar-dark bg-dark sticky-top">
             <div class="container">
                 <a class="navbar-brand" th:href="@{/login}"><img th:src="@{/img/joystick.png}" width="45" /></a>
                 <button aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"
@@ -26,7 +26,7 @@
                 <div class="text-end">
                     <a class="btn btn-light me-1" th:href="@{/login}">Ingresar</a> 
                     <a class="btn btn-warning" th:href="@{/signup}">Registrarse</a> 
-                  </div>
+                </div>
             </div>
         </nav> 
         
@@ -34,17 +34,39 @@
 
         <div class="registration-form container">
             
-            
-            <form th:action="@{/logincheck}" method="post" class="needs-validation" novalidate>
-                <div class="form-group form-title">
-                    <h1>iniciar sesion</h1>
+            <div th:if="${error}" class="container text-center">
+                <div class="row">
+                    <div th:text="${error}" class="alert alert-danger mb-5 shadow"></div>
                 </div>
+            </div>
+            <div th:if="${logout}" class="container text-center">
+                <div class="row">
+                    <div th:text="${logout}" class="alert alert-success alert-dismissible fade show mb-5 shadow"></div>
+                </div>
+            </div>
+            <form class="mb-3" th:action="@{/registro}" th:object="${empleado}" method="POST" autocomplete="off">
+                <div class="form-group form-title">
+                    <h1>Registrarse</h1>
+                </div>
+                <div class="form-group">
+                    <input type="text" class="form-control" name="nombre" id="nombre" placeholder="Ingresar nombre" required>
+                    <div class="valid-feedback"></div> 
+                    <div class="invalid-feedback">Ingresar nombre valido</div>
+                </div>
+                <br>
+                <div class="form-group">
+                    <input type="text" class="form-control" name="apellido" id="apellido" placeholder="Ingresar apellido" required>
+                    <div class="valid-feedback"></div> 
+                    <div class="invalid-feedback">Ingresar apellido valido</div>
+                </div>
+                <br>
                 <div class="form-group">
                     <input type="text" class="form-control" name="usuario" id="usuario" placeholder="Ingresar usuario" required>
                     <div class="valid-feedback"></div> 
                     <div class="invalid-feedback">Ingresar usuario valido</div>
                 </div>
                 <br>
+                <input type="hidden" th:field="*{rol}">
                 <div class="form-group">
                     <input type="password" class="form-control" name="clave" id="clave" placeholder="Ingresar clave" required>
                     <div class="valid-feedback"></div> 
@@ -52,12 +74,15 @@
                 </div>
 
                 <div class="form-group text-center">
-                    <button type="submit" class="btn btn-block create-account">Ingresar</button>
+                    <button type="submit" class="btn btn-block create-account">Registrar</button>
                 </div>
             </form>
         </div>
 
-    </div> 
+   
+    </div>   
+    
+</div> 
     
     <footer th:replace="fragments/footer :: footer"></footer>
     

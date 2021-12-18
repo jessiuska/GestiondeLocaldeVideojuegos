@@ -48,9 +48,11 @@ public class ClienteService {
         cliente.setNombre(dto.getNombre());
         cliente.setApellido(dto.getApellido());
         cliente.setDni(dto.getDni());
-        cliente.setTarjeta(dto.getTarjeta());
-
+        cliente.setTarjeta(tarjetaService.crear());
         cliente.setRol(Rol.USER);
+        cliente.setAlta(true);
+
+        clienteRepository.save(cliente);
     }
 
     @Transactional
@@ -62,7 +64,8 @@ public class ClienteService {
         cliente.setNombre(dto.getNombre());
         cliente.setApellido(dto.getApellido());
         cliente.setTarjeta(dto.getTarjeta());
-        cliente.setRol(dto.getRol());
+        //cliente.setRol(dto.getRol());
+        cliente.setRol(Rol.USER); //por las dudas, ya que siempre va a ser USER
         clienteRepository.save(cliente);
     }
 
@@ -88,21 +91,30 @@ public class ClienteService {
     }
 
     @Transactional
-    public void cambiarTarjeta(Cliente cliente) throws SpringException {
+    public void cambiarTarjeta(Long dniCliente) throws SpringException {
+        Cliente cliente = buscarPorDni(dniCliente);
+
         //guardo el saldo de la tarjeta actual
         Double tempSaldo = cliente.getTarjeta().getSaldo();
 
         //elimino la tarjeta
-        //TarjetaService tarjetaService = new TarjetaService();
         tarjetaService.eliminar(cliente.getTarjeta().getId());
-
+        
+        /*
         //creo una nueva tarjeta temporal con el saldo anterior
         Tarjeta tarjeta = new Tarjeta();
         tarjeta.setSaldo(tempSaldo);
 
         //le asigno la nueva tarjeta al cliente
         cliente.setTarjeta(tarjeta);
-        //la guardo
+        */
+        
+        //Le creo una nueva tarjeta (saldo 0.0)
+        cliente.setTarjeta(tarjetaService.crear());
+        //Le modifico el saldo
+        cliente.getTarjeta().setSaldo(tempSaldo);
+
+        //guardo el cliente
         clienteRepository.save(cliente);
 
     }

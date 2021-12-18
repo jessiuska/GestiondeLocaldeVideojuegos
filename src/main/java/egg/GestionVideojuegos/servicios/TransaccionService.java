@@ -46,5 +46,19 @@ public class TransaccionService {
         return transaccionRepository.findAll();
     }
 
+    @Transactional(readOnly = true)
+    public List<Transaccion> buscarCierres() {
+        return transaccionRepository.findBytipoTransaccion(4); //cierres
+    }
+    
+    @Transactional(readOnly = true)
+    public List<Transaccion> buscarDebitos() {
+        return transaccionRepository.findBytipoTransaccion(2); //débitos
+    }
+    
+    @Transactional(readOnly = true)
+    public List<Transaccion> buscarCreditos() {
+        return transaccionRepository.findBytipoTransaccion(1); //créditos
+    }
     
 }

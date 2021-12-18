@@ -33,16 +33,16 @@
                     <div class="card mb-4 shadow">
                         <div class="card-body text-center my-2">
                             <img class="rounded-circle"
-                                 th:src="${videojuego.image != null} ? @{/uploads/__${autor.image}__} : @{/uploads/foto-no-disponible.png}"
+                                 th:src="${videojuego.image != null} ? @{/uploads/__${videojuego.image}__} : @{/uploads/foto-no-disponible.png}"
                                  width="165">
                         </div>
                         <div class="card-footer">
                             <div th:text="|Nombre: ${videojuego.nombre}|">Nombre</div>
-                            <div th:text="|Precio ${videojuego.precio}|">Precio</div>
+                            <div th:text="|Precio ${videojuego.precioFicha}|">Precio</div>
                             <div th:text="|Alta ${videojuego.alta}|">Fecha</div>
                             <div class="d-flex justify-content-start my-2">
                                 <a class="btn btn-warning btn-sm me-2" th:href="@{/videojuego/editar/__${videojuego.id}__}">Editar</a>
-                                <form th:action="${videojuego.alta} ? @{/videojuego/eliminar/__${autor.id}__} : @{/autor/habilitar/__${videojuego.id}__}"
+                                <form th:action="${videojuego.alta} ? @{/videojuego/eliminar/__${videojuego.id}__} : @{/videojuego/habilitar/__${videojuego.id}__}"
                                       method="POST">
                                     <button th:class="${videojuego.alta} ? 'btn btn-danger btn-sm' : 'btn btn-primary btn-sm'"
                                             type="submit" th:text="${videojuego.alta} ? 'Eliminar' : 'Habilitar'">

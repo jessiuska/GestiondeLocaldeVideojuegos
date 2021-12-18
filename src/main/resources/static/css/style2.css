@@ -2,10 +2,7 @@
 
 body {
     font-family: 'Poppins', sans-serif;
-}
-
-nav, footer, .dropdown-menu {
-    background-image: radial-gradient(circle farthest-corner at 10% 20%, rgba(226, 73, 124, 1) 0.1%, rgba(0, 0, 10, 1) 94.2%);
+    height: 100vh;
 }
 
 .index-libro {
@@ -13,7 +10,7 @@ nav, footer, .dropdown-menu {
     background-position: left;
     background-size: cover;
     background-repeat: no-repeat;
-     width: 33%;
+    width: 33%;
     height: 200px;
 }
 
@@ -96,7 +93,7 @@ nav, footer, .dropdown-menu {
 }
 
 .main {
-    margin-bottom: 4rem !important;
+    margin-bottom: 4rem;
 }
 
 .error {
@@ -126,13 +123,23 @@ nav, footer, .dropdown-menu {
         text-align: center;
     }
 .registration-form{
-	padding: 70px ;    
+	padding: 70px;    
+        display: flex;
+        justify-content: center;
+        align-content: center;
+}
+.form-title {
+    margin-bottom: 25px;
+}
+
+.container{
+    margin-top: 5%;
 }
 
 .registration-form form{
-    background-color: rgba(255, 255, 255, 0.329);
+    background-color: rgba(255, 255, 255, 0.7);
     max-width: 500px;
-    margin:auto;
+    margin: auto;
     padding: 30px 75px;
     border-top-left-radius: 40px;
     border-top-right-radius: 40px;
@@ -142,7 +149,7 @@ nav, footer, .dropdown-menu {
 }
 
 .registration-form .form-icon{
-	text-align: center;
+    text-align: center;
     background-color: #5891ff;
     border-radius: 50%;
     font-size: 40px;
@@ -155,7 +162,7 @@ nav, footer, .dropdown-menu {
 }
 
 .registration-form .item{
-	border-radius: 20px;
+    border-radius: 20px;
     margin-bottom: 25px;
     padding: 10px 20px;
 }
@@ -175,7 +182,7 @@ nav, footer, .dropdown-menu {
 
 .registration-form a:hover{
     text-decoration: none;
-    opacity: 0.6;
+    opacity: 0.8;
     
 }
 
@@ -207,7 +214,7 @@ nav, footer, .dropdown-menu {
 
 .card {
     
-    max-width: 400;
+    max-width: 400px;
     margin: auto;
     border-radius: 20px;
     -webkit-box-shadow: 0 1px 2.94px 0.06px rgba(4,26,55,0.16);

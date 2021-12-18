@@ -53,7 +53,7 @@ public class LocalService {
 
     @Transactional
     public void cerrarCaja(int idEmpleado) throws SpringException {
-        Local local = localRepository.findById(0).orElseThrow(() -> new SpringException(String.format(mensaje, 0)));
+        Local local = localRepository.findById(1).orElseThrow(() -> new SpringException(String.format(mensaje, 0)));
 
         LocalDateTime desde = local.getFechaUltimoCierre(); //la fecha del último cierre va a pasar a ser la anterior para el nuevo cierre
         LocalDateTime ahora = LocalDateTime.now();
@@ -76,9 +76,13 @@ public class LocalService {
     }
 
     @Transactional
-    public void cargarTarjeta(Cliente dto, Double monto) throws SpringException {
-        tarjetaService.carga(dto.getTarjeta(), monto);
-        transaccionService.crearTransaccion(1, monto, dto.getDni(),0 , null, null, null);
+    public void cargarTarjeta(Long dniCliente, Double monto, Integer idEmpleado) throws SpringException {
+        Cliente cliente = clienteService.buscarPorDni(dniCliente);
+        if (cliente.getTarjeta() == null) throw new SpringException("Inconsistencia de datos: el cliente no tiene una tarjeta asociada");
+        
+        tarjetaService.carga(cliente.getTarjeta(), monto);
+        
+        transaccionService.crearTransaccion(1, monto, cliente.getDni(),idEmpleado , null, null, null);
     }
 
     public void aumentarFicha(Double porcentaje) throws SpringException {
@@ -96,22 +100,6 @@ public class LocalService {
         for (Videojuego videojuego : videojuegos) {
             double nuevoPrecio = videojuego.getPrecioFicha() - (videojuego.getPrecioFicha() * porcentaje) / 100;
             videojuegoService.nuevoPrecioFicha(videojuego.getId(), nuevoPrecio);
-        }
-    }
-
-    public void simularJuegos(Cliente dto, int repetir) throws SpringException {
-        int v, c;
-        
-        List<Cliente> clientes = clienteService.buscarTodos();
-        List<Videojuego> videojuegos = videojuegoService.buscarTodos();
-        
-        for (int i = 0; i <= (repetir - 1); i++) {
-            v = (int) (Math.random() * videojuegos.size() + 1);
-            c = (int) (Math.random() * clientes.size() + 1);
-            
-            if (dto.getTarjeta().getSaldo() >= videojuegos.get(v).getPrecioFicha()){
-                videojuegoService.jugar(clientes.get(c).getDni(), videojuegos.get(v).getId());
-            }
         }
     }
     

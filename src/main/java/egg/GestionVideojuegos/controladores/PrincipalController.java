@@ -31,6 +31,13 @@ public class PrincipalController {
     @Autowired
     private EmpleadoService empleadoService;
 
+    //TEST
+    @GetMapping("/")
+    public RedirectView preInicio() {
+        return new RedirectView("/home");
+    }
+    //TEST
+    
     @GetMapping("/home")
     public ModelAndView inicio() {
         //return new ModelAndView("index");
@@ -72,7 +79,7 @@ public class PrincipalController {
 
         if (flashMap != null) {
             mav.addObject("error", flashMap.get("error"));
-            mav.addObject("empleado", flashMap.get("usuario"));
+            mav.addObject("empleado", flashMap.get("empleado"));
         } else {
             //mav.addObject("empleado", new Empleado());
             Empleado empleado  = new Empleado();

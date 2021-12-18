@@ -1,45 +1,57 @@
 <!DOCTYPE html>
 <html lang="es" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+    <head th:replace="fragments/head :: head"></head>
 
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-
-        <link href="https://cdnjs.cloudflare.com/ajax/libs/simple-line-icons/2.4.1/css/simple-line-icons.min.css"
-              rel="stylesheet">
-        <link rel="stylesheet" href="assets/bootstrap.min.css">
-        <link rel="stylesheet" th:href="@{/css/style2.css}"/>
-    </head>
-
-    <body> 
+    <body>
         <nav th:replace="fragments/navbar :: navbar"></nav>
-        
+
+        <!-- Mensajes de error y éxito -->
+        <div th:if="${error}" class="container d-flex justify-content-center">
+            <div class="row col-md-4 mx-auto position-fixed" style="padding-top: 5%;">
+                <div th:text="${error}" class="alert alert-danger m-0 shadow"></div>
+            </div>
+        </div>
+
+        <div th:if="${exito}" class="container d-flex justify-content-center">
+            <div class="row col-md-4 mx-auto position-fixed" style="padding-top: 5%;">
+                <div th:text="${exito}" class="alert alert-success m-0 shadow"></div>
+            </div>
+        </div>
+
         <div class="body-imagen">
             <div class="registration-form">
-                <form>
+                <form class="mb-4" th:action="@{/videojuego/__${action}__}" th:object="${videojuego}" method="POST" enctype="multipart/form-data" autocomplete="off">
                     <div class="form-group">
                         <h1>Ingrese Juego</h1>
                     </div>
+                    
+                    <input th:field="*{id}" type="hidden"/>
+
                     <div class="form-group">
-                        <input type="text" class="form-control item" id="username" placeholder="Nombre">
-                    </div>
-                    <div class="form-group">
-                        <input type="password" class="form-control item" id="Number" placeholder="Precio">
+                        <input class="form-control item" id="nombre" placeholder="Nombre del videojuego" th:field="*{nombre}" type="text"/>
+                        <div class="error text-start" th:if="${#fields.hasErrors('nombre')}"
+                             th:errors="*{nombre}"></div>
                     </div>
 
+                    <div class="form-group">
+                        <input type="number" min="1" step="any" class="form-control item" id="precio" th:field="*{precioFicha}" placeholder="Precio ficha"/>
+                        <div class="error text-start" th:if="${#fields.hasErrors('nombre')}"
+                             th:errors="*{precioFicha}"></div>
+                    </div>
+                    
                     <div class="mb-3 col-xl-12">
-                        <label for="foto">Cargar foto</label>
-                        <input class="form-control mt-2" type="file" name="foto" accept="image/*">
+                        <input class="form-control item mt-2" type="file" name="foto" accept="image/*">
                     </div>
 
-                    <div class="form-group">
-                        <button type="button" class="btn btn-block create-account">Subir Juego</button>
+                    <div class="row">
+                        <div class="col-xl-3">
+                            <button class="btn btn-success" th:text="${action == 'guardar'} ? 'Crear' : 'Guardar'" type="submit"></button>
+                        </div>
                     </div>
                 </form>
             </div>
         </div>
-        
+
         <footer th:replace="fragments/footer :: footer"></footer>
         <script th:src="@{/assets/bootstrap.bundle.min.js}"></script>
     </body>  

@@ -56,19 +56,27 @@ public class LocalController {
     }
 
     @PostMapping("/cargar")
-    public RedirectView cargar(@ModelAttribute Cliente cliente, @RequestParam("monto") Double monto, RedirectAttributes attributes) {
-        RedirectView redirectView = new RedirectView("/cliente");
-
+    public RedirectView cargar(HttpSession session, @RequestParam("dnicliente") Long dnicliente, @RequestParam("monto") Double monto, RedirectAttributes attributes) {
+        //RedirectView redirectView = new RedirectView("/cliente");
         try {
-            localService.cargarTarjeta(cliente, monto);
+            //COMENTAR ESTO, SOLO TEST
+            session = null;
+            int idEmpleado = 666;
+            if (session != null) {
+                idEmpleado = Integer.valueOf(session.getId());
+            }
+            /////////////////////////
+
+            localService.cargarTarjeta(dnicliente, monto, idEmpleado);
             attributes.addFlashAttribute("exito", "La carga de $" + monto + " ha sido exitosa");
+            System.out.println("DEBUG> Cliente DNI " + dnicliente + " carga $" + monto);
         } catch (SpringException e) {
-            attributes.addFlashAttribute("cliente", cliente);
+            //attributes.addFlashAttribute("cliente", cliente);
             attributes.addFlashAttribute("error", e.getMessage());
-            redirectView.setUrl("/local/carga");
+            //redirectView.setUrl("/local/carga");
         }
 
-        return redirectView;
+        return new RedirectView("/local/carga");
     }
 
     @GetMapping("/cierres")
@@ -82,65 +90,31 @@ public class LocalController {
             mav.addObject("error", flashMap.get("error"));
         }
 
-        mav.addObject("title", "Recaudación - Lista de cierres de caja");
-        mav.addObject("cierres", transaccionService.buscarTodos());
+        mav.addObject("title", "Recaudaciones");
+        mav.addObject("cierres", transaccionService.buscarCierres());
 
         return mav;
     }
-    
-    @PostMapping("/cierre")
+
+    @GetMapping("/cierre")
     public RedirectView cierreCaja(HttpSession session, RedirectAttributes attributes) {
         try {
-            int idEmpleado = Integer.valueOf(session.getId()); //Es un string
+            //int idEmpleado = Integer.valueOf(session.getId()); //Es un string
+            //COMENTAR ESTO, SOLO TEST
+            session = null;
+            int idEmpleado = 666;
+            if (session != null) {
+                idEmpleado = Integer.valueOf(session.getId());
+            }
+            /////////////////////////
+
             localService.cerrarCaja(idEmpleado);
             attributes.addFlashAttribute("exito", "El cierre de caja ha sido realizado correctamente.");
         } catch (SpringException e) {
             attributes.addFlashAttribute("error", e.getMessage());
         }
-        return new RedirectView("/home");
+        return new RedirectView("/local/cierres");
 
     }
-
-    @PostMapping("/cambiar-tarjeta")
-    public RedirectView cambiarTarjeta(@ModelAttribute Cliente cliente, RedirectAttributes attributes) {
-        try {
-            clienteService.cambiarTarjeta(cliente);
-            attributes.addFlashAttribute("exito", "El cambio de tarjeta ha sido realizado correctamente.");
-        } catch (SpringException e) {
-            attributes.addFlashAttribute("error", e.getMessage());
-        }
-        return new RedirectView("/home");
-    }
-
-    @GetMapping("/jugar")
-    public ModelAndView simulacionJugada(HttpServletRequest request) {
-        ModelAndView mav = new ModelAndView("simulador");
-
-        Map<String, ?> flashMap = RequestContextUtils.getInputFlashMap(request);
-
-        if (flashMap != null) {
-            mav.addObject("exito", flashMap.get("exito"));
-            mav.addObject("error", flashMap.get("error"));
-        }
-
-        mav.addObject("title", "Simular juego");
-        mav.addObject("clientes", clienteService.buscarTodos());
-        mav.addObject("videojuegos", videojuegoService.buscarTodos());
-        return mav;
-
-    }
-
-    @PostMapping("/simular")
-    public RedirectView simularJugada(Long dniCliente, Integer idVideojuego, RedirectAttributes attributes) {
-        try {
-            videojuegoService.jugar(dniCliente, idVideojuego);
-            attributes.addFlashAttribute("exito", "La partida ha sido exitosa.");
-        } catch (SpringException e) {
-            attributes.addFlashAttribute("error", e.getMessage());
-        }
-        return new RedirectView("/simulador");
-    }
-
-
 
 }

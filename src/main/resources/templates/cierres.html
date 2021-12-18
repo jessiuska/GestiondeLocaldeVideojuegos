@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+    <head th:replace="fragments/head :: head"></head>
+
+    <body>       
+        <nav th:replace="fragments/navbar :: navbar"></nav>
+
+        <!-- main container -->
+        <div class="container my-5 py-5 main">
+            <div class="alert alert-success" th:if="${exito}" th:text="${exito}"></div>
+            <div class="alert alert-danger col-xl-6" th:if="${error}" th:text="${error}"></div>
+            <h1 th:text="${title}"></h1>
+            <hr class="mb-5" />
+            <!-- si cierres viene vacío -->
+            <div th:if="${cierres.isEmpty()}">
+                <h5>No hay cierres de caja registrados.</h5>
+            </div>
+            <!-- si cierres NO viene vacío -->
+            <div class="table-responsive" th:unless="${cierres.isEmpty()}">
+                <table class="table table-hover table-sm table-bordered align-middle">
+                    <thead class="table-secondary text-center">
+                        <tr>
+                            <!--<th class="col-md-1 ps-2" scope="col">ID</th>-->
+                            <th class="col-md-3 px-md-2" scope="col">Desde</th>
+                            <th class="col-md-1 px-md-2" scope="col">Hasta</th>
+                            <th class="col-md-1 px-md-2" scope="col">Monto</th>
+                            <th class="col-md-1 px-md-1" scope="col">Fecha de cierre</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="cierre : ${cierres}">
+                            <!--<th class="col-md-1 px-md-2 text-center" scope="row" th:text="${editorial.id}"></th>-->
+                            <td class="col-md-3 px-md-2" th:text="${cierre.fechaDesde}"></td>
+                            <td class="col-md-3 px-md-2" th:text="${cierre.fechaHasta}"></td>
+                            <td class="col-md-3 px-md-2" th:text="${cierre.monto}"></td>
+                            <!-- Uso temporals porque es LocalDateTime, los otros son LocalDate -->
+                            <td class="col-md-3 px-md-2" th:text="${#temporals.format(cierre.fechaTransaccion, 'dd-MM-yyyy HH:mm')}"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <footer th:replace="fragments/footer :: footer"></footer>
+        <script th:src="@{/assets/bootstrap.bundle.min.js}"></script>
+    </body>
+</html>

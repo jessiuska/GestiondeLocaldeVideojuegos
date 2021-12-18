@@ -24,19 +24,18 @@
             <hr class="mb-4"/>
             <div th:if="${empleados.isEmpty()}">
              <!--USAR ESTE NETBEANS   <h5>Todavía no hay empleados cargados.  <a th:href="@{/empleado/crear}">Cargar Empleado.</a></h5>  -->  
-             <h5>Todavía no hay empleados cargados.  <a th:href="empleado-formulario.html">Cargar Empleado.</a></h5> 
+             <h5>Todavía no hay empleados cargados.  <a th:href="@{/empleado/crear}">Cargar Empleado.</a></h5> 
             </div>
 
-            <a th:href="@{/empleado/crear}" th:unless="${empleados.isEmpty()}" class="btn btn-success mb-4">Ingresar Empleados</a>
             <div class="row" th:unless="${empleados.isEmpty()}">
                 <div class="col-3" th:each="empleado : ${empleados}">
                     <div class="card mb-4 shadow">
                         
                         <div class="card-footer">
-                            <div th:text="|Nombre ${empleado.nombre}|">Nombre</div>
-                            <div th:text="|Apellido ${empleado.apellido}|">Apellido</div>
-                            <div th:text="|Usuario ${empleado.usuario}|">Usuario</div>
-                            <div th:text="|Alta ${empleado.alta}|">Alta</div>
+                            <div th:text="|Nombre: ${empleado.nombre}|">Nombre</div>
+                            <div th:text="|Apellido: ${empleado.apellido}|">Apellido</div>
+                            <div th:text="|Usuario: ${empleado.usuario}|">Usuario</div>
+                            <div th:text="|Rol: ${empleado.rol}|">Alta</div>
                             <div class="d-flex justify-content-start my-2">
                                 <a class="btn btn-warning btn-sm me-2" th:href="@{/empleado/editar/__${empleado.id}__}">Editar</a>
                                 <form th:action="${empleado.alta} ? @{/empleado/eliminar/__${empleado.id}__} : @{/empleado/habilitar/__${empleado.id}__}"
