@@ -15,7 +15,7 @@
 
 <body class="img-body">
     
-        <nav class="navbar navbar-expand-sm navbar-dark bg-dark sticky-top">
+        
             <div class="container">
                 <a class="navbar-brand" th:href="@{/login}"><img th:src="@{/img/joystick.png}" width="45" /></a>
                 <button aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"
@@ -24,7 +24,7 @@
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="text-end">
-                    <a class="btn btn-light me-1" th:href="@{/login}">Ingresar</a> 
+
                     <a class="btn btn-warning" th:href="@{/signup}">Registrarse</a> 
                   </div>
             </div>
@@ -59,7 +59,7 @@
 
     </div> 
     
-    <footer th:replace="fragments/footer :: footer"></footer>
+    
     
     <!-- JS -->
     <script th:src="@{/assets/bootstrap.bundle.min.js}"></script>
