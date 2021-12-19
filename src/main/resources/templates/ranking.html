@@ -23,10 +23,8 @@
                                  width="165">
                         </div>
                         <div class="card-footer">
-                            <div th:text="|Nombre: ${videojuego.nombre}|">Nombre</div>
-                            <div th:text="|Precio ${videojuego.precioFicha}|">Precio</div>
-                            <div th:text="|Alta ${videojuego.alta}|">Fecha</div>
-                            
+                            <div class ="fw-bold" th:text="|${videojuego.nombre}|">Nombre</div>
+                            <div class="precio" th:text="|$${videojuego.precioFicha}|">Precio</div>
                         </div>
                     </div>
                 </div>
