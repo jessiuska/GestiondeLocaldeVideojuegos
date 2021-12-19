@@ -84,14 +84,14 @@ public class VideojuegoController {
     }
 
     @PostMapping("/guardar")
-    public RedirectView guardar(@RequestParam MultipartFile foto, @ModelAttribute Videojuego videoJuego, RedirectAttributes attributes) {
+    public RedirectView guardar(@RequestParam MultipartFile foto, @ModelAttribute Videojuego vj, RedirectAttributes attributes) {
         RedirectView redirectView = new RedirectView("/videojuego");
 
         try {
-            videojuegoService.crear(videoJuego, foto);
+            videojuegoService.crear(vj, foto);
             attributes.addFlashAttribute("exito", "La creación ha sido realizada satisfactoriamente");
         } catch (SpringException e) {
-            attributes.addFlashAttribute("videojuego", videoJuego);
+            attributes.addFlashAttribute("videojuego", vj);
             attributes.addFlashAttribute("error", e.getMessage());
             redirectView.setUrl("/videojuego/crear");
         }
@@ -100,16 +100,16 @@ public class VideojuegoController {
     }
 
     @PostMapping("/modificar")
-    public RedirectView modificar(@RequestParam MultipartFile foto, @ModelAttribute Videojuego videoJuego, RedirectAttributes attributes) {
+    public RedirectView modificar(@RequestParam MultipartFile foto, @ModelAttribute Videojuego vj, RedirectAttributes attributes) {
         RedirectView redirectView = new RedirectView("/videojuego");
 
         try {
-            videojuegoService.modificar(videoJuego, foto);
+            videojuegoService.modificar(vj, foto);
             attributes.addFlashAttribute("exito", "La actualización ha sido realizada satisfactoriamente");
         } catch (SpringException e) {
-            attributes.addFlashAttribute("videojuego", videoJuego);
+            attributes.addFlashAttribute("videojuego", vj);
             attributes.addFlashAttribute("error", e.getMessage());
-            redirectView.setUrl("/videojuego/editar/" + videoJuego.getId());
+            redirectView.setUrl("/videojuego/editar/" + vj.getId());
         }
 
         return redirectView;

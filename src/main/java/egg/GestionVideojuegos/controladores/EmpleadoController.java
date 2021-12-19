@@ -59,11 +59,15 @@ public class EmpleadoController {
 
     @GetMapping("/editar/{id}")
     public ModelAndView editar(@PathVariable Integer id, HttpServletRequest request, HttpSession session, RedirectAttributes attributes) {
-        if (!session.getAttribute("id").equals(id)) {
-            return new ModelAndView(new RedirectView("/home"));
+        ModelAndView mav = new ModelAndView("empleado-formulario");
+        
+        if (!session.getAttribute("id").equals(id) && !session.getAttribute("rol").equals("ADMIN")) {
+            attributes.addFlashAttribute("error", "No puede editar un usuario que no es el suyo");
+            mav.setViewName("redirect:/empleado");
+            //return new ModelAndView(new RedirectView("/empleado"));
         }
 
-        ModelAndView mav = new ModelAndView("empleado-formulario");
+        //ModelAndView mav = new ModelAndView("empleado-formulario");
         Map<String, ?> flashMap = RequestContextUtils.getInputFlashMap(request);
 
         try {

@@ -59,12 +59,24 @@ public class ClienteController {
         return mav;
     }
 
-    @GetMapping("/editar/{dni}")
-    public ModelAndView editar(@PathVariable Long dni, HttpServletRequest request, HttpSession session, RedirectAttributes attributes) {
-        if (!session.getAttribute("dni").equals(dni)) {
-            return new ModelAndView(new RedirectView("/home"));
+    @PostMapping("/guardar")
+    public RedirectView guardar(@ModelAttribute Cliente cliente, RedirectAttributes attributes) {
+        RedirectView redirectView = new RedirectView("/cliente");
+
+        try {
+            clienteService.crear(cliente);
+            attributes.addFlashAttribute("exito", "El cliente se creó con éxito");
+        } catch (SpringException e) {
+            attributes.addFlashAttribute("cliente", cliente);
+            attributes.addFlashAttribute("error", e.getMessage());
+            redirectView.setUrl("/cliente");
         }
 
+        return redirectView;
+    }
+
+    @GetMapping("/editar/{dni}")
+    public ModelAndView editar(@PathVariable Long dni, HttpServletRequest request, HttpSession session, RedirectAttributes attributes) {
         ModelAndView mav = new ModelAndView("cliente-formulario");
         Map<String, ?> flashMap = RequestContextUtils.getInputFlashMap(request);
 
@@ -86,28 +98,8 @@ public class ClienteController {
         return mav;
     }
 
-    @PostMapping("/guardar")
-    public RedirectView guardar(@ModelAttribute Cliente cliente, RedirectAttributes attributes) {
-        RedirectView redirectView = new RedirectView("/cliente");
-
-        try {
-            clienteService.crear(cliente);
-            attributes.addFlashAttribute("exito", "El cliente se creó con éxito");
-        } catch (SpringException e) {
-            attributes.addFlashAttribute("cliente", cliente);
-            attributes.addFlashAttribute("error", e.getMessage());
-            redirectView.setUrl("/cliente");
-        }
-
-        return redirectView;
-    }
-
     @PostMapping("/modificar")
     public RedirectView modificar(@ModelAttribute Cliente cliente, HttpSession session, RedirectAttributes attributes) {
-        if (!session.getAttribute("id").equals(cliente.getDni())) {
-            return new RedirectView("/home");
-        }
-
         RedirectView redirectView = new RedirectView("/cliente");
 
         try {

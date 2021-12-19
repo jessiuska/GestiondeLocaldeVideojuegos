@@ -40,13 +40,13 @@
 
 
                     <div class="mb-3">
-                        <label for="clave" class="form-label">clave</label>
+                        <label for="clave" class="form-label">Clave</label>
                         <input type="password" class="form-control" name="clave" id="clave" th:field="*{clave}" placeholder="Ingresar clave" required>
                         <div class="valid-feedback"></div> 
                         <div class="invalid-feedback">Ingresar clave valida</div>
                     </div>
 
-                    <div class="input-group mb-3">
+                    <div sec:authorize="hasRole('ADMIN')" class="input-group mb-3">
                         <select class="form-select" th:field="*{rol}" id="rol" aria-describedby="rol" required>
                             <option value="">Elegir ROL</option>
                             <option th:if="${action == 'guardar'}" th:each=" rol : ${T(egg.GestionVideojuegos.enums.Rol).values()}" th:text="${rol}" th:value="${rol}"></option>

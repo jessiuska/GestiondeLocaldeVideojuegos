@@ -32,31 +32,35 @@ public class VideojuegoService {
     private String mensaje = "No existe ningún videojuego asociado con el ID %s";
 
     @Transactional
-    public void crear(Videojuego videoJuego, MultipartFile foto) throws SpringException {
-        if (videoJuegoRepository.existsByNombre(videoJuego.getNombre())) {
+    public void crear(Videojuego vj, MultipartFile foto) throws SpringException {
+        if (videoJuegoRepository.existsByNombre(vj.getNombre())) {
             throw new SpringException("Ya existe un videojuego registrado con ese nombre");
         }
         Videojuego videojuego = new Videojuego();
-        videojuego.setNombre(videoJuego.getNombre());
-        videojuego.setPrecioFicha(videoJuego.getPrecioFicha());
-        videojuego.setRecaudacion(videoJuego.getRecaudacion());
+        videojuego.setNombre(vj.getNombre());
+        videojuego.setPrecioFicha(vj.getPrecioFicha());
+        videojuego.setRecaudacion(0.0);
+        videojuego.setAlta(true);
+        
         if (!foto.isEmpty()) {
             videojuego.setImage(fotoService.copiar(foto));
         }
-        videojuego.setAlta(true);
+        
         videoJuegoRepository.save(videojuego);
     }
 
     @Transactional
-    public void modificar(Videojuego videoJuego, MultipartFile foto) throws SpringException {
-        Videojuego videojuego = buscarPorId(videoJuego.getId());
-
-        videojuego.setNombre(videoJuego.getNombre());
-        videojuego.setPrecioFicha(videoJuego.getPrecioFicha());
-        videojuego.setRecaudacion(videoJuego.getRecaudacion());
+    public void modificar(Videojuego vj, MultipartFile foto) throws SpringException {
+        Videojuego videojuego = buscarPorId(vj.getId());
+        videojuego.setNombre(vj.getNombre());
+        videojuego.setPrecioFicha(vj.getPrecioFicha());
+        videojuego.setRecaudacion(vj.getRecaudacion());
+        System.out.println("TEST " + vj.getRecaudacion());
+        
         if (!foto.isEmpty()) {
             videojuego.setImage(fotoService.copiar(foto));
         }
+        
         videoJuegoRepository.save(videojuego);
     }
 
