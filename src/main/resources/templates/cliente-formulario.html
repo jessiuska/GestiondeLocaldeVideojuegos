@@ -45,6 +45,8 @@
                     <div class="error text-start" th:if="${#fields.hasErrors('apellido')}"
                          th:errors="*{apellido}"></div>
                 </div>
+                
+                <input th:field="*{tarjeta}" type="hidden"/>
 
                 <div class="row">
                     <div class="col-xl-3">

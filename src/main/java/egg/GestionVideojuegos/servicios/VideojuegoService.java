@@ -55,7 +55,6 @@ public class VideojuegoService {
         videojuego.setNombre(vj.getNombre());
         videojuego.setPrecioFicha(vj.getPrecioFicha());
         videojuego.setRecaudacion(vj.getRecaudacion());
-        System.out.println("TEST " + vj.getRecaudacion());
         
         if (!foto.isEmpty()) {
             videojuego.setImage(fotoService.copiar(foto));
