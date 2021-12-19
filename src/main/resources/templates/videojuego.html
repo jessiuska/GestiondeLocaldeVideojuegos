@@ -21,7 +21,7 @@
                         <div class="card-body text-center p-0">
                             <img 
                                  th:src="${videojuego.image != null} ? @{/uploads/__${videojuego.image}__} : @{/uploads/foto-no-disponible.png}"
-                                 width="100%">
+                                 height="250" width="100%">
                         </div>
                         <div class="card-footer">
                             <div class="fw-bold" th:text="|${videojuego.nombre}|">Nombre</div>
