@@ -73,8 +73,6 @@ public class EmpleadoService implements UserDetailsService {
         if (!dto.getClave().isEmpty()) empleado.setClave(encoder.encode(dto.getClave()));
         if (dto.getRol() != null) empleado.setRol(dto.getRol());
         
-        System.out.println("TEST -> " + dto.getRol().toString());
-        
         empleadoRepository.save(empleado);
     }
     
