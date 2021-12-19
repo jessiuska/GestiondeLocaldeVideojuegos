@@ -28,6 +28,7 @@ public class EmpleadoController {
     //@PreAuthorize("hasAnyRole('ADMIN', 'CAJERO')")
     public ModelAndView mostrar(HttpServletRequest request) {
         ModelAndView mav = new ModelAndView("empleado");
+        mav.addObject("title", "Listado de Empleados");
         Map<String, ?> flashMap = RequestContextUtils.getInputFlashMap(request);
 
         if (flashMap != null) {
