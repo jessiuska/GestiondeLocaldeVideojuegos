@@ -78,7 +78,7 @@ public class EmpleadoService implements UserDetailsService {
     
     @Transactional(readOnly = true)
     public List<Empleado> buscarTodos() {
-        return empleadoRepository.findAll();
+        return empleadoRepository.findByAlta(true);
     }
 
     @Transactional(readOnly = true)

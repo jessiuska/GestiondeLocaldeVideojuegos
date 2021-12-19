@@ -2,7 +2,7 @@
 
 body {
     font-family: 'Poppins', sans-serif;
-    height:100%;
+    height:100vh;
 }
 
 nav, footer, .dropdown-menu {
@@ -286,4 +286,8 @@ nav, footer, .dropdown-menu {
 }
 .bi-x-circle-fill {
   color: red;
+}
+
+.precio{
+    color: #85BB65;
 }

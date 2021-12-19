@@ -71,7 +71,7 @@ public class ClienteService {
 
     @Transactional(readOnly = true)
     public List<Cliente> buscarTodos() {
-        return clienteRepository.findAll();
+        return clienteRepository.findByAlta(true);
     }
 
     @Transactional(readOnly = true)

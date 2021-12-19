@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security"></html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
     <head th:replace="fragments/head :: head"></head>
     
     <body>
@@ -24,9 +24,8 @@
                                  width="100%">
                         </div>
                         <div class="card-footer">
-                            <div th:text="|Nombre: ${videojuego.nombre}|">Nombre</div>
-                            <div th:text="|Precio ${videojuego.precioFicha}|">Precio</div>
-                            <div th:text="|Alta ${videojuego.alta}|">Fecha</div>
+                            <div class="fw-bold" th:text="|${videojuego.nombre}|">Nombre</div>
+                            <div class="precio" th:text="|$${videojuego.precioFicha}|">Precio</div>
                             <div class="d-flex justify-content-start my-2">
                                 <a class="btn btn-warning btn-sm me-2" th:href="@{/videojuego/editar/__${videojuego.id}__}">Editar</a>
                                 <form th:action="${videojuego.alta} ? @{/videojuego/eliminar/__${videojuego.id}__} : @{/videojuego/habilitar/__${videojuego.id}__}"

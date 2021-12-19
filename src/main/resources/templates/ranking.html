@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security"></html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
     <head th:replace="fragments/head :: head"></head>
     
     <body>
@@ -11,7 +11,7 @@
             <h1>Listado de Ranking</h1>
             <hr class="mb-4"/>
             <div th:if="${videojuegos.isEmpty()}">
-             <h5>Todavía no hay videojuegos jugados. <a th:href="@{/videojuego/simular}">Jugar videojuego.</a></h5> 
+             <h5>Todavía no hay videojuegos jugados. <a th:href="@{/videojuego/jugar}">Jugar videojuego.</a></h5> 
             </div>
 
             <div class="row" th:unless="${videojuegos.isEmpty()}">
@@ -23,10 +23,8 @@
                                  width="165">
                         </div>
                         <div class="card-footer">
-                            <div th:text="|Nombre: ${videojuego.nombre}|">Nombre</div>
-                            <div th:text="|Precio ${videojuego.precioFicha}|">Precio</div>
-                            <div th:text="|Alta ${videojuego.alta}|">Fecha</div>
-                            
+                            <div class ="fw-bold" th:text="|${videojuego.nombre}|">Nombre</div>
+                            <div class="precio" th:text="|$${videojuego.precioFicha}|">Precio</div>
                         </div>
                     </div>
                 </div>

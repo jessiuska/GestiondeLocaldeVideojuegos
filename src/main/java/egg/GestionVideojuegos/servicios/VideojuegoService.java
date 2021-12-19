@@ -65,7 +65,7 @@ public class VideojuegoService {
 
     @Transactional(readOnly = true)
     public List<Videojuego> buscarTodos() {
-        return videoJuegoRepository.findAll();
+        return videoJuegoRepository.findByAlta(true);
     }
 
     @Transactional(readOnly = true)

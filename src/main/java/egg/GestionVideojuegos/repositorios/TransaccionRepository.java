@@ -16,4 +16,6 @@ public interface TransaccionRepository extends JpaRepository<Transaccion, Intege
     
     List<Transaccion> findBytipoTransaccion(Integer tipoTransaccion);
     
+    List<Transaccion> findBytipoTransaccionOrderByFechaTransaccionDesc(Integer tipoTransaccion);
+    
 }
