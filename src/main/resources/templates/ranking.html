@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security"></html>
+    <head th:replace="fragments/head :: head"></head>
+    
+    <body>
+        <nav th:replace="fragments/navbar :: navbar"></nav>
+
+        <div class="container mt-5 main">
+            <div class="alert alert-success" th:if="${exito}" th:text="${exito}"></div>
+            <div class="alert alert-danger col-xl-6" th:if="${error}" th:text="${error}"></div>
+            <h1>Listado de Ranking</h1>
+            <hr class="mb-4"/>
+            <div th:if="${videojuegos.isEmpty()}">
+             <h5>Todavía no hay videojuegos jugados. <a th:href="@{/videojuego/simular}">Jugar videojuego.</a></h5> 
+            </div>
+
+            <div class="row" th:unless="${videojuegos.isEmpty()}">
+                <div class="col-3" th:each="videojuego : ${videojuegos}">
+                    <div class="card mb-4 shadow">
+                        <div class="card-body text-center my-2">
+                            <img class="rounded-circle"
+                                 th:src="${videojuego.image != null} ? @{/uploads/__${videojuego.image}__} : @{/uploads/foto-no-disponible.png}"
+                                 width="165">
+                        </div>
+                        <div class="card-footer">
+                            <div th:text="|Nombre: ${videojuego.nombre}|">Nombre</div>
+                            <div th:text="|Precio ${videojuego.precioFicha}|">Precio</div>
+                            <div th:text="|Alta ${videojuego.alta}|">Fecha</div>
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <footer th:replace="fragments/footer :: footer"></footer>
+        <script th:src="@{/assets/bootstrap.bundle.min.js}"></script>
+    </body>
+</html>

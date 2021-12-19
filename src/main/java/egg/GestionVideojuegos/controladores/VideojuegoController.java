@@ -173,6 +173,18 @@ public class VideojuegoController {
         return new RedirectView("/videojuego");
     }
     
-    
-    
+    @GetMapping("/ranking")
+    public ModelAndView ranking(HttpServletRequest request) {
+        ModelAndView mav = new ModelAndView("ranking");
+        Map<String, ?> flashMap = RequestContextUtils.getInputFlashMap(request);
+      
+            if (flashMap != null) {
+                mav.addObject("exito", flashMap.get("exito"));
+                mav.addObject("error", flashMap.get("error"));
+            }else{
+                mav.addObject("videojuegos", videojuegoService.ranking());
+            }
+        return mav;     
+    }
+
 }
