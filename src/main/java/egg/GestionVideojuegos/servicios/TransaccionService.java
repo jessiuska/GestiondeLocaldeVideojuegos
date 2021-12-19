@@ -48,7 +48,7 @@ public class TransaccionService {
 
     @Transactional(readOnly = true)
     public List<Transaccion> buscarCierres() {
-        return transaccionRepository.findBytipoTransaccion(4); //cierres
+        return transaccionRepository.findBytipoTransaccionOrderByFechaTransaccionDesc(4); //cierres
     }
     
     @Transactional(readOnly = true)

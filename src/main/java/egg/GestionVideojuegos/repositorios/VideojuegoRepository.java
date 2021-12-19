@@ -21,5 +21,5 @@ public interface VideojuegoRepository extends JpaRepository<Videojuego, Integer>
 //    List<Videojuego> 
 
     List<Videojuego> findTop5ByOrderByRecaudacionDesc();
-    
+    List<Videojuego> findByAlta(Boolean alta);
 }
