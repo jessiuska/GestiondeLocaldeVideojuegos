@@ -7,6 +7,7 @@ import egg.GestionVideojuegos.servicios.VideojuegoService;
 import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -28,10 +29,14 @@ public class VideojuegoController {
     private VideojuegoService videojuegoService;
     
     @Autowired ClienteService clienteService;
+    
+    @Value("${custom.nombre-sistema}")
+    private String nombreSistema;
 
     @GetMapping
     public ModelAndView mostrar(HttpServletRequest request) {
         ModelAndView mav = new ModelAndView("videojuego");
+        mav.addObject("title", "Listado de Videojuegos");
         Map<String, ?> flashMap = RequestContextUtils.getInputFlashMap(request);
 
         if (flashMap != null) {
@@ -176,6 +181,7 @@ public class VideojuegoController {
     @GetMapping("/ranking")
     public ModelAndView ranking(HttpServletRequest request) {
         ModelAndView mav = new ModelAndView("ranking");
+        mav.addObject("title", nombreSistema + " - Ranking");
         Map<String, ?> flashMap = RequestContextUtils.getInputFlashMap(request);
       
             if (flashMap != null) {
