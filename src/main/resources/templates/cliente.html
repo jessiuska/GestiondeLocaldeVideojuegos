@@ -24,6 +24,7 @@
                             <th class="col-md-1 px-md-2" scope="col">Nombre</th>
                             <!--<th class="col-md-1 px-md-2" scope="col">Apellido</th>-->
                             <!--<th class="col-md-1 px-md-2" scope="col">Rol</th>-->
+                            <th class="col-md-1 px-md-2" scope="col">Saldo</th>
                             <th class="col-md-1 ps-2" scope="col">Fecha alta</th>
                             <th class="col-md-1 px-md-1" scope="col">Activo</th>
                             <!--<th sec:authorize="hasRole('ADMIN')" class="col-md-1 px-md-1" scope="col">Acciones</th>-->
@@ -35,6 +36,7 @@
                         <tr th:each="cliente : ${clientes}">
                             <th class="col-md-1 px-md-2 text-center" scope="row" th:text="${cliente.dni}"></th>
                             <td class="col-md-1 px-md-2" th:text="|${cliente.nombre} ${cliente.apellido}|"></td>
+                            <td class="col-md-1 px-md-2" th:text="|$${#numbers.formatDecimal(cliente.tarjeta.saldo,0,2)}|" } ></td>
                             <td class="col-md-1 ps-2" th:text="${#temporals.format(cliente.fechaAlta, 'dd/MM/yyyy')}"></td>
                             <td class="col-md-1 px-md-1 text-center"><i class="bi" th:classappend="${cliente.alta ? 'bi-check-circle-fill' : 'bi-x-circle-fill'}"></i></td>
                             
