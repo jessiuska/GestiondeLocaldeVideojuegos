@@ -36,6 +36,7 @@ public class EmpleadoController {
             mav.addObject("error", flashMap.get("error"));
         }
 
+        mav.addObject("title", "Listado de empleados");
         mav.addObject("empleados", empleadoService.buscarTodos());
         return mav;
     }
@@ -110,7 +111,10 @@ public class EmpleadoController {
         RedirectView redirectView = new RedirectView("/empleado");
 
         try {
-            empleadoService.modificar(empleado);
+            empleadoService.modificar(empleado, session);
+            if (session.getAttribute("id").equals(empleado.getId())) {
+                //empleadoService.actualizarSesion(empleado, session);
+            }
             attributes.addFlashAttribute("exito", "La actualización ha sido realizada satisfactoriamente");
         } catch (SpringException e) {
             attributes.addFlashAttribute("empleado", empleado);

@@ -8,13 +8,14 @@
         <div class="container mt-5 main">
             <div class="alert alert-success" th:if="${exito}" th:text="${exito}"></div>
             <div class="alert alert-danger col-xl-6" th:if="${error}" th:text="${error}"></div>
-            <h1>Listado de Ranking</h1>
+            <h1>Ranking</h1>
             <hr class="mb-4"/>
             <div th:if="${videojuegos.isEmpty()}">
-             <h5>Todavía no hay videojuegos jugados. <a th:href="@{/videojuego/jugar}">Jugar videojuego.</a></h5> 
+                <h5>Todavía no hay videojuegos jugados. <a th:href="@{/videojuego/jugar}">Jugar videojuego.</a></h5> 
             </div>
 
             <div class="row" th:unless="${videojuegos.isEmpty()}">
+<<<<<<< HEAD
                 <div class="col-3" th:each="videojuego : ${videojuegos}">
                     <div class="card mb-4 shadow">
                         <div class="card-body text-center p-0">
@@ -25,6 +26,31 @@
                         <div class="card-footer">
                             <div class ="fw-bold" th:text="|${videojuego.nombre}|">Nombre</div>
                             <div class="precio" th:text="|$${videojuego.precioFicha}|">Precio</div>
+=======
+                <div class="col-7" th:each="videojuego, iterador : ${videojuegos}">
+                    <div class="card mb-6" style="max-width: 800px;">
+                        <div class="row g-0">
+                            <div class="col-md-4 img-ranking">
+                                <img
+                                     th:src="${videojuego.image != null} ? @{/uploads/__${videojuego.image}__} : @{/uploads/foto-no-disponible.png}"
+                                     height="100%" width="200" />
+                            </div>
+                            <div class="col-md-8">
+                                <div class="card-body ranking">
+                                    <div class="caja">
+                                    <img class="medal" th:if="${iterador.index} == 0" th:src="@{/img/medal-solid-gold.png}" />
+                                    <img class="medal" th:if="${iterador.index} == 1" th:src="@{/img/medal-solid-silver.png}" />
+                                    <img class="medal" th:if="${iterador.index} == 2" th:src="@{/img/medal-solid-bronze.png}" />
+                                    <h3  class="posicion" th:unless="${iterador.index + 1 < 4}" th:text="${iterador.index + 1} + ${'°'}">Posicion</h3>
+                                    <h5 class="fw-bold nombre-juego" th:text="|${videojuego.nombre}|">Nombre</h5><br>
+                                    </div><br>
+                                    <p id="recaudacion">Recaudación: </p>
+                                    <p class="precio" th:text="|$${videojuego.recaudacion}|">Precio</p><br><br>
+                                    <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                                    <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                                </div>
+                            </div>
+>>>>>>> 8206cf7b54a756478bb34e6c8522f4118e4fb3a8
                         </div>
                     </div>
                 </div>

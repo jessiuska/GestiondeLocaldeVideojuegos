@@ -6,10 +6,10 @@
                 data-bs-target="#navbarSupportedContent" data-bs-toggle="collapse" type="button">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <div sec:authorize="hasAnyRole('ADMIN','CAJERO','USER')" class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mb-2 mb-md-0 w-100">
                 <!--LOCAL -->
-                <li class="nav-item dropdown text-white">
+                <li sec:authorize="hasAnyRole('ADMIN')" class="nav-item dropdown text-white">
                     <a aria-expanded="false" class="nav-link dropdown-toggle text-reset" data-bs-toggle="dropdown"
                        href="#"
                        id="dropdown-local" role="button">
@@ -22,13 +22,10 @@
                         <li>
                             <a class="dropdown-item text-white" th:href="@{/local/cierre}">Cerrar Caja</a>
                         </li>
-                        <li>
-                            <a class="dropdown-item text-white" th:href="@{/local/carga}">Cargar Saldo</a>
-                        </li>
                     </ul>
                 </li>
                 <!-- EMPLEADOS -->
-                <li class="nav-item dropdown text-white">
+                <li sec:authorize="hasAnyRole('ADMIN')" class="nav-item dropdown text-white">
                     <a aria-expanded="false" class="nav-link dropdown-toggle text-reset" data-bs-toggle="dropdown"
                        href="#"
                        id="dropdown-empleados" role="button">
@@ -44,7 +41,7 @@
                     </ul>
                 </li>
                 <!-- CLIENTES -->
-                <li class="nav-item dropdown text-white">
+                <li sec:authorize="hasAnyRole('ADMIN','CAJERO')" class="nav-item dropdown text-white">
                     <a aria-expanded="false" class="nav-link dropdown-toggle text-reset" data-bs-toggle="dropdown"
                        href="#"
                        id="dropdown-clientes" role="button">
@@ -55,10 +52,13 @@
                         <li>
                             <a class="dropdown-item text-white" th:href="@{/cliente/crear}">Cargar Cliente</a>
                         </li>
+                        <li>
+                            <a class="dropdown-item text-white" th:href="@{/local/carga}">Cargar Saldo</a>
+                        </li>
                     </ul>
                 </li>
                 <!--VIDEOJUEGOS -->
-                <li class="nav-item dropdown text-white">
+                <li sec:authorize="hasAnyRole('ADMIN','CAJERO')" class="nav-item dropdown text-white">
                     <a aria-expanded="false" class="nav-link dropdown-toggle text-reset" data-bs-toggle="dropdown"
                        href="#"
                        id="dropdown-videojuegos" role="button">

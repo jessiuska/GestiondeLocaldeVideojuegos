@@ -11,8 +11,11 @@ import java.util.List;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -63,17 +66,33 @@ public class EmpleadoService implements UserDetailsService {
     }
 
     @Transactional
-    public void modificar(Empleado dto) throws SpringException {
+    public void modificar(Empleado dto, HttpSession session) throws SpringException {
+        /*
+        if (empleadoRepository.existsByUsuario(dto.getUsuario()) &&
+                !session.getAttribute("usuario").equals(dto.getUsuario()))
+            throw new SpringException("Ya existe un usuario con ese nombre de usuario");
+        */
+        
         Empleado empleado = buscarPorId(dto.getId());
         
         empleado.setNombre(dto.getNombre());
         empleado.setApellido(dto.getApellido());
         empleado.setUsuario(dto.getUsuario());
         
+        //Si la clave NO viene vacía, la cambia, sino deja la misma
         if (!dto.getClave().isEmpty()) empleado.setClave(encoder.encode(dto.getClave()));
+        //Si se modifica un rol se guarda, si no se tocó va a llegar null así que se deja el que estaba
         if (dto.getRol() != null) empleado.setRol(dto.getRol());
         
         empleadoRepository.save(empleado);
+        
+        //Actualiza datos de la sesión solo si se modifica el usuario que está en la sesión
+        if (session.getAttribute("id").equals(empleado.getId())) {
+            session.setAttribute("nombre", dto.getNombre());
+            session.setAttribute("apellido", dto.getApellido());
+            session.setAttribute("usuario", dto.getUsuario());
+            session.setAttribute("rol", dto.getRol().name());
+        }
     }
     
     @Transactional(readOnly = true)
@@ -108,6 +127,7 @@ public class EmpleadoService implements UserDetailsService {
         HttpSession session = attributes.getRequest().getSession(true);
 
         session.setAttribute("id", empleado.getId());
+        session.setAttribute("usuario", empleado.getUsuario());
         session.setAttribute("nombre", empleado.getNombre());
         session.setAttribute("apellido", empleado.getApellido());
         session.setAttribute("rol", empleado.getRol().name());

@@ -5,6 +5,18 @@
     <body class="img-body">
         <nav th:replace="fragments/navbar :: navbar"></nav>
 
+        <div th:if="${error}" class="container mt-4 text-center">
+            <div class="row col-md-4 mx-auto">
+                <div th:text="${error}" class="alert alert-danger m-0 shadow"></div>
+            </div>
+        </div>
+
+        <div th:if="${logout}" class="container mt-4 text-center">
+            <div class="row col-md-4 mx-auto">
+                <div th:text="${logout}" class="alert alert-success m-0 shadow"></div>
+            </div>
+        </div>
+
         <div class="body-login">
 
             <div class="registration-form container">
