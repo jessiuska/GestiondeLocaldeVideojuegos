@@ -18,10 +18,10 @@
                 <div class="col-7" th:each="videojuego, iterador : ${videojuegos}">
                     <div class="card mb-6" style="max-width: 800px;">
                         <div class="row g-0">
-                            <div class="col-md-4">
-                                <img class="rounded-circle"
+                            <div class="col-md-4 img-ranking">
+                                <img
                                      th:src="${videojuego.image != null} ? @{/uploads/__${videojuego.image}__} : @{/uploads/foto-no-disponible.png}"
-                                     width="165">
+                                     height="100%" width="200" />
                             </div>
                             <div class="col-md-8">
                                 <div class="card-body ranking">
