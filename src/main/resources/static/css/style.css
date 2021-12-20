@@ -288,20 +288,32 @@ nav, footer, .dropdown-menu {
   color: red;
 }
 
+#recaudacion{
+    font-weight: bold;
+    font-size: 17px;
+    display: block;
+    margin-left: 0;
+    margin-right: 10px;
+    float: left;
+}
 .precio{
     color: #85BB65;
-    clear: both;
+    font-weight: 500;
+    float: left;
 }
 .nombre-juego{
     float: left;
-    clear: right;
+    clear: none;
 }
 .medal{
-    float: left;
     margin-right: 5px;
     width: 25px;
+    float: left;
 }
 .posicion{
     font-weight: bolder;
     color: grey;
+}
+.caja{
+    clear: both;
 }
