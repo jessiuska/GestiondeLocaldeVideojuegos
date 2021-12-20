@@ -290,4 +290,18 @@ nav, footer, .dropdown-menu {
 
 .precio{
     color: #85BB65;
+    clear: both;
+}
+.nombre-juego{
+    float: left;
+    clear: right;
+}
+.medal{
+    float: left;
+    margin-right: 5px;
+    width: 25px;
+}
+.posicion{
+    font-weight: bolder;
+    color: grey;
 }
