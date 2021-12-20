@@ -3,11 +3,11 @@
 
     <head th:replace="fragments/head :: head"></head>
 
-    <body>       
+    <body class="fondo-cierres">       
         <nav th:replace="fragments/navbar :: navbar"></nav>
 
         <!-- main container -->
-        <div class="container my-5 py-5 main">
+        <div class="container mt-5 main">
             <div class="alert alert-success" th:if="${exito}" th:text="${exito}"></div>
             <div class="alert alert-danger" th:if="${error}" th:text="${error}"></div>
             <h1 th:text="${title}"></h1>

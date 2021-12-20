@@ -14,6 +14,21 @@ nav, footer, .dropdown-menu {
     background-size: cover;
     background-repeat: no-repeat;
 }
+.fondo-index {
+    background-image: linear-gradient(to right, #fc5c7d, #6a82fb);
+}
+.fondo-cierres {
+    background-image: linear-gradient(to right, #ff6e7f, #bfe9ff);
+}
+.fondo-empleados {
+    background-image: linear-gradient(to right, #ff9966, #ff5e62);
+}
+.fondo-clientes {
+    background-image: linear-gradient( 95.2deg, rgba(173,252,234,1) 26.8%, rgba(192,229,246,1) 64% );
+}
+.fondo-videojuegos {
+    background-image: linear-gradient(to right, #8360c3, #2ebf91);
+}
 .body-login{
     display: flex;
     align-items: center;

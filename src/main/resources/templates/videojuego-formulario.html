@@ -2,10 +2,9 @@
 <html lang="es" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
     <head th:replace="fragments/head :: head"></head>
 
-    <body>
+    <body class="fondo-videojuegos">
         <nav th:replace="fragments/navbar :: navbar"></nav>
-
-        <div class="body-imagen">
+        <div class="container mt-5 main">
             <div class="alert alert-success" th:if="${exito}" th:text="${exito}"></div>
             <div class="alert alert-danger" th:if="${error}" th:text="${error}"></div>
             <h1 th:text="${title}"></h1>
@@ -43,7 +42,6 @@
                 </form>
             </div>
         </div>
-
         <footer th:replace="fragments/footer :: footer"></footer>
         <script th:src="@{/assets/bootstrap.bundle.min.js}"></script>
     </body>  

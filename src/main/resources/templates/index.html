@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html lang="es" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
     <head th:replace="fragments/head :: head"></head>
-    <body>
+    <body class="fondo-index">
         <nav th:replace="fragments/navbar :: navbar"></nav>
 
         <div class="container mt-5 main">
             <div class="row my-auto g-4 justify-content-evenly">
-                <div class="card col-lg-5 p-0 clickable-card">
+                <div sec:authorize="hasAnyRole('ADMIN')" class="card col-lg-5 p-0 clickable-card">
                     <a class="text-decoration-none" th:href="@{/empleado}">
                         <div class="row g-0">
                             <div class="col-md-4 index-empleados"></div>
