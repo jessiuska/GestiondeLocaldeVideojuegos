@@ -25,7 +25,7 @@
                         </div>
                         <div class="card-footer">
                             <div class="fw-bold" th:text="|${videojuego.nombre}|">Nombre</div>
-                            <div class="precio" th:text="|$${videojuego.recaudacion}|">Precio</div>
+                            <div class="precio" th:text="|$${#numbers.formatDecimal(videojuego.precioFicha,0,2)}|">Precio</div><br>
                             <div class="d-flex justify-content-start my-2">
                                 <a class="btn btn-warning btn-sm me-2" th:href="@{/videojuego/editar/__${videojuego.id}__}">Editar</a>
                                 <form th:action="${videojuego.alta} ? @{/videojuego/eliminar/__${videojuego.id}__} : @{/videojuego/habilitar/__${videojuego.id}__}"
