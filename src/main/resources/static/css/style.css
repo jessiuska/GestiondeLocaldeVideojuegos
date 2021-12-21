@@ -305,7 +305,7 @@ nav, footer, .dropdown-menu {
 
 #recaudacion{
     font-weight: bold;
-    font-size: 17px;
+    font-size: 20px;
     display: block;
     margin-left: 0;
     margin-right: 10px;
@@ -316,19 +316,37 @@ nav, footer, .dropdown-menu {
     font-weight: 500;
     float: left;
 }
+.precio-ranking{
+    color: #85BB65;
+    font-weight: 500;
+    float: left;
+    font-size: 20px;
+}
 .nombre-juego{
     float: left;
     clear: none;
+    font-size: 30px;
 }
 .medal{
     margin-right: 5px;
-    width: 25px;
+    margin-top: 5px;
+    width: 28px;
     float: left;
 }
 .posicion{
     font-weight: bolder;
     color: grey;
+    float: left;
+    font-size: 30px;
+    margin-right: 6px;
 }
 .caja{
     clear: both;
+    display: inline-block;
+}
+.rec{
+    display: flex;
+}
+.card-ranking{
+    height: 200px;
 }
