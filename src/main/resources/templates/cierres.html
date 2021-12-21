@@ -33,7 +33,7 @@
                             <!--<th class="col-md-1 px-md-2 text-center" scope="row" th:text="${editorial.id}"></th>-->
                             <td class="col-md-3 px-md-2" th:text="${#temporals.format(cierre.fechaDesde, 'dd-MM-yyyy HH:mm')}"></td>
                             <td class="col-md-3 px-md-2" th:text="${#temporals.format(cierre.fechaHasta, 'dd-MM-yyyy HH:mm')}"></td>
-                            <td class="col-md-3 px-md-2" th:text="|$${cierre.monto}|"></td>
+                            <td class="col-md-3 px-md-2" th:text="|$${#numbers.formatDecimal(cierre.monto,0,2)}|"></td>
                             <!-- Uso temporals porque es LocalDateTime, los otros son LocalDate -->
                             <td class="col-md-3 px-md-2" th:text="${#temporals.format(cierre.fechaTransaccion, 'dd-MM-yyyy HH:mm')}"></td>
                         </tr>
