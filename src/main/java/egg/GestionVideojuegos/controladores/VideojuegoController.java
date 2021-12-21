@@ -127,8 +127,9 @@ public class VideojuegoController {
     }
 
     @PostMapping("/eliminar/{id}")
-    public RedirectView eliminar(@PathVariable Integer id) {
+    public RedirectView eliminar(@PathVariable Integer id, RedirectAttributes attributes) {
         videojuegoService.eliminar(id);
+        attributes.addFlashAttribute("exito", "El juego ha sido eliminado exitosamente.");
         return new RedirectView("/videojuego");
     }
 

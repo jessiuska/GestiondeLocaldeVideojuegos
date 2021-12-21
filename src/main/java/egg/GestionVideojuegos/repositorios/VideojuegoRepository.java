@@ -16,10 +16,8 @@ public interface VideojuegoRepository extends JpaRepository<Videojuego, Integer>
     @Modifying
     @Query("UPDATE Videojuego v SET v.alta = true WHERE v.id = :id")
     void habilitar(@Param("id") Integer id);
-    
-//    @Query("SELECT v FROM Videojuego v ORDER BY v.recaudacion DESC LIMIT 5")
-//    List<Videojuego> 
 
     List<Videojuego> findTop5ByOrderByRecaudacionDesc();
+    
     List<Videojuego> findByAlta(Boolean alta);
 }
