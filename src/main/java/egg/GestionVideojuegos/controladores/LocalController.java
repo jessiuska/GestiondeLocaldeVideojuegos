@@ -53,7 +53,7 @@ public class LocalController {
     public RedirectView cargar(HttpSession session, @RequestParam("dnicliente") Long dnicliente, @RequestParam("monto") Double monto, RedirectAttributes attributes) {
         //RedirectView redirectView = new RedirectView("/cliente");
         try {
-            int idEmpleado = Integer.valueOf(session.getId()); //Es un string
+            int idEmpleado = (int) session.getAttribute("id"); //Es un string
             //COMENTAR ESTO, SOLO TEST
             /*
             session = null;
@@ -95,7 +95,7 @@ public class LocalController {
     @GetMapping("/cierre")
     public RedirectView cierreCaja(HttpSession session, RedirectAttributes attributes) {
         try {
-            int idEmpleado = Integer.valueOf(session.getId()); //Es un string
+            int idEmpleado = (int) session.getAttribute("id"); //Es un string
             //COMENTAR ESTO, SOLO TEST
             /*
             session = null;
