@@ -132,12 +132,6 @@ public class VideojuegoController {
         return new RedirectView("/videojuego");
     }
 
-//    @PostMapping("/recaudacion")
-//    public RedirectView recaudacionDiaria() {
-//        videojuegoService.recaudacionDiaria();
-//        return new RedirectView("/recaudacion-diaria");
-//    }
-    
     @GetMapping("/jugar")
     public ModelAndView simulacionJugada(HttpServletRequest request) {
         ModelAndView mav = new ModelAndView("videojuego-simulador");

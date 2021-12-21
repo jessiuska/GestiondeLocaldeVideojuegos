@@ -1,18 +1,15 @@
 package egg.GestionVideojuegos.controladores;
 
-import egg.GestionVideojuegos.entidades.Cliente;
 import egg.GestionVideojuegos.excepciones.SpringException;
 import egg.GestionVideojuegos.servicios.ClienteService;
 import egg.GestionVideojuegos.servicios.LocalService;
 import egg.GestionVideojuegos.servicios.TransaccionService;
-import egg.GestionVideojuegos.servicios.VideojuegoService;
 import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -31,9 +28,6 @@ public class LocalController {
 
     @Autowired
     private ClienteService clienteService;
-
-    @Autowired
-    private VideojuegoService videojuegoService;
 
     @Autowired
     private TransaccionService transaccionService;
@@ -59,13 +53,15 @@ public class LocalController {
     public RedirectView cargar(HttpSession session, @RequestParam("dnicliente") Long dnicliente, @RequestParam("monto") Double monto, RedirectAttributes attributes) {
         //RedirectView redirectView = new RedirectView("/cliente");
         try {
+            int idEmpleado = Integer.valueOf(session.getId()); //Es un string
             //COMENTAR ESTO, SOLO TEST
+            /*
             session = null;
             int idEmpleado = 666;
             if (session != null) {
                 idEmpleado = Integer.valueOf(session.getId());
             }
-            /////////////////////////
+            */
 
             localService.cargarTarjeta(dnicliente, monto, idEmpleado);
             attributes.addFlashAttribute("exito", "La carga de $" + monto + " ha sido exitosa");
@@ -99,14 +95,14 @@ public class LocalController {
     @GetMapping("/cierre")
     public RedirectView cierreCaja(HttpSession session, RedirectAttributes attributes) {
         try {
-            //int idEmpleado = Integer.valueOf(session.getId()); //Es un string
+            int idEmpleado = Integer.valueOf(session.getId()); //Es un string
             //COMENTAR ESTO, SOLO TEST
+            /*
             session = null;
             int idEmpleado = 666;
             if (session != null) {
                 idEmpleado = Integer.valueOf(session.getId());
-            }
-            /////////////////////////
+            }*/
 
             localService.cerrarCaja(idEmpleado);
             attributes.addFlashAttribute("exito", "El cierre de caja ha sido realizado correctamente.");

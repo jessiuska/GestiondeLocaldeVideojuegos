@@ -1,27 +1,14 @@
 package egg.GestionVideojuegos.servicios;
 
 import egg.GestionVideojuegos.entidades.Cliente;
-import egg.GestionVideojuegos.entidades.Tarjeta;
 import egg.GestionVideojuegos.excepciones.SpringException;
-import egg.GestionVideojuegos.enums.Rol;
 import egg.GestionVideojuegos.repositorios.ClienteRepository;
 
 import java.util.List;
 
-import javax.servlet.http.HttpSession;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.context.request.RequestContextHolder;
-import org.springframework.web.context.request.ServletRequestAttributes;
 
 @Service
 public class ClienteService {
@@ -31,9 +18,6 @@ public class ClienteService {
 
     @Autowired
     private TarjetaService tarjetaService;
-
-    @Autowired
-    private EmailService emailService;
 
     private String mensaje = "No existe ningún cliente asociado con el DNI %s";
 
@@ -49,7 +33,7 @@ public class ClienteService {
         cliente.setApellido(dto.getApellido());
         cliente.setDni(dto.getDni());
         cliente.setTarjeta(tarjetaService.crear());
-        cliente.setRol(Rol.USER);
+        //cliente.setRol(Rol.USER);
         cliente.setAlta(true);
 
         clienteRepository.save(cliente);
@@ -65,7 +49,7 @@ public class ClienteService {
         cliente.setApellido(dto.getApellido());
         cliente.setTarjeta(dto.getTarjeta());
         //cliente.setRol(dto.getRol());
-        cliente.setRol(Rol.USER); //por las dudas, ya que siempre va a ser USER
+        //cliente.setRol(Rol.USER); //por las dudas, ya que siempre va a ser USER
         clienteRepository.save(cliente);
     }
 

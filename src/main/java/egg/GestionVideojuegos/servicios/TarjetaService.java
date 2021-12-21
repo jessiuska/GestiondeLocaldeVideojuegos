@@ -4,7 +4,6 @@ import egg.GestionVideojuegos.entidades.Tarjeta;
 import egg.GestionVideojuegos.excepciones.SpringException;
 import egg.GestionVideojuegos.repositorios.TarjetaRepository;
 
-import java.util.Collections;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,8 +14,7 @@ public class TarjetaService {
 
     @Autowired
     private TarjetaRepository tarjetaRepository;
-    
-    
+
     private String mensaje = "No existe ningúna tarjeta asociado con el ID %s";
 
     @Transactional
@@ -29,7 +27,6 @@ public class TarjetaService {
     }
 
     @Transactional
-    // precioficha
     public boolean consumo(Tarjeta dto, Double precioFicha) throws SpringException {
         
         if (dto.getSaldo()<precioFicha) return false;

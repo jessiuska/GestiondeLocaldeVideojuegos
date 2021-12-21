@@ -83,7 +83,7 @@ public class PrincipalController {
         } else {
             //mav.addObject("empleado", new Empleado());
             Empleado empleado  = new Empleado();
-            empleado.setRol(Rol.USER);
+            empleado.setRol(Rol.CAJERO);
             mav.addObject("empleado", empleado);
         }
 

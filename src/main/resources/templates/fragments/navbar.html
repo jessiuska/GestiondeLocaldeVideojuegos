@@ -6,7 +6,7 @@
                 data-bs-target="#navbarSupportedContent" data-bs-toggle="collapse" type="button">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <div sec:authorize="hasAnyRole('ADMIN','CAJERO','USER')" class="collapse navbar-collapse" id="navbarSupportedContent">
+        <div sec:authorize="hasAnyRole('ADMIN','CAJERO')" class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mb-2 mb-md-0 w-100">
                 <!--LOCAL -->
                 <li sec:authorize="hasAnyRole('ADMIN')" class="nav-item dropdown text-white">

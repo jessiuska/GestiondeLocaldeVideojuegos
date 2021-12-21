@@ -35,11 +35,11 @@ public class Cliente {
 
     @OneToOne
     private Tarjeta tarjeta;
-
+    /*
     @Enumerated(EnumType.STRING)
     //@Column(nullable = false)
     private Rol rol;
-    
+    */
     private Boolean alta;
     
 }

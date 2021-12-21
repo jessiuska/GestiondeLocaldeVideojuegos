@@ -4,7 +4,6 @@ import egg.GestionVideojuegos.entidades.Empleado;
 import egg.GestionVideojuegos.excepciones.SpringException;
 import egg.GestionVideojuegos.servicios.EmpleadoService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
