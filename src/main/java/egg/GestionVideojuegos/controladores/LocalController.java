@@ -8,6 +8,7 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -33,6 +34,7 @@ public class LocalController {
     private TransaccionService transaccionService;
 
     @GetMapping("/carga")
+    @PreAuthorize("hasAnyRole('ADMIN', 'CAJERO')")
     public ModelAndView cargaSaldo(HttpServletRequest request) {
         ModelAndView mav = new ModelAndView("carga-saldo");
 
@@ -50,6 +52,7 @@ public class LocalController {
     }
 
     @PostMapping("/cargar")
+    @PreAuthorize("hasAnyRole('ADMIN', 'CAJERO')")
     public RedirectView cargar(HttpSession session, @RequestParam("dnicliente") Long dnicliente, @RequestParam("monto") Double monto, RedirectAttributes attributes) {
         //RedirectView redirectView = new RedirectView("/cliente");
         try {
@@ -76,6 +79,7 @@ public class LocalController {
     }
 
     @GetMapping("/cierres")
+    @PreAuthorize("hasRole('ADMIN')")
     public ModelAndView consultaCierres(HttpServletRequest request) {
         ModelAndView mav = new ModelAndView("cierres");
 
@@ -93,6 +97,7 @@ public class LocalController {
     }
 
     @GetMapping("/cierre")
+    @PreAuthorize("hasRole('ADMIN')")
     public RedirectView cierreCaja(HttpSession session, RedirectAttributes attributes) {
         try {
             int idEmpleado = (int) session.getAttribute("id"); //Es un string

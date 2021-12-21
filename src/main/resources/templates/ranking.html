@@ -14,8 +14,8 @@
                 <h5>Todavía no hay videojuegos jugados. <a th:href="@{/videojuego/jugar}">Jugar videojuego.</a></h5> 
             </div>
 
-            <div class="row" th:unless="${videojuegos.isEmpty()}">
-                <div class="col-7" th:each="videojuego, iterador : ${videojuegos}">
+            <div class="row" th:unless="${videojuegos.isEmpty()}" th:each="videojuego, iterador : ${videojuegos}">
+                <div class="col-6">
                     <div class="card mb-6" style="max-width: 800px;">
                         <div class="row g-0">
                             <div class="col-md-4 card-ranking">

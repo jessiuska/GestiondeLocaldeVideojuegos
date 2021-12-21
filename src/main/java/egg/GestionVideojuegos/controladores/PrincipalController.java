@@ -15,7 +15,6 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.support.RequestContextUtils;
 import org.springframework.web.servlet.view.RedirectView;
-import org.springframework.beans.factory.annotation.Value;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -24,9 +23,6 @@ import java.util.Map;
 
 @Controller
 public class PrincipalController {
-    
-    @Value("${custom.nombre-sistema}")
-    private String nombreSistema;
     
     @Autowired
     private EmpleadoService empleadoService;
@@ -42,14 +38,14 @@ public class PrincipalController {
     public ModelAndView inicio() {
         //return new ModelAndView("index");
         ModelAndView mav = new ModelAndView("index");
-        mav.addObject("title", nombreSistema);
+        mav.addObject("title", "BasicGames");
         return mav;
     }
 
     @GetMapping("/login")
     public ModelAndView login(@RequestParam(required = false) String error, @RequestParam(required = false) String logout, Principal principal) {
         ModelAndView mav = new ModelAndView("login");
-        mav.addObject("title", nombreSistema + " - Login");
+        mav.addObject("title", "Login");
 
         if (error != null) {
             mav.addObject("error", "Usuario o contraseña incorrectos");
@@ -69,7 +65,7 @@ public class PrincipalController {
     @GetMapping("/signup")
     public ModelAndView signup(HttpServletRequest request, Principal principal) {
         ModelAndView mav = new ModelAndView("signup");
-        mav.addObject("title", nombreSistema + " - Registro");
+        mav.addObject("title", "Registro");
         
         Map<String, ?> flashMap = RequestContextUtils.getInputFlashMap(request);
 

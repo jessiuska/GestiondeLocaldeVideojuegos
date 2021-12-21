@@ -42,10 +42,8 @@ logging:
         web: debug
 custom:
   upload-path: src/main/resources/static/uploads
-  nombre-sistema: BasicGames
-
-#server:
-#    error:
-#        path: /error
-#        whitelabel:
-#            enabled: false
+server:
+    error:
+        path: /error
+        whitelabel:
+            enabled: false
