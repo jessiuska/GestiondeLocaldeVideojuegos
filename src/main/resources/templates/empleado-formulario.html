@@ -13,7 +13,7 @@
             <form class="mb-4" th:action="@{/empleado/__${action}__}" method="POST" th:object="${empleado}" >
 
                 <div class="form-floating mb-3 col-xl-6">
-                    <input class="form-control" id="nombre" placeholder="Nombre" th:field="*{nombre}" type="text"/>
+                    <input class="form-control" id="nombre" placeholder="Nombre" th:field="*{nombre}" type="text" required/>
                     <label for="nombre">Nombre</label>
                     <div class="error text-start" th:if="${#fields.hasErrors('nombre')}"
                          th:errors="*{nombre}"></div>
@@ -21,7 +21,7 @@
 
                 <div class="form-floating mb-3 col-xl-6">
                     <input class="form-control" id="apellido" placeholder="Apellido" th:field="*{apellido}"
-                           type="text"/>
+                           type="text" required/>
                     <label for="apellido">Apellido</label>
                     <div class="error text-start" th:if="${#fields.hasErrors('apellido')}"
                          th:errors="*{apellido}"></div>
@@ -29,7 +29,7 @@
 
                 <div class="form-floating mb-3 col-xl-6">
                     <input class="form-control" id="usuario" placeholder="Usuario" th:field="*{usuario}"
-                           type="text"/>
+                           type="text" required/>
                     <label for="usuario">Usuario</label>
                     <div class="error text-start" th:if="${#fields.hasErrors('usuario')}"
                          th:errors="*{usuario}"></div>

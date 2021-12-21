@@ -19,13 +19,13 @@
                     <input th:field="*{recaudacion}" type="hidden"/>
                     
                     <div class="form-group">
-                        <input class="form-control item" id="nombre" placeholder="Nombre del videojuego" th:field="*{nombre}" type="text"/>
+                        <input class="form-control item" id="nombre" placeholder="Nombre del videojuego" th:field="*{nombre}" type="text" required/>
                         <div class="error text-start" th:if="${#fields.hasErrors('nombre')}"
                              th:errors="*{nombre}"></div>
                     </div>
 
                     <div class="form-group">
-                        <input type="number" min="1" step="any" class="form-control item" id="precio" th:field="*{precioFicha}" placeholder="Precio ficha"/>
+                        <input type="number" min="1" step="any" class="form-control item" id="precio" th:field="*{precioFicha}" placeholder="Precio ficha" required/>
                         <div class="error text-start" th:if="${#fields.hasErrors('nombre')}"
                              th:errors="*{precioFicha}"></div>
                     </div>
