@@ -18,19 +18,25 @@
                 <div class="col-7" th:each="videojuego, iterador : ${videojuegos}">
                     <div class="card mb-6" style="max-width: 800px;">
                         <div class="row g-0">
-                            <div class="col-md-4 img-ranking">
+                            <div class="col-md-4 card-ranking">
                                 <img
                                      th:src="${videojuego.image != null} ? @{/uploads/__${videojuego.image}__} : @{/uploads/foto-no-disponible.png}"
                                      height="100%" width="200" />
                             </div>
-                            <div class="col-md-8">
+                            <div class="col-md-8 d-flex align-items-center">
                                 <div class="card-body ranking">
-                                    <img class="medal" th:if="${iterador.index} == 0" th:src="@{/img/medal-solid-gold.png}" />
-                                    <img class="medal" th:if="${iterador.index} == 1" th:src="@{/img/medal-solid-silver.png}" />
-                                    <img class="medal" th:if="${iterador.index} == 2" th:src="@{/img/medal-solid-bronze.png}" />
-                                    <h3  class="posicion" th:unless="${iterador.index + 1 < 4}" th:text="${iterador.index + 1} + ${'°'}">Posicion</h3>
-                                    <h5 class="fw-bold nombre-juego" th:text="|${videojuego.nombre}|">Nombre</h5><br>
-                                    <p class="precio" th:text="|$${#numbers.formatDecimal(videojuego.precioFicha,0,2)}|">Precio</p>
+                                    <div class="caja"> 
+                                        <img class="medal" th:if="${iterador.index} == 0" th:src="@{/img/medal-solid-gold.png}" />
+                                        <img class="medal" th:if="${iterador.index} == 1" th:src="@{/img/medal-solid-silver.png}" />
+                                        <img class="medal" th:if="${iterador.index} == 2" th:src="@{/img/medal-solid-bronze.png}" />
+                                        <h3 class="posicion" th:unless="${iterador.index + 1 < 4}" th:text="${iterador.index + 1} + ${'°'}">Posicion</h3>
+                                        <h5 class="fw-bold nombre-juego" th:text="|${videojuego.nombre}|">Nombre</h5>
+                                    </div>
+                                    <br>
+                                    <div class="rec">
+                                        <p id="recaudacion">Recaudación:</p>
+                                        <p class="precio-ranking" th:text="|$${#numbers.formatDecimal(videojuego.recaudacion,0,2)}|">Precio</p>
+                                    </div>
                                     <!--<p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
                                     <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>-->
                                 </div>
