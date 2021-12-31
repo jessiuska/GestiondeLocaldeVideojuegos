@@ -150,8 +150,10 @@ public class VideojuegoService {
             }
         }
     }
+    
     @Transactional(readOnly = true)
     public List<Videojuego> ranking() {
         return videoJuegoRepository.findTop5ByOrderByRecaudacionDesc();
     }
+
 }

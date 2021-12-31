@@ -4,6 +4,8 @@ import egg.GestionVideojuegos.excepciones.SpringException;
 import egg.GestionVideojuegos.servicios.ClienteService;
 import egg.GestionVideojuegos.servicios.LocalService;
 import egg.GestionVideojuegos.servicios.TransaccionService;
+import egg.GestionVideojuegos.servicios.VideojuegoService;
+
 import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -20,12 +22,14 @@ import org.springframework.web.servlet.support.RequestContextUtils;
 import org.springframework.web.servlet.view.RedirectView;
 
 @Controller
-
 @RequestMapping("/local")
 public class LocalController {
 
     @Autowired
     private LocalService localService;
+
+    @Autowired
+    private VideojuegoService videojuegoService;
 
     @Autowired
     private ClienteService clienteService;
@@ -116,6 +120,25 @@ public class LocalController {
         }
         return new RedirectView("/local/cierres");
 
+    }
+
+    @GetMapping("/ranking")
+    public ModelAndView ranking(HttpServletRequest request) {
+        ModelAndView mav = new ModelAndView("ranking");
+        mav.addObject("title", "Ranking");
+        Map<String, ?> flashMap = RequestContextUtils.getInputFlashMap(request);
+
+            if (flashMap != null) {
+                mav.addObject("exito", flashMap.get("exito"));
+                mav.addObject("error", flashMap.get("error"));
+            /*}else{
+                mav.addObject("videojuegos", videojuegoService.ranking());
+            }*/
+            }
+
+        mav.addObject("videojuegos", videojuegoService.ranking());
+        mav.addObject("clientes", clienteService.ranking());
+        return mav;     
     }
 
 }

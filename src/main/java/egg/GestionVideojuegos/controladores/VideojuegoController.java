@@ -168,9 +168,10 @@ public class VideojuegoController {
         } catch (SpringException e) {
             attributes.addFlashAttribute("error", e.getMessage());
         }
-        return new RedirectView("/videojuego");
+        return new RedirectView("/local/ranking");
     }
-    
+
+    /* Pasa para LocalService porque se agregan también los clientes
     @GetMapping("/ranking")
     public ModelAndView ranking(HttpServletRequest request) {
         ModelAndView mav = new ModelAndView("ranking");
@@ -185,5 +186,6 @@ public class VideojuegoController {
             }
         return mav;     
     }
-
+    */
+    
 }

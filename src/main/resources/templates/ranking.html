@@ -1,53 +1,83 @@
 <!DOCTYPE html>
 <html lang="es" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
-    <head th:replace="fragments/head :: head"></head>
-    
-    <body class="fondo-videojuegos">
-        <nav th:replace="fragments/navbar :: navbar"></nav>
+  <head th:replace="fragments/head :: head"></head>
 
-        <div class="container mt-5 main">
-            <div class="alert alert-success" th:if="${exito}" th:text="${exito}"></div>
-            <div class="alert alert-danger col-xl-6" th:if="${error}" th:text="${error}"></div>
-            <h1>Ranking</h1>
-            <hr class="mb-4"/>
-            <div th:if="${videojuegos.isEmpty()}">
+  <body class="fondo-index">
+    <nav th:replace="fragments/navbar :: navbar"></nav>
+
+    <div class="container mt-5 main">
+      <div class="alert alert-success" th:if="${exito}" th:text="${exito}"></div>
+      <div class="alert alert-danger col-xl-6" th:if="${error}" th:text="${error}"></div>
+      <h1>Ranking</h1>
+      <hr class="mb-4" />
+
+      <!--<div th:if="${videojuegos.isEmpty()}">
                 <h5>Todavía no hay videojuegos jugados. <a th:href="@{/videojuego/jugar}">Jugar videojuego.</a></h5> 
-            </div>
+            </div>-->
 
-            <div class="row" th:unless="${videojuegos.isEmpty()}" th:each="videojuego, iterador : ${videojuegos}">
-                <div class="col-6">
-                    <div class="card mb-6" style="max-width: 800px;">
-                        <div class="row g-0">
-                            <div class="col-md-4 card-ranking">
-                                <img
-                                     th:src="${videojuego.image != null} ? @{/uploads/__${videojuego.image}__} : @{/uploads/foto-no-disponible.png}"
-                                     height="100%" width="200" />
-                            </div>
-                            <div class="col-md-8 d-flex align-items-center">
-                                <div class="card-body ranking">
-                                    <div class="caja"> 
-                                        <img class="medal" th:if="${iterador.index} == 0" th:src="@{/img/medal-solid-gold.png}" />
-                                        <img class="medal" th:if="${iterador.index} == 1" th:src="@{/img/medal-solid-silver.png}" />
-                                        <img class="medal" th:if="${iterador.index} == 2" th:src="@{/img/medal-solid-bronze.png}" />
-                                        <h3 class="posicion" th:unless="${iterador.index + 1 < 4}" th:text="${iterador.index + 1} + ${'°'}">Posicion</h3>
-                                        <h5 class="fw-bold nombre-juego" th:text="|${videojuego.nombre}|">Nombre</h5>
-                                    </div>
-                                    <br>
-                                    <div class="rec">
-                                        <p id="recaudacion">Recaudación:</p>
-                                        <p class="precio-ranking" th:text="|$${#numbers.formatDecimal(videojuego.recaudacion,0,2)}|">Precio</p>
-                                    </div>
-                                    <!--<p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                                    <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>-->
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+      <div class="row">
+        <!-- Ranking Videojuegos -->
+        <div class="col-6">
+          <h2>Juegos:</h2>
+          <div class="row mx-2" th:unless="${videojuegos.isEmpty()}" th:each="videojuego, iterador : ${videojuegos}">
+            <div class="card mb-6" style="max-width: 800px">
+              <div class="row g-0">
+                <div class="col-md-4 card-ranking">
+                  <img th:src="${videojuego.image != null} ? @{/uploads/__${videojuego.image}__} : @{/uploads/foto-no-disponible.png}" height="100%" width="200" />
                 </div>
+                <div class="col-md-8 d-flex align-items-center">
+                  <div class="card-body ranking">
+                    <div class="caja">
+                      <img class="medal" th:if="${iterador.index} == 0" th:src="@{/img/medal-solid-gold.png}" />
+                      <img class="medal" th:if="${iterador.index} == 1" th:src="@{/img/medal-solid-silver.png}" />
+                      <img class="medal" th:if="${iterador.index} == 2" th:src="@{/img/medal-solid-bronze.png}" />
+                      <h3 class="posicion" th:unless="${iterador.index + 1 < 4}" th:text="${iterador.index + 1} + ${'°'}">Posicion</h3>
+                      <h5 class="fw-bold nombre-juego" th:text="|${videojuego.nombre}|">Nombre</h5>
+                    </div>
+                    <br />
+                    <div class="rec">
+                      <p id="recaudacion">Recaudación:</p>
+                      <p class="precio-ranking" th:text="|$${#numbers.formatDecimal(videojuego.recaudacion,0,2)}|">Precio</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
+          </div>
         </div>
 
-        <footer th:replace="fragments/footer :: footer"></footer>
-        <script th:src="@{/assets/bootstrap.bundle.min.js}"></script>
-    </body>
+        <!-- Ranking Clientes -->
+        <div class="col-6">
+          <h2>Clientes:</h2>
+          <div class="row mx-2" th:unless="${clientes.isEmpty()}" th:each="cliente, iterador : ${clientes}">
+            <div class="card mb-6" style="max-width: 800px">
+              <div class="row g-0">
+                <div class="col-md-4 card-ranking p-3">
+                    <img th:src="@{/img/user.png}" height="85%" width="85%" />
+                </div>
+                <div class="col-md-8 d-flex align-items-center">
+                  <div class="card-body ranking">
+                    <div class="caja">
+                      <img class="medal" th:if="${iterador.index} == 0" th:src="@{/img/medal-solid-gold.png}" />
+                      <img class="medal" th:if="${iterador.index} == 1" th:src="@{/img/medal-solid-silver.png}" />
+                      <img class="medal" th:if="${iterador.index} == 2" th:src="@{/img/medal-solid-bronze.png}" />
+                      <h3 class="posicion" th:unless="${iterador.index + 1 < 4}" th:text="${iterador.index + 1} + ${'°'}">Posicion</h3>
+                      <h5 class="fw-bold nombre-cliente" th:text="|${cliente.nombre} ${cliente.apellido}|">Nombre</h5>
+                    </div>
+                    <br />
+                    <div class="rec">
+                      <p class="rainbow-text" th:text="|Este cliente jugó ${cliente.jugados} veces!|"></p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <footer th:replace="fragments/footer :: footer"></footer>
+    <script th:src="@{/assets/bootstrap.bundle.min.js}"></script>
+  </body>
 </html>

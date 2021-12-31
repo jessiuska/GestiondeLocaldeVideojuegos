@@ -22,4 +22,5 @@ public interface EmpleadoRepository extends JpaRepository<Empleado, Integer> {
     void habilitar(@Param("id") Integer id);
     
     List<Empleado> findByAlta(Boolean alta);
+    
 }

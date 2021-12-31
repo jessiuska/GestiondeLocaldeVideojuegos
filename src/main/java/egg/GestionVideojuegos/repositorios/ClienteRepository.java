@@ -1,6 +1,7 @@
 package egg.GestionVideojuegos.repositorios;
 
 import egg.GestionVideojuegos.entidades.Cliente;
+import egg.GestionVideojuegos.modelos.ClienteModel; //Para la query de ranking
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -21,4 +22,8 @@ public interface ClienteRepository extends JpaRepository<Cliente, Long> {
     void habilitar(@Param("dni") Long dni);
     
     List<Cliente> findByAlta(Boolean alta);
+
+    @Query(name = "buscar_top5_clientes", nativeQuery = true)
+    List<ClienteModel> buscarTop5();
+
 }

@@ -2,7 +2,7 @@
 <html lang="es" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
     <head th:replace="fragments/head :: head"></head>
 
-    <body>
+    <body class="fondo-index">
         <nav th:replace="fragments/navbar :: navbar"></nav>
 
         <!-- main container -->
@@ -17,7 +17,7 @@
                 <div class="form-floating mb-3 col-xl-6">
                     <select aria-label="Elegir cliente" class="form-select" id="cliente" name="dnicliente" required>
                         <option selected value="">Elegir cliente</option>
-                        <option th:each="cliente : ${clientes}" th:text="|${cliente.nombre} ${cliente.apellido}|"
+                        <option th:each="cliente : ${clientes}" th:text="|${cliente.nombre} ${cliente.apellido} (Saldo: $${cliente.tarjeta.saldo})|"
                                 th:value="${cliente.dni}"></option>
                     </select>
                     <label for="cliente">Cliente</label>
@@ -27,7 +27,7 @@
                 <div class="form-floating mb-3 col-xl-6">
                     <select aria-label="Elegir videojuego" class="form-select" id="videojuego" name="idvideojuego" required>
                         <option selected value="">Elegir videojuego</option>
-                        <option th:each="videojuego : ${videojuegos}" th:text="|${videojuego.nombre} ($ ${videojuego.precioFicha})|"
+                        <option th:each="videojuego : ${videojuegos}" th:text="|${videojuego.nombre} (Precio: $${videojuego.precioFicha})|"
                                 th:value="${videojuego.id}"></option>
                     </select>
                     <label for="videojuego">Videojuego</label>

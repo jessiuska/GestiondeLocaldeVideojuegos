@@ -72,15 +72,15 @@
                             <a class="dropdown-item text-white" th:href="@{/videojuego/crear}">Crear</a>
                         </li>
                         <li>
-                            <a class="dropdown-item text-white" th:href="@{/videojuego/ranking}">Ranking</a>
+                            <a class="dropdown-item text-white" th:href="@{/local/ranking}">Ranking</a>
                         </li>
-                        <!--<li>
+                        <li>
                             <a class="dropdown-item text-white" th:href="@{/videojuego/jugar}">Simular cliente jugando</a>
-                        </li>-->
+                        </li>
                         <li>
                             <form action="/videojuego/simular-varios" method="POST">
-                                <input name="repetir" value="10" type="hidden"/>
-                                <button class="dropdown-item text-white" type="submit">Simular 10 clientes jugando</button>
+                                <input name="repetir" value="30" type="hidden"/>
+                                <button class="dropdown-item text-white" type="submit">Simular 30 clientes jugando</button>
                             </form>
                         </li>
                         <!--<li>

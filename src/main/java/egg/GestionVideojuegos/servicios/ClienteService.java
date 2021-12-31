@@ -2,6 +2,7 @@ package egg.GestionVideojuegos.servicios;
 
 import egg.GestionVideojuegos.entidades.Cliente;
 import egg.GestionVideojuegos.excepciones.SpringException;
+import egg.GestionVideojuegos.modelos.ClienteModel;
 import egg.GestionVideojuegos.repositorios.ClienteRepository;
 
 import java.util.List;
@@ -55,7 +56,8 @@ public class ClienteService {
 
     @Transactional(readOnly = true)
     public List<Cliente> buscarTodos() {
-        return clienteRepository.findByAlta(true);
+        //return clienteRepository.findByAlta(true);
+        return clienteRepository.findAll(); //Muestro todos para que se note el cambio de botones habilitar/deshabilitar
     }
 
     @Transactional(readOnly = true)
@@ -100,6 +102,11 @@ public class ClienteService {
 
         //guardo el cliente
         clienteRepository.save(cliente);
-
     }
+
+    @Transactional(readOnly = true)
+    public List<ClienteModel> ranking() {
+        return clienteRepository.buscarTop5();
+    }
+
 }

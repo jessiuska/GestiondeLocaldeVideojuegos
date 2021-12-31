@@ -1,0 +1,327 @@
+/*
+drop database videojuegos;
+create database videojuegos;
+*/
+
+USE videojuegos;
+
+SET SQL_SAFE_UPDATES = 0;
+
+/********************************************************* INSERT LOCAL  ********************************************************************************************/
+
+INSERT INTO local(nombre, fecha_alta, fecha_ultimo_cierre, precio_tarjeta, recaudacion) VALUES('BasicGames', DATE_SUB(NOW(),INTERVAL 30 DAY), DATE_SUB(NOW(),INTERVAL 30 DAY), 150.0, 0.0);
+
+/********************************************************* INSERT EMPLEADOS  ********************************************************************************************/
+
+INSERT INTO empleado(nombre, apellido, usuario, clave, rol, fecha_alta, alta) VALUES('Federico','López','FEDE896', '$2a$10$F0y8Z0//hSfcMnzsTE4QS.CtvJ82dofzFrDaHLY5lXhoEyHaXCsYK', 'ADMIN', DATE_SUB(NOW(),INTERVAL 30 DAY), 1); -- 12345
+INSERT INTO empleado(nombre, apellido, usuario, clave, rol, fecha_alta, alta) VALUES('Leonardo','Ramírez','LEO256', '$2a$10$F0y8Z0//hSfcMnzsTE4QS.CtvJ82dofzFrDaHLY5lXhoEyHaXCsYK', 'CAJERO', DATE_SUB(NOW(),INTERVAL 28 DAY), 1); -- 12345
+INSERT INTO empleado(nombre, apellido, usuario, clave, rol, fecha_alta, alta) VALUES('Luciano','Torres','LUCHO123', '$2a$10$F0y8Z0//hSfcMnzsTE4QS.CtvJ82dofzFrDaHLY5lXhoEyHaXCsYK', 'CAJERO', DATE_SUB(NOW(),INTERVAL 28 DAY), 1); -- 12345
+
+/******************************************************** INSERT VIDEJUEGOS *************************************************************************************************/
+
+INSERT INTO videojuego(nombre, alta, fecha_alta, precio_ficha, recaudacion, image) VALUES('Gun Fight', 1, DATE_SUB(NOW(),INTERVAL 30 DAY), 80.58, 0.00, 'Gun Fight.jpg');
+INSERT INTO videojuego(nombre, alta, fecha_alta, precio_ficha, recaudacion, image) VALUES('Night Driver', 1, DATE_SUB(NOW(),INTERVAL 30 DAY), 100.06, 0.00, 'nightdriver.jpg');
+INSERT INTO videojuego(nombre, alta, fecha_alta, precio_ficha, recaudacion, image) VALUES('Breakout', 1, DATE_SUB(NOW(),INTERVAL 30 DAY), 90.87, 0.00, 'Breakout.jpg');
+INSERT INTO videojuego(nombre, alta, fecha_alta, precio_ficha, recaudacion, image) VALUES('Pacman', 1, DATE_SUB(NOW(),INTERVAL 30 DAY), 105.38, 0.00, 'Pac-man.jpg');
+INSERT INTO videojuego(nombre, alta, fecha_alta, precio_ficha, recaudacion, image) VALUES('Frogger', 1, DATE_SUB(NOW(),INTERVAL 30 DAY), 109.26, 0.00, 'Frogger.jpg');
+INSERT INTO videojuego(nombre, alta, fecha_alta, precio_ficha, recaudacion, image) VALUES('Scramble', 1, DATE_SUB(NOW(),INTERVAL 30 DAY), 91.40, 0.00, 'Scramble.jpg');
+INSERT INTO videojuego(nombre, alta, fecha_alta, precio_ficha, recaudacion, image) VALUES('Galaga', 1, DATE_SUB(NOW(),INTERVAL 30 DAY), 83.50, 0.00, 'Galaga.jpg');
+INSERT INTO videojuego(nombre, alta, fecha_alta, precio_ficha, recaudacion, image) VALUES('Donkey Kong', 1, DATE_SUB(NOW(),INTERVAL 30 DAY), 69.61, 0.00, 'Donkey Kong.jpg');
+INSERT INTO videojuego(nombre, alta, fecha_alta, precio_ficha, recaudacion, image) VALUES('Tempest', 1, DATE_SUB(NOW(),INTERVAL 30 DAY), 116.84, 0.00, 'Tempest.jpg');
+INSERT INTO videojuego(nombre, alta, fecha_alta, precio_ficha, recaudacion, image) VALUES('Pole Position', 1, DATE_SUB(NOW(),INTERVAL 30 DAY), 101.01, 0.00, 'Pole Position.jpg');
+INSERT INTO videojuego(nombre, alta, fecha_alta, precio_ficha, recaudacion, image) VALUES("Dragon's Lair", 1, DATE_SUB(NOW(),INTERVAL 30 DAY), 57.74, 0.00, "Dragon's Lair.jpg");
+INSERT INTO videojuego(nombre, alta, fecha_alta, precio_ficha, recaudacion, image) VALUES('Tetris', 1, DATE_SUB(NOW(),INTERVAL 30 DAY), 79.26, 0.00, 'Tetris.jpg');
+INSERT INTO videojuego(nombre, alta, fecha_alta, precio_ficha, recaudacion, image) VALUES('1942', 1, DATE_SUB(NOW(),INTERVAL 30 DAY), 81.00, 0.00, '1942.jpg');
+INSERT INTO videojuego(nombre, alta, fecha_alta, precio_ficha, recaudacion, image) VALUES('Kung-Fu Master', 1, DATE_SUB(NOW(),INTERVAL 30 DAY), 57.43, 0.00, 'Kung Fu Master.jpg');
+INSERT INTO videojuego(nombre, alta, fecha_alta, precio_ficha, recaudacion, image) VALUES("Ghosts'n Goblins", 1, DATE_SUB(NOW(),INTERVAL 30 DAY), 108.49, 0.00, 'Ghosts n Goblins.jpg');
+INSERT INTO videojuego(nombre, alta, fecha_alta, precio_ficha, recaudacion, image) VALUES('Space Harrier', 1, DATE_SUB(NOW(),INTERVAL 30 DAY), 110.92, 0.00, 'Space Harrier.jpg');
+INSERT INTO videojuego(nombre, alta, fecha_alta, precio_ficha, recaudacion, image) VALUES('Commando', 1, DATE_SUB(NOW(),INTERVAL 30 DAY), 53.54, 0.00, 'Commando.jpg');
+INSERT INTO videojuego(nombre, alta, fecha_alta, precio_ficha, recaudacion, image) VALUES('Glauntlet', 1, DATE_SUB(NOW(),INTERVAL 30 DAY), 71.62, 0.00, 'Glauntlet.jpg');
+INSERT INTO videojuego(nombre, alta, fecha_alta, precio_ficha, recaudacion, image) VALUES('Bubble Bobble', 1, DATE_SUB(NOW(),INTERVAL 30 DAY), 94.62, 0.00, 'Bubble Bobble.jpg');
+INSERT INTO videojuego(nombre, alta, fecha_alta, precio_ficha, recaudacion, image) VALUES('Altered Beast', 1, DATE_SUB(NOW(),INTERVAL 30 DAY), 101.49, 0.00, 'Altered Beast.jpg');
+INSERT INTO videojuego(nombre, alta, fecha_alta, precio_ficha, recaudacion, image) VALUES('Arkanoid', 1, DATE_SUB(NOW(),INTERVAL 30 DAY), 114.39, 0.00, 'Arkanoid.jpg');
+INSERT INTO videojuego(nombre, alta, fecha_alta, precio_ficha, recaudacion, image) VALUES('Out Run', 1, DATE_SUB(NOW(),INTERVAL 30 DAY), 91.99, 0.00, 'Out Run.jpg');
+INSERT INTO videojuego(nombre, alta, fecha_alta, precio_ficha, recaudacion, image) VALUES('Double Dragon', 1, DATE_SUB(NOW(),INTERVAL 30 DAY), 51.62, 0.00, 'Double Dragon.jpg');
+INSERT INTO videojuego(nombre, alta, fecha_alta, precio_ficha, recaudacion, image) VALUES('Black Tiger', 1, DATE_SUB(NOW(),INTERVAL 30 DAY),117.35, 0.00, 'Black Tiger.jpg');
+INSERT INTO videojuego(nombre, alta, fecha_alta, precio_ficha, recaudacion, image) VALUES('Shinobi', 1, DATE_SUB(NOW(),INTERVAL 30 DAY), 97.24, 0.00, 'Shinobi.jpg');
+INSERT INTO videojuego(nombre, alta, fecha_alta, precio_ficha, recaudacion, image) VALUES('Contra', 1, DATE_SUB(NOW(),INTERVAL 30 DAY), 56.99, 0.00, 'Contra.jpg');
+INSERT INTO videojuego(nombre, alta, fecha_alta, precio_ficha, recaudacion, image) VALUES('Operation Wolf', 1, DATE_SUB(NOW(),INTERVAL 30 DAY), 69.90, 0.00, 'Operacion Wolf.jpg');
+INSERT INTO videojuego(nombre, alta, fecha_alta, precio_ficha, recaudacion, image) VALUES('Super Hang-On', 1, DATE_SUB(NOW(),INTERVAL 30 DAY), 99.07, 0.00, 'Super Hang-On.jpg');
+INSERT INTO videojuego(nombre, alta, fecha_alta, precio_ficha, recaudacion, image) VALUES('After Burner', 1, DATE_SUB(NOW(),INTERVAL 30 DAY), 107.32, 0.00, 'After Burner.jpg');
+INSERT INTO videojuego(nombre, alta, fecha_alta, precio_ficha, recaudacion, image) VALUES('R-Type', 1, DATE_SUB(NOW(),INTERVAL 30 DAY), 94.31, 0.00, 'R-Type.jpg');
+INSERT INTO videojuego(nombre, alta, fecha_alta, precio_ficha, recaudacion, image) VALUES('Rastan Saga', 1, DATE_SUB(NOW(),INTERVAL 30 DAY), 95.43, 0.00, 'Rastan saga.jpg');
+INSERT INTO videojuego(nombre, alta, fecha_alta, precio_ficha, recaudacion, image) VALUES('Ninja Gaiden', 1, DATE_SUB(NOW(),INTERVAL 30 DAY), 50.42, 0.00, 'Ninja Gaiden.jpg');
+INSERT INTO videojuego(nombre, alta, fecha_alta, precio_ficha, recaudacion, image) VALUES('New Zealand Story', 1, DATE_SUB(NOW(),INTERVAL 30 DAY), 63.89, 0.00, 'New Zealand Story.jpg');
+INSERT INTO videojuego(nombre, alta, fecha_alta, precio_ficha, recaudacion, image) VALUES('Cabal', 1, DATE_SUB(NOW(),INTERVAL 30 DAY), 69.65, 0.00, 'Cabal.jpg');
+INSERT INTO videojuego(nombre, alta, fecha_alta, precio_ficha, recaudacion, image) VALUES('Power Drift', 1, DATE_SUB(NOW(),INTERVAL 30 DAY), 76.30, 0.00, 'Power Drift.jpg');
+INSERT INTO videojuego(nombre, alta, fecha_alta, precio_ficha, recaudacion, image) VALUES('Golden Axe', 1, DATE_SUB(NOW(),INTERVAL 30 DAY), 53.09, 0.00, 'Golden Axe.jpg');
+INSERT INTO videojuego(nombre, alta, fecha_alta, precio_ficha, recaudacion, image) VALUES('Teenage Mutant Ninja Turtles', 1, DATE_SUB(NOW(),INTERVAL 30 DAY), 107.77, 0.00, 'Teenage Mutant Ninja Turtles.jpg');
+INSERT INTO videojuego(nombre, alta, fecha_alta, precio_ficha, recaudacion, image) VALUES('Final Fight', 1, DATE_SUB(NOW(),INTERVAL 30 DAY), 84.49, 0.00, 'Final Fight.jpg');
+INSERT INTO videojuego(nombre, alta, fecha_alta, precio_ficha, recaudacion, image) VALUES('Pang', 1, DATE_SUB(NOW(),INTERVAL 30 DAY), 62.89, 0.00, 'Pang.jpg');
+INSERT INTO videojuego(nombre, alta, fecha_alta, precio_ficha, recaudacion, image) VALUES('Toki', 1, DATE_SUB(NOW(),INTERVAL 30 DAY), 113.12, 0.00, 'Toki.jpg');
+INSERT INTO videojuego(nombre, alta, fecha_alta, precio_ficha, recaudacion, image) VALUES('Shadow Dancer', 1, DATE_SUB(NOW(),INTERVAL 30 DAY), 71.20, 0.00, 'Shadow Dancer.jpg');
+INSERT INTO videojuego(nombre, alta, fecha_alta, precio_ficha, recaudacion) VALUES('Strider', 1, DATE_SUB(NOW(),INTERVAL 30 DAY), 55.34, 0.00);
+INSERT INTO videojuego(nombre, alta, fecha_alta, precio_ficha, recaudacion, image) VALUES('Snow Bros', 1, DATE_SUB(NOW(),INTERVAL 30 DAY), 57.30, 0.00, 'Snow Bros.jpg');
+INSERT INTO videojuego(nombre, alta, fecha_alta, precio_ficha, recaudacion, image) VALUES('Gals Panic', 1, DATE_SUB(NOW(),INTERVAL 30 DAY), 63.37, 0.00, 'Gals Panic.jpg');
+INSERT INTO videojuego(nombre, alta, fecha_alta, precio_ficha, recaudacion, image) VALUES('R-360', 1, DATE_SUB(NOW(),INTERVAL 30 DAY), 71.90, 0.00, 'R-360.jpg');
+INSERT INTO videojuego(nombre, alta, fecha_alta, precio_ficha, recaudacion, image) VALUES('The Simpsons Arcade Game', 1, DATE_SUB(NOW(),INTERVAL 30 DAY), 72.07, 0.00, 'The Simpsons.jpg');
+INSERT INTO videojuego(nombre, alta, fecha_alta, precio_ficha, recaudacion, image) VALUES('Three Wonders', 1, DATE_SUB(NOW(),INTERVAL 30 DAY), 67.15, 0.00, 'Three Wonders.jpg');
+INSERT INTO videojuego(nombre, alta, fecha_alta, precio_ficha, recaudacion, image) VALUES('Joe & Mac: Caveman Ninja', 1, DATE_SUB(NOW(),INTERVAL 30 DAY), 51.18, 0.00, 'Joe&Mac Caveman Ninja.jpg');
+INSERT INTO videojuego(nombre, alta, fecha_alta, precio_ficha, recaudacion, image) VALUES('Tumblepop', 1, DATE_SUB(NOW(),INTERVAL 30 DAY), 64.18, 0.00, 'Tumblepop.jpg');
+INSERT INTO videojuego(nombre, alta, fecha_alta, precio_ficha, recaudacion) VALUES('The King of Dragons', 1, DATE_SUB(NOW(),INTERVAL 30 DAY), 101.75, 0.00);
+INSERT INTO videojuego(nombre, alta, fecha_alta, precio_ficha, recaudacion, image) VALUES('Knights of the Round', 1, DATE_SUB(NOW(),INTERVAL 30 DAY), 93.98, 0.00, 'Knights of the Round.jpg');
+INSERT INTO videojuego(nombre, alta, fecha_alta, precio_ficha, recaudacion, image) VALUES('Captain Commando', 1, DATE_SUB(NOW(),INTERVAL 30 DAY), 86.43, 0.00, 'Captain Commando.jpg');
+INSERT INTO videojuego(nombre, alta, fecha_alta, precio_ficha, recaudacion, image) VALUES('Sunset Riders', 1, DATE_SUB(NOW(),INTERVAL 30 DAY), 116.43, 0.00, 'Sunset Riders.jpg');
+INSERT INTO videojuego(nombre, alta, fecha_alta, precio_ficha, recaudacion, image) VALUES('Street Fighter 2', 1, DATE_SUB(NOW(),INTERVAL 30 DAY), 70.27, 0.00, 'Street Fighter 2.jpg');
+INSERT INTO videojuego(nombre, alta, fecha_alta, precio_ficha, recaudacion) VALUES('Fatal Fury', 1, DATE_SUB(NOW(),INTERVAL 30 DAY), 99.80, 0.00);
+INSERT INTO videojuego(nombre, alta, fecha_alta, precio_ficha, recaudacion, image) VALUES('Terminator 2: Judgement Day', 1, DATE_SUB(NOW(),INTERVAL 30 DAY), 78.95, 0.00, 'Terminator 2.jpg');
+INSERT INTO videojuego(nombre, alta, fecha_alta, precio_ficha, recaudacion, image) VALUES('X-Men', 1, DATE_SUB(NOW(),INTERVAL 30 DAY), 50.49, 0.00, 'X-Men.jpg');
+INSERT INTO videojuego(nombre, alta, fecha_alta, precio_ficha, recaudacion, image) VALUES('Art of Fighting', 1, DATE_SUB(NOW(),INTERVAL 30 DAY), 68.13, 0.00, 'Art of Figthing.jpg');
+INSERT INTO videojuego(nombre, alta, fecha_alta, precio_ficha, recaudacion, image) VALUES('Aerofighters', 1, DATE_SUB(NOW(),INTERVAL 30 DAY), 64.39, 0.00, 'Aerofighters.jpg');
+INSERT INTO videojuego(nombre, alta, fecha_alta, precio_ficha, recaudacion, image) VALUES('Super Sidekicks', 1, DATE_SUB(NOW(),INTERVAL 30 DAY), 72.82, 0.00, 'Super Sidekicks.jpg');
+INSERT INTO videojuego(nombre, alta, fecha_alta, precio_ficha, recaudacion, image) VALUES('Mortal Kombat', 1, DATE_SUB(NOW(),INTERVAL 30 DAY), 91.08, 0.00, 'Mortal Kombat.jpg');
+INSERT INTO videojuego(nombre, alta, fecha_alta, precio_ficha, recaudacion, image) VALUES('Asterix', 1, DATE_SUB(NOW(),INTERVAL 30 DAY), 90.32, 0.00, 'Asterix.jpg');
+INSERT INTO videojuego(nombre, alta, fecha_alta, precio_ficha, recaudacion, image) VALUES('Virtua Racing', 1, DATE_SUB(NOW(),INTERVAL 30 DAY), 62.00, 0.00, 'Virtua Racing.jpg');
+INSERT INTO videojuego(nombre, alta, fecha_alta, precio_ficha, recaudacion, image) VALUES('Soccer Brawl', 1, DATE_SUB(NOW(),INTERVAL 30 DAY), 51.85, 0.00, 'Soccer Brawl.jpg');
+INSERT INTO videojuego(nombre, alta, fecha_alta, precio_ficha, recaudacion, image) VALUES('NBA Jam', 1, DATE_SUB(NOW(),INTERVAL 30 DAY), 107.87, 0.00, 'NBA Jam.jpg');
+INSERT INTO videojuego(nombre, alta, fecha_alta, precio_ficha, recaudacion, image) VALUES('Samuari Shodown', 1, DATE_SUB(NOW(),INTERVAL 30 DAY), 76.76, 0.00, 'Samuari Shodown.jpg');
+INSERT INTO videojuego(nombre, alta, fecha_alta, precio_ficha, recaudacion, image) VALUES('Cadillacs & Dinosaurs', 1, DATE_SUB(NOW(),INTERVAL 30 DAY), 105.07, 0.00, 'Cadillacs & Dinosaurs.jpg');
+INSERT INTO videojuego(nombre, alta, fecha_alta, precio_ficha, recaudacion, image) VALUES('Daytona USA', 1, DATE_SUB(NOW(),INTERVAL 30 DAY), 96.72, 0.00, 'Daytona USA.jpg');
+INSERT INTO videojuego(nombre, alta, fecha_alta, precio_ficha, recaudacion, image) VALUES('World Rally Championship', 1, DATE_SUB(NOW(),INTERVAL 30 DAY), 55.67, 0.00, 'World Rally Championship.jpg');
+INSERT INTO videojuego(nombre, alta, fecha_alta, precio_ficha, recaudacion, image) VALUES('Virtua Fighter', 1, DATE_SUB(NOW(),INTERVAL 30 DAY), 65.40, 0.00, 'Virtua Fighter.jpg');
+INSERT INTO videojuego(nombre, alta, fecha_alta, precio_ficha, recaudacion, image) VALUES('Ridge Racer', 1, DATE_SUB(NOW(),INTERVAL 30 DAY), 94.22, 0.00, 'Ridge Racer.jpg');
+INSERT INTO videojuego(nombre, alta, fecha_alta, precio_ficha, recaudacion, image) VALUES('Puzzle Bobble', 1, DATE_SUB(NOW(),INTERVAL 30 DAY), 75.22, 0.00, 'Puzzle Bobble.jpg');
+INSERT INTO videojuego(nombre, alta, fecha_alta, precio_ficha, recaudacion, image) VALUES('Windjammers', 1, DATE_SUB(NOW(),INTERVAL 30 DAY), 110.53, 0.00, 'Windjammers.jpg');
+INSERT INTO videojuego(nombre, alta, fecha_alta, precio_ficha, recaudacion, image) VALUES('Virtua Cop', 1, DATE_SUB(NOW(),INTERVAL 30 DAY), 63.46, 0.00, 'Virtua Cop.jpg');
+INSERT INTO videojuego(nombre, alta, fecha_alta, precio_ficha, recaudacion, image) VALUES('Killer Instinct', 1, DATE_SUB(NOW(),INTERVAL 30 DAY), 68.72, 0.00, 'Killer Instinct.jpg');
+INSERT INTO videojuego(nombre, alta, fecha_alta, precio_ficha, recaudacion, image) VALUES('Cruis USA', 1, DATE_SUB(NOW(),INTERVAL 30 DAY), 98.06, 0.00, 'Cruis USA.jpg');
+INSERT INTO videojuego(nombre, alta, fecha_alta, precio_ficha, recaudacion, image) VALUES('Sega Rally', 1, DATE_SUB(NOW(),INTERVAL 30 DAY), 62.45, 0.00, 'Sega Rally.jpg');
+INSERT INTO videojuego(nombre, alta, fecha_alta, precio_ficha, recaudacion, image) VALUES('Time Crisis', 1, DATE_SUB(NOW(),INTERVAL 30 DAY), 56.70, 0.00, 'Time Crisis.jpg');
+INSERT INTO videojuego(nombre, alta, fecha_alta, precio_ficha, recaudacion, image) VALUES('Tekken 2', 1, DATE_SUB(NOW(),INTERVAL 30 DAY), 110.77, 0.00, 'Tekken 2.jpg');
+INSERT INTO videojuego(nombre, alta, fecha_alta, precio_ficha, recaudacion, image) VALUES('Manx TT', 1, DATE_SUB(NOW(),INTERVAL 30 DAY), 90.61, 0.00, 'Manx TT.jpg');
+INSERT INTO videojuego(nombre, alta, fecha_alta, precio_ficha, recaudacion, image) VALUES('The House of the Dead', 1, DATE_SUB(NOW(),INTERVAL 30 DAY), 68.01, 0.00, 'The House of the Dead.jpg');
+INSERT INTO videojuego(nombre, alta, fecha_alta, precio_ficha, recaudacion, image) VALUES('Neo Turf Masters', 1, DATE_SUB(NOW(),INTERVAL 30 DAY), 89.91, 0.00, 'Neo Turf Masters.jpg');
+INSERT INTO videojuego(nombre, alta, fecha_alta, precio_ficha, recaudacion, image) VALUES('Metal Slug', 1, DATE_SUB(NOW(),INTERVAL 30 DAY), 93.21, 0.00, 'Metal Slug.jpg');
+INSERT INTO videojuego(nombre, alta, fecha_alta, precio_ficha, recaudacion, image) VALUES('Police Trainer', 1, DATE_SUB(NOW(),INTERVAL 30 DAY), 94.83, 0.00, 'Police Trainer.jpg');
+INSERT INTO videojuego(nombre, alta, fecha_alta, precio_ficha, recaudacion, image) VALUES('Virtua Striker 2', 1, DATE_SUB(NOW(),INTERVAL 30 DAY), 102.34, 0.00, 'Virtua Striker 2.jpg');
+INSERT INTO videojuego(nombre, alta, fecha_alta, precio_ficha, recaudacion, image) VALUES('The Lost World: Jurassic Park', 1, DATE_SUB(NOW(),INTERVAL 30 DAY), 87.15, 0.00, 'The Lost World Jurassic Park.jpg');
+INSERT INTO videojuego(nombre, alta, fecha_alta, precio_ficha, recaudacion, image) VALUES('King of Fighters', 1, DATE_SUB(NOW(),INTERVAL 30 DAY), 51.04, 0.00, 'King of Fighters.jpg');
+INSERT INTO videojuego(nombre, alta, fecha_alta, precio_ficha, recaudacion, image) VALUES('Dance Dance Revolution', 1, DATE_SUB(NOW(),INTERVAL 30 DAY), 98.92, 0.00, 'Dance Dance Revolution.jpg');
+INSERT INTO videojuego(nombre, alta, fecha_alta, precio_ficha, recaudacion, image) VALUES('Radikal Bikers', 1, DATE_SUB(NOW(),INTERVAL 30 DAY), 67.55, 0.00, 'Radikal Bikers.jpg');
+INSERT INTO videojuego(nombre, alta, fecha_alta, precio_ficha, recaudacion, image) VALUES('Soul Calibur', 1, DATE_SUB(NOW(),INTERVAL 30 DAY), 81.49, 0.00, 'Soul Calibur.jpg');
+INSERT INTO videojuego(nombre, alta, fecha_alta, precio_ficha, recaudacion, image) VALUES('Virtua tennis', 1, DATE_SUB(NOW(),INTERVAL 30 DAY), 77.58, 0.00, 'Virtua tennis.jpg');
+INSERT INTO videojuego(nombre, alta, fecha_alta, precio_ficha, recaudacion, image) VALUES('Crazy Taxi', 1, DATE_SUB(NOW(),INTERVAL 30 DAY), 82.23, 0.00, 'Crazy Taxi.jpg');
+INSERT INTO videojuego(nombre, alta, fecha_alta, precio_ficha, recaudacion, image) VALUES('Silent Scope', 1, DATE_SUB(NOW(),INTERVAL 30 DAY), 52.46, 0.00, 'Silent Scope.jpg');
+INSERT INTO videojuego(nombre, alta, fecha_alta, precio_ficha, recaudacion) VALUES('Ikaruga', 1, DATE_SUB(NOW(),INTERVAL 30 DAY), 109.01, 0.00);
+INSERT INTO videojuego(nombre, alta, fecha_alta, precio_ficha, recaudacion, image) VALUES('Initial D Arcade Stage', 1, DATE_SUB(NOW(),INTERVAL 30 DAY), 101.23, 0.00, 'Initial D Arcade Stage.jpg');
+INSERT INTO videojuego(nombre, alta, fecha_alta, precio_ficha, recaudacion, image) VALUES('Rage of the Dragons', 1, DATE_SUB(NOW(),INTERVAL 30 DAY), 60.67, 0.00, 'Rage of the Dragons.jpg');
+INSERT INTO videojuego(nombre, alta, fecha_alta, precio_ficha, recaudacion, image) VALUES('Pong', 1, DATE_SUB(NOW(),INTERVAL 30 DAY), 77.43, 0.00, 'Pong.jpg');
+
+
+/************************************************ INSERT TARJETAS ***************************************************************************/
+
+INSERT INTO tarjeta(id, saldo, fecha_alta, alta) VALUES(634746, 1000.00, DATE_SUB(NOW(),INTERVAL 20 DAY), 1);
+INSERT INTO tarjeta(id, saldo, fecha_alta, alta) VALUES(613539, 1000.00, DATE_SUB(NOW(),INTERVAL 15 DAY), 1);
+INSERT INTO tarjeta(id, saldo, fecha_alta, alta) VALUES(854487, 1000.00, DATE_SUB(NOW(),INTERVAL 8 DAY), 1);
+INSERT INTO tarjeta(id, saldo, fecha_alta, alta) VALUES(412734, 1000.00, DATE_SUB(NOW(),INTERVAL 10 DAY), 1);
+INSERT INTO tarjeta(id, saldo, fecha_alta, alta) VALUES(993574, 1000.00, DATE_SUB(NOW(),INTERVAL 9 DAY), 1);
+INSERT INTO tarjeta(id, saldo, fecha_alta, alta) VALUES(832838, 1000.00, DATE_SUB(NOW(),INTERVAL 11 DAY), 1);
+INSERT INTO tarjeta(id, saldo, fecha_alta, alta) VALUES(301817, 1000.00, DATE_SUB(NOW(),INTERVAL 14 DAY), 1);
+INSERT INTO tarjeta(id, saldo, fecha_alta, alta) VALUES(140042, 1000.00, DATE_SUB(NOW(),INTERVAL 13 DAY), 1);
+INSERT INTO tarjeta(id, saldo, fecha_alta, alta) VALUES(486044, 1000.00, DATE_SUB(NOW(),INTERVAL 13 DAY), 1);
+INSERT INTO tarjeta(id, saldo, fecha_alta, alta) VALUES(172005, 1000.00, NOW(), 1);
+INSERT INTO tarjeta(id, saldo, fecha_alta, alta) VALUES(256131, 1000.00, DATE_SUB(NOW(),INTERVAL 5 DAY), 1);
+INSERT INTO tarjeta(id, saldo, fecha_alta, alta) VALUES(398822, 1000.00, DATE_SUB(NOW(),INTERVAL 4 DAY), 1);
+INSERT INTO tarjeta(id, saldo, fecha_alta, alta) VALUES(221783, 1000.00, DATE_SUB(NOW(),INTERVAL 2 DAY), 1);
+INSERT INTO tarjeta(id, saldo, fecha_alta, alta) VALUES(772131, 1000.00, DATE_SUB(NOW(),INTERVAL 6 DAY), 1);
+INSERT INTO tarjeta(id, saldo, fecha_alta, alta) VALUES(903853, 1000.00, DATE_SUB(NOW(),INTERVAL 7 DAY), 1);
+INSERT INTO tarjeta(id, saldo, fecha_alta, alta) VALUES(575114, 1000.00, DATE_SUB(NOW(),INTERVAL 18 DAY), 1);
+INSERT INTO tarjeta(id, saldo, fecha_alta, alta) VALUES(174706, 1000.00, DATE_SUB(NOW(),INTERVAL 20 DAY), 1);
+
+/****************************************************************** INSERT CLIENTES  ******************************************************************************************/
+
+INSERT INTO cliente(dni, nombre, apellido, fecha_alta, tarjeta_id, rol, alta) VALUES(19172362, 'Belén', 'González', DATE_SUB(NOW(),INTERVAL 10 DAY), 634746, 'USER', 1);
+INSERT INTO cliente(dni, nombre, apellido, fecha_alta, tarjeta_id, rol, alta) VALUES(46021255, 'Catalina', 'Rodríguez', DATE_SUB(NOW(),INTERVAL 14 DAY), 613539, 'USER', 1);
+INSERT INTO cliente(dni, nombre, apellido, fecha_alta, tarjeta_id, rol, alta) VALUES(10472930, 'Cecilia', 'Gómez', DATE_SUB(NOW(),INTERVAL 8 DAY), 854487, 'USER', 1);
+INSERT INTO cliente(dni, nombre, apellido, fecha_alta, tarjeta_id, rol, alta) VALUES(33278994, 'Delfina', 'Fernández', DATE_SUB(NOW(),INTERVAL 10 DAY), 412734, 'USER', 1);
+INSERT INTO cliente(dni, nombre, apellido, fecha_alta, tarjeta_id, rol, alta) VALUES(17891459, 'Florencia', 'López', DATE_SUB(NOW(),INTERVAL 9 DAY), 993574, 'USER', 1);
+INSERT INTO cliente(dni, nombre, apellido, fecha_alta, tarjeta_id, rol, alta) VALUES(19899898, 'Martina', 'Pérez', DATE_SUB(NOW(),INTERVAL 11 DAY), 832838, 'USER', 1);
+INSERT INTO cliente(dni, nombre, apellido, fecha_alta, tarjeta_id, rol, alta) VALUES(48388449, 'Olivia', 'Martínez', DATE_SUB(NOW(),INTERVAL 14 DAY), 301817, 'USER', 1);
+INSERT INTO cliente(dni, nombre, apellido, fecha_alta, tarjeta_id, rol, alta) VALUES(44825567, 'Benjamín', 'Diaz', DATE_SUB(NOW(),INTERVAL 13 DAY), 140042, 'USER', 1);
+INSERT INTO cliente(dni, nombre, apellido, fecha_alta, tarjeta_id, rol, alta) VALUES(32491840, 'Bruno', 'García', DATE_SUB(NOW(),INTERVAL 13 DAY), 486044, 'USER', 1);
+INSERT INTO cliente(dni, nombre, apellido, fecha_alta, tarjeta_id, rol, alta) VALUES(20501930, 'Diego', 'Romero', NOW(), 172005, 'USER', 1);
+INSERT INTO cliente(dni, nombre, apellido, fecha_alta, tarjeta_id, rol, alta) VALUES(14957320, 'Federico', 'Sosa', DATE_SUB(NOW(),INTERVAL 5 DAY), 256131, 'USER', 1);
+INSERT INTO cliente(dni, nombre, apellido, fecha_alta, tarjeta_id, rol, alta) VALUES(44470880, 'Joaquín', 'Benítez', DATE_SUB(NOW(),INTERVAL 4 DAY), 398822, 'USER', 1);
+INSERT INTO cliente(dni, nombre, apellido, fecha_alta, tarjeta_id, rol, alta) VALUES(18340907, 'Leonardo', 'Ramírez', DATE_SUB(NOW(),INTERVAL 2 DAY), 221783, 'USER', 1);
+INSERT INTO cliente(dni, nombre, apellido, fecha_alta, tarjeta_id, rol, alta) VALUES(10316222, 'Luciano', 'Torres', DATE_SUB(NOW(),INTERVAL 6 DAY), 772131, 'USER', 1);
+INSERT INTO cliente(dni, nombre, apellido, fecha_alta, tarjeta_id, rol, alta) VALUES(48341086, 'Martín', 'Ruiz', DATE_SUB(NOW(),INTERVAL 7 DAY), 903853, 'USER', 1);
+INSERT INTO cliente(dni, nombre, apellido, fecha_alta, tarjeta_id, rol, alta) VALUES(10555639, 'Matías', 'Flores', DATE_SUB(NOW(),INTERVAL 12 DAY), 575114, 'USER', 1);
+INSERT INTO cliente(dni, nombre, apellido, fecha_alta, tarjeta_id, rol, alta) VALUES(32082817, 'Valentino', 'Acosta', DATE_SUB(NOW(),INTERVAL 20 DAY), 174706, 'USER', 1);
+
+/************************************************************* INSERT TRANSACCION (CARGA DE TARJETA) *********************************************************************/
+
+INSERT INTO transaccion(fecha_transaccion, id_empleado, tipo_transaccion, dni_cliente, monto) VALUES(DATE_SUB(NOW(),INTERVAL 14 DAY), 2, 0, 46021255, 1000.00);
+INSERT INTO transaccion(fecha_transaccion, id_empleado, tipo_transaccion, dni_cliente, monto) VALUES(DATE_SUB(NOW(),INTERVAL 8 DAY), 2, 0, 10472930, 1000.00);
+INSERT INTO transaccion(fecha_transaccion, id_empleado, tipo_transaccion, dni_cliente, monto) VALUES(DATE_SUB(NOW(),INTERVAL 10 DAY), 2, 0, 33278994, 1000.00);
+INSERT INTO transaccion(fecha_transaccion, id_empleado, tipo_transaccion, dni_cliente, monto) VALUES(DATE_SUB(NOW(),INTERVAL 9 DAY), 2, 0, 17891459, 1000.00);
+INSERT INTO transaccion(fecha_transaccion, id_empleado, tipo_transaccion, dni_cliente, monto) VALUES(DATE_SUB(NOW(),INTERVAL 11 DAY), 2, 0, 19899898, 1000.00);
+INSERT INTO transaccion(fecha_transaccion, id_empleado, tipo_transaccion, dni_cliente, monto) VALUES(DATE_SUB(NOW(),INTERVAL 14 DAY), 3, 0, 48388449, 1000.00);
+INSERT INTO transaccion(fecha_transaccion, id_empleado, tipo_transaccion, dni_cliente, monto) VALUES(DATE_SUB(NOW(),INTERVAL 13 DAY), 3, 0, 44825567, 1000.00);
+INSERT INTO transaccion(fecha_transaccion, id_empleado, tipo_transaccion, dni_cliente, monto) VALUES(DATE_SUB(NOW(),INTERVAL 13 DAY), 3, 0, 32491840, 1000.00);
+INSERT INTO transaccion(fecha_transaccion, id_empleado, tipo_transaccion, dni_cliente, monto) VALUES(NOW(), 3, 0, 20501930, 1000.00);
+INSERT INTO transaccion(fecha_transaccion, id_empleado, tipo_transaccion, dni_cliente, monto) VALUES(DATE_SUB(NOW(),INTERVAL 5 DAY), 3, 0, 14957320, 1000.00);
+INSERT INTO transaccion(fecha_transaccion, id_empleado, tipo_transaccion, dni_cliente, monto) VALUES(DATE_SUB(NOW(),INTERVAL 4 DAY), 2, 0, 44470880, 1000.00);
+INSERT INTO transaccion(fecha_transaccion, id_empleado, tipo_transaccion, dni_cliente, monto) VALUES(DATE_SUB(NOW(),INTERVAL 2 DAY), 2, 0, 18340907, 1000.00);
+INSERT INTO transaccion(fecha_transaccion, id_empleado, tipo_transaccion, dni_cliente, monto) VALUES(DATE_SUB(NOW(),INTERVAL 6 DAY), 2, 0, 10316222, 1000.00);
+INSERT INTO transaccion(fecha_transaccion, id_empleado, tipo_transaccion, dni_cliente, monto) VALUES(DATE_SUB(NOW(),INTERVAL 7 DAY), 2, 0, 48341086, 1000.00);
+INSERT INTO transaccion(fecha_transaccion, id_empleado, tipo_transaccion, dni_cliente, monto) VALUES(DATE_SUB(NOW(),INTERVAL 12 DAY), 3, 0, 10555639, 1000.00);
+INSERT INTO transaccion(fecha_transaccion, id_empleado, tipo_transaccion, dni_cliente, monto) VALUES(DATE_SUB(NOW(),INTERVAL 20 DAY), 3, 0, 32082817, 1000.00);
+
+
+/************************************************************ INSERT TRANSACCION (GASTO DE TARJETA)  ********************************************************************************/
+
+INSERT INTO transaccion(fecha_transaccion, id_videojuego, tipo_transaccion, dni_cliente, monto) VALUES(DATE_SUB(NOW(),INTERVAL 14 DAY), 7, 1, 46021255, 120.00);
+INSERT INTO transaccion(fecha_transaccion, id_videojuego, tipo_transaccion, dni_cliente, monto) VALUES(DATE_SUB(NOW(),INTERVAL 14 DAY), 13, 1, 46021255, 120.00);
+INSERT INTO transaccion(fecha_transaccion, id_videojuego, tipo_transaccion, dni_cliente, monto) VALUES(DATE_SUB(NOW(),INTERVAL 14 DAY), 7, 1, 46021255, 120.00);
+INSERT INTO transaccion(fecha_transaccion, id_videojuego, tipo_transaccion, dni_cliente, monto) VALUES(DATE_SUB(NOW(),INTERVAL 14 DAY), 69, 1, 46021255, 120.00);
+INSERT INTO transaccion(fecha_transaccion, id_videojuego, tipo_transaccion, dni_cliente, monto) VALUES(DATE_SUB(NOW(),INTERVAL 14 DAY), 7, 1, 46021255, 120.00);
+INSERT INTO transaccion(fecha_transaccion, id_videojuego, tipo_transaccion, dni_cliente, monto) VALUES(DATE_SUB(NOW(),INTERVAL 14 DAY), 7, 1, 46021255, 120.00);
+INSERT INTO transaccion(fecha_transaccion, id_videojuego, tipo_transaccion, dni_cliente, monto) VALUES(DATE_SUB(NOW(),INTERVAL 8 DAY), 59, 1, 10472930, 120.00);
+INSERT INTO transaccion(fecha_transaccion, id_videojuego, tipo_transaccion, dni_cliente, monto) VALUES(DATE_SUB(NOW(),INTERVAL 8 DAY), 16, 1, 10472930, 120.00);
+INSERT INTO transaccion(fecha_transaccion, id_videojuego, tipo_transaccion, dni_cliente, monto) VALUES(DATE_SUB(NOW(),INTERVAL 8 DAY), 71, 1, 10472930, 120.00);
+INSERT INTO transaccion(fecha_transaccion, id_videojuego, tipo_transaccion, dni_cliente, monto) VALUES(DATE_SUB(NOW(),INTERVAL 8 DAY), 43, 1, 10472930, 120.00);
+INSERT INTO transaccion(fecha_transaccion, id_videojuego, tipo_transaccion, dni_cliente, monto) VALUES(DATE_SUB(NOW(),INTERVAL 10 DAY), 29, 1, 33278994, 120.00);
+INSERT INTO transaccion(fecha_transaccion, id_videojuego, tipo_transaccion, dni_cliente, monto) VALUES(DATE_SUB(NOW(),INTERVAL 10 DAY), 26, 1, 33278994, 120.00);
+INSERT INTO transaccion(fecha_transaccion, id_videojuego, tipo_transaccion, dni_cliente, monto) VALUES(DATE_SUB(NOW(),INTERVAL 10 DAY), 76, 1, 33278994, 120.00);
+INSERT INTO transaccion(fecha_transaccion, id_videojuego, tipo_transaccion, dni_cliente, monto) VALUES(DATE_SUB(NOW(),INTERVAL 10 DAY), 3, 1, 33278994, 120.00);
+INSERT INTO transaccion(fecha_transaccion, id_videojuego, tipo_transaccion, dni_cliente, monto) VALUES(DATE_SUB(NOW(),INTERVAL 9 DAY), 51, 1, 17891459, 120.00);
+INSERT INTO transaccion(fecha_transaccion, id_videojuego, tipo_transaccion, dni_cliente, monto) VALUES(DATE_SUB(NOW(),INTERVAL 9 DAY), 47, 1, 17891459, 120.00);
+INSERT INTO transaccion(fecha_transaccion, id_videojuego, tipo_transaccion, dni_cliente, monto) VALUES(DATE_SUB(NOW(),INTERVAL 9 DAY), 57, 1, 17891459, 120.00);
+INSERT INTO transaccion(fecha_transaccion, id_videojuego, tipo_transaccion, dni_cliente, monto) VALUES(DATE_SUB(NOW(),INTERVAL 9 DAY), 95, 1, 17891459, 120.00);
+INSERT INTO transaccion(fecha_transaccion, id_videojuego, tipo_transaccion, dni_cliente, monto) VALUES(DATE_SUB(NOW(),INTERVAL 9 DAY), 10, 1, 17891459, 120.00);
+INSERT INTO transaccion(fecha_transaccion, id_videojuego, tipo_transaccion, dni_cliente, monto) VALUES(DATE_SUB(NOW(),INTERVAL 9 DAY), 52, 1, 17891459, 120.00);
+INSERT INTO transaccion(fecha_transaccion, id_videojuego, tipo_transaccion, dni_cliente, monto) VALUES(DATE_SUB(NOW(),INTERVAL 11 DAY), 87, 1, 19899898, 120.00);
+INSERT INTO transaccion(fecha_transaccion, id_videojuego, tipo_transaccion, dni_cliente, monto) VALUES(DATE_SUB(NOW(),INTERVAL 11 DAY), 85, 1, 19899898, 120.00);
+INSERT INTO transaccion(fecha_transaccion, id_videojuego, tipo_transaccion, dni_cliente, monto) VALUES(DATE_SUB(NOW(),INTERVAL 11 DAY), 34, 1, 19899898, 120.00);
+INSERT INTO transaccion(fecha_transaccion, id_videojuego, tipo_transaccion, dni_cliente, monto) VALUES(DATE_SUB(NOW(),INTERVAL 11 DAY), 16, 1, 19899898, 120.00);
+INSERT INTO transaccion(fecha_transaccion, id_videojuego, tipo_transaccion, dni_cliente, monto) VALUES(DATE_SUB(NOW(),INTERVAL 14 DAY), 65, 1, 48388449, 120.00);
+INSERT INTO transaccion(fecha_transaccion, id_videojuego, tipo_transaccion, dni_cliente, monto) VALUES(DATE_SUB(NOW(),INTERVAL 14 DAY), 34, 1, 48388449, 120.00);
+INSERT INTO transaccion(fecha_transaccion, id_videojuego, tipo_transaccion, dni_cliente, monto) VALUES(DATE_SUB(NOW(),INTERVAL 14 DAY), 41, 1, 48388449, 120.00);
+INSERT INTO transaccion(fecha_transaccion, id_videojuego, tipo_transaccion, dni_cliente, monto) VALUES(DATE_SUB(NOW(),INTERVAL 14 DAY), 56, 1, 48388449, 120.00);
+INSERT INTO transaccion(fecha_transaccion, id_videojuego, tipo_transaccion, dni_cliente, monto) VALUES(DATE_SUB(NOW(),INTERVAL 13 DAY), 35, 1, 44825567, 120.00);
+INSERT INTO transaccion(fecha_transaccion, id_videojuego, tipo_transaccion, dni_cliente, monto) VALUES(DATE_SUB(NOW(),INTERVAL 13 DAY), 89, 1, 44825567, 120.00);
+INSERT INTO transaccion(fecha_transaccion, id_videojuego, tipo_transaccion, dni_cliente, monto) VALUES(DATE_SUB(NOW(),INTERVAL 13 DAY), 94, 1, 44825567, 120.00);
+INSERT INTO transaccion(fecha_transaccion, id_videojuego, tipo_transaccion, dni_cliente, monto) VALUES(DATE_SUB(NOW(),INTERVAL 13 DAY), 8, 1, 44825567, 120.00);
+INSERT INTO transaccion(fecha_transaccion, id_videojuego, tipo_transaccion, dni_cliente, monto) VALUES(DATE_SUB(NOW(),INTERVAL 13 DAY), 87, 1, 32491840, 120.00);
+INSERT INTO transaccion(fecha_transaccion, id_videojuego, tipo_transaccion, dni_cliente, monto) VALUES(DATE_SUB(NOW(),INTERVAL 13 DAY), 46, 1, 32491840, 120.00);
+INSERT INTO transaccion(fecha_transaccion, id_videojuego, tipo_transaccion, dni_cliente, monto) VALUES(DATE_SUB(NOW(),INTERVAL 13 DAY), 64, 1, 32491840, 120.00);
+INSERT INTO transaccion(fecha_transaccion, id_videojuego, tipo_transaccion, dni_cliente, monto) VALUES(DATE_SUB(NOW(),INTERVAL 13 DAY), 83, 1, 32491840, 120.00);
+INSERT INTO transaccion(fecha_transaccion, id_videojuego, tipo_transaccion, dni_cliente, monto) VALUES(NOW(), 37, 1, 20501930, 120.00);
+INSERT INTO transaccion(fecha_transaccion, id_videojuego, tipo_transaccion, dni_cliente, monto) VALUES(NOW(), 9, 1, 20501930, 120.00);
+INSERT INTO transaccion(fecha_transaccion, id_videojuego, tipo_transaccion, dni_cliente, monto) VALUES(NOW(), 51, 1, 20501930, 120.00);
+INSERT INTO transaccion(fecha_transaccion, id_videojuego, tipo_transaccion, dni_cliente, monto) VALUES(NOW(), 69, 1, 20501930, 120.00);
+INSERT INTO transaccion(fecha_transaccion, id_videojuego, tipo_transaccion, dni_cliente, monto) VALUES(DATE_SUB(NOW(),INTERVAL 5 DAY), 3, 1, 14957320, 120.00);
+INSERT INTO transaccion(fecha_transaccion, id_videojuego, tipo_transaccion, dni_cliente, monto) VALUES(DATE_SUB(NOW(),INTERVAL 5 DAY), 53, 1, 14957320, 120.00);
+INSERT INTO transaccion(fecha_transaccion, id_videojuego, tipo_transaccion, dni_cliente, monto) VALUES(DATE_SUB(NOW(),INTERVAL 5 DAY), 1, 1, 14957320, 120.00);
+INSERT INTO transaccion(fecha_transaccion, id_videojuego, tipo_transaccion, dni_cliente, monto) VALUES(DATE_SUB(NOW(),INTERVAL 5 DAY), 51, 1, 14957320, 120.00);
+INSERT INTO transaccion(fecha_transaccion, id_videojuego, tipo_transaccion, dni_cliente, monto) VALUES(DATE_SUB(NOW(),INTERVAL 4 DAY), 73, 1, 44470880, 120.00);
+INSERT INTO transaccion(fecha_transaccion, id_videojuego, tipo_transaccion, dni_cliente, monto) VALUES(DATE_SUB(NOW(),INTERVAL 4 DAY), 22, 1, 44470880, 120.00);
+INSERT INTO transaccion(fecha_transaccion, id_videojuego, tipo_transaccion, dni_cliente, monto) VALUES(DATE_SUB(NOW(),INTERVAL 2 DAY), 86, 1, 18340907, 120.00);
+INSERT INTO transaccion(fecha_transaccion, id_videojuego, tipo_transaccion, dni_cliente, monto) VALUES(DATE_SUB(NOW(),INTERVAL 2 DAY), 60, 1, 18340907, 120.00);
+INSERT INTO transaccion(fecha_transaccion, id_videojuego, tipo_transaccion, dni_cliente, monto) VALUES(DATE_SUB(NOW(),INTERVAL 6 DAY), 66, 1, 10316222, 120.00);
+INSERT INTO transaccion(fecha_transaccion, id_videojuego, tipo_transaccion, dni_cliente, monto) VALUES(DATE_SUB(NOW(),INTERVAL 6 DAY), 86, 1, 10316222, 120.00);
+INSERT INTO transaccion(fecha_transaccion, id_videojuego, tipo_transaccion, dni_cliente, monto) VALUES(DATE_SUB(NOW(),INTERVAL 20 DAY), 17, 1, 19172362, 120.00);
+INSERT INTO transaccion(fecha_transaccion, id_videojuego, tipo_transaccion, dni_cliente, monto) VALUES(DATE_SUB(NOW(),INTERVAL 20 DAY), 89, 1, 19172362, 120.00);
+INSERT INTO transaccion(fecha_transaccion, id_videojuego, tipo_transaccion, dni_cliente, monto) VALUES(DATE_SUB(NOW(),INTERVAL 20 DAY), 61, 1, 19172362, 120.00);
+INSERT INTO transaccion(fecha_transaccion, id_videojuego, tipo_transaccion, dni_cliente, monto) VALUES(DATE_SUB(NOW(),INTERVAL 20 DAY), 54, 1, 19172362, 120.00);
+
+
+/****************************************** UPDATE (AGREGA MONTO EN TRANSACCIONES TIPO DEBITO) **********************************************************************************************************************/
+
+UPDATE transaccion t
+INNER JOIN videojuego v ON t.id_videojuego = v.id
+SET t.monto = v.precio_ficha
+WHERE t.tipo_transaccion = 1; /*DEBITO*/
+
+/****************************************** UPDATE (RECAUDACION POR CADA VIDEOJUEGO) **********************************************************************************************************************/
+
+UPDATE videojuego v
+	JOIN (
+		SELECT v.id, (count(v.nombre) * v.precio_ficha) as 'recaudacion'
+		FROM transaccion t
+		INNER JOIN videojuego v ON t.id_videojuego = v.id
+		WHERE t.tipo_transaccion = 1 /*DEBITO*/
+		GROUP BY v.nombre
+    ) t ON v.id = t.id
+SET v.recaudacion = v.recaudacion + t.recaudacion;
+
+/****************************************** UPDATE (DESCUENTO DE SALDOS EN TARJETAS) **********************************************************************************************************************/
+
+UPDATE tarjeta tarj
+	JOIN (
+		SELECT tar.id, (tar.saldo - SUM(v.precio_ficha)) 'saldo_restante'
+		FROM tarjeta tar
+		INNER JOIN cliente c ON tar.id = c.tarjeta_id
+		INNER JOIN transaccion tra ON  c.dni = tra.dni_cliente
+		INNER JOIN videojuego v ON tra.id_videojuego = v.id
+		GROUP BY c.dni
+    ) t ON tarj.id = t.id
+SET tarj.saldo = t.saldo_restante; 
+
+/************************************************************** CONSULTAS (LAURE) *******************************************************************************************************/
+
+
+/*Para sacar los clientes que mas jugaron*/
+SELECT c.nombre, c.apellido, COUNT(t.dni_cliente)
+FROM transaccion t 
+INNER JOIN cliente c ON c.dni = t.dni_cliente
+WHERE t.tipo_transaccion = 2 /*DEBITO*/
+GROUP BY c.nombre, c.apellido
+ORDER BY COUNT(t.dni_cliente) DESC, c.apellido ASC LIMIT 5;
+
+
+/*5 videojuegos mas jugados*/
+SELECT v.nombre, count(t.id_videojuego) AS 'cantidad'
+FROM transaccion t 
+INNER JOIN videojuego v ON v.id = t.id_videojuego
+GROUP BY v.nombre
+ORDER BY cantidad DESC LIMIT 5;
+
+
+/******************************************************** EN CASO DE VOLVER A CARGAR LOS DATOS DESDE 0 ***********************************************************************************/
+
+-- IMPORTANTE!
+-- NO OLVIDAR VOLVER A COMENTAR LAS SIGUIENTES LINEAS UNA VEZ EJECUTADA
+
+/*
+SET FOREIGN_KEY_CHECKS = 0;
+
+DELETE FROM videojuego;
+ALTER TABLE videojuego AUTO_INCREMENT = 1;
+
+DELETE FROM tarjeta;
+
+DELETE FROM cliente;
+
+DELETE FROM empleado;
+ALTER TABLE empleado AUTO_INCREMENT = 1;
+
+DELETE FROM transaccion;
+ALTER TABLE transaccion AUTO_INCREMENT = 1;
+
+SET FOREIGN_KEY_CHECKS=1;
+*/
+
+-- DROPEAR
+/*
+SET SQL_SAFE_UPDATES = 0;
+SET FOREIGN_KEY_CHECKS = 0;
+DROP TABLE tarjeta;
+DROP TABLE empleado;
+DROP TABLE cliente;
+DROP TABLE videojuego;
+DROP TABLE transaccion;
+DROP TABLE local;
+SET FOREIGN_KEY_CHECKS = 1;
+SET SQL_SAFE_UPDATES = 1;
+*/

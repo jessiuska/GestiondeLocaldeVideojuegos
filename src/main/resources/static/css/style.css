@@ -1,7 +1,7 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap');
+/*@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap');*/
 
 body {
-    font-family: 'Poppins', sans-serif;
+    /*font-family: 'Poppins', sans-serif;*/
     height:100vh;
 }
 
@@ -327,6 +327,11 @@ nav, footer, .dropdown-menu {
     clear: none;
     font-size: 30px;
 }
+.nombre-cliente{
+    float: left;
+    clear: none;
+    font-size: 30px;
+}
 .medal{
     margin-right: 5px;
     margin-top: 5px;
@@ -350,3 +355,10 @@ nav, footer, .dropdown-menu {
 .card-ranking{
     height: 200px;
 }
+
+.rainbow-text {
+    background-image: linear-gradient(to left, violet, indigo, blue, green, yellow, orange, red);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-size: 25px;
+  }

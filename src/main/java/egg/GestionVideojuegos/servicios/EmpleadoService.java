@@ -47,10 +47,9 @@ public class EmpleadoService implements UserDetailsService {
         empleado.setUsuario(dto.getUsuario());
         empleado.setClave(encoder.encode(dto.getClave()));
         
+        //Si no existen empleados en la base, este es el primero, le doy rol de ADMIN
         if (empleadoRepository.findAll().isEmpty()) {
             empleado.setRol(Rol.ADMIN);
-        /*} else if (dto.getRol() == null) {
-            empleado.setRol(Rol.CAJERO);*/
         } else {
             empleado.setRol(dto.getRol());
         }
@@ -61,7 +60,7 @@ public class EmpleadoService implements UserDetailsService {
 
     @Transactional
     public void modificar(Empleado dto, HttpSession session) throws SpringException {
-        /*
+        /* Esto era para que no se pueda elegir un nombre de usuario existente pero se complicó...
         if (empleadoRepository.existsByUsuario(dto.getUsuario()) &&
                 !session.getAttribute("usuario").equals(dto.getUsuario()))
             throw new SpringException("Ya existe un usuario con ese nombre de usuario");
@@ -74,13 +73,18 @@ public class EmpleadoService implements UserDetailsService {
         empleado.setUsuario(dto.getUsuario());
         
         //Si la clave NO viene vacía, la cambia, sino deja la misma
+        //Esto es para que no haya que tipear la clave cada vez que se modifica un empleado,
+        //si se deja la clave vacía no la modifica y deja la misma
         if (!dto.getClave().isEmpty()) empleado.setClave(encoder.encode(dto.getClave()));
         //Si se modifica un rol se guarda, si no se tocó va a llegar null así que se deja el que estaba
+        //Lo mismo que antes, si no se modifica el rol queda el que ya tenía
         if (dto.getRol() != null) empleado.setRol(dto.getRol());
         
         empleadoRepository.save(empleado);
         
         //Actualiza datos de la sesión solo si se modifica el usuario que está en la sesión
+        //El rol cambia solo en el texto, en cuanto a seguridad va a seguir teniendo el rol
+        //original hasta que vyuelva a iniciar sesión
         if (session.getAttribute("id").equals(empleado.getId())) {
             session.setAttribute("nombre", dto.getNombre());
             session.setAttribute("apellido", dto.getApellido());
@@ -91,7 +95,8 @@ public class EmpleadoService implements UserDetailsService {
     
     @Transactional(readOnly = true)
     public List<Empleado> buscarTodos() {
-        return empleadoRepository.findByAlta(true);
+        //return empleadoRepository.findByAlta(true);
+        return empleadoRepository.findAll(); //Muestro todos para que se note el cambio de botones habilitar/deshabilitar
     }
 
     @Transactional(readOnly = true)
@@ -112,11 +117,13 @@ public class EmpleadoService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String usuario) throws UsernameNotFoundException {
+        //Busco en la tabla de empleados el nombre de usuario pasado por parámetro, si no lo encuentra lanza una excepción
         Empleado empleado = empleadoRepository.findByUsuario(usuario)
                 .orElseThrow(() -> new UsernameNotFoundException("No existe el usuario: " + usuario));
-        
+        //Seteo una GrantedAuthority con el rol de ese empleado
         GrantedAuthority authority = new SimpleGrantedAuthority("ROLE_" + empleado.getRol().name());
 
+        //Creo una HttpSession con datos que puede ver el frontend (via thymeleaf)
         ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
         HttpSession session = attributes.getRequest().getSession(true);
 
@@ -126,6 +133,7 @@ public class EmpleadoService implements UserDetailsService {
         session.setAttribute("apellido", empleado.getApellido());
         session.setAttribute("rol", empleado.getRol().name());
 
+        //Retorno un User con los permisos seteados
         return new User(empleado.getUsuario(), empleado.getClave(), Collections.singletonList(authority));
     }
 

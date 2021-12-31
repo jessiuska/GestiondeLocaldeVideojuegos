@@ -1,0 +1,213 @@
+Mail: grupo6.egg@gmail.com
+Clave: 123grupo6.egg
+
+
+
+
+Eso es como veníamos haciendo, no? 
+
+(en la propia rama)
+git pull origin main (trae la rama main a la rama actual)
+(modificar cosas)
+git add .
+git commit -m "mensaje"
+git push origin flor (sube la rama flor local a la rama flor remota)
+git checkout main (cambia a la rama main)
+git pull (si la main local está desactualizada respecto de la main remota)
+git merge flor -m "cambios flor" (junta los cambios de la rama flor local en la rama main local)
+git push origin main (sube la rama main local a la rama main remota)
+
+
+SELECT * FROM transaccion where tipo_transaccion=2 order by fecha_transaccion desc LIMIT 100;
+
+
+${#numbers.formatDecimal(content.number == null ? 0 : content.number, 0, 0)}
+
+
+Entidad Cliente:
+----------------
+-Alta, baja, modificación
+-Baja tarjeta (necesario? puede reeamplazarla Deshabilitar cliente)
+-Cambio tarjeta (baja tarjeta actual y alta nueva)
+-Deshabilitar cliente
+
+-Listar movimientos (cargas, gastos, videojuegos jugados)
+
+
+Entidad Videojuego:
+-------------------
+-Alta, baja, modificación
+-Cambiar precio ficha
+-Consultar recaudación
+
+
+
+----
+    public void nuevoPrecioFicha(Integer idVideojuego, Double nuevoPrecio) throws SpringException {
+        Videojuego videojuego = buscarPorId(idVideojuego);
+        videojuego.setPrecioFicha(nuevoPrecio);
+        videoJuegoRepository.save(videojuego);
+    }
+
+    public void aumentarFicha(Double porcentaje) throws SpringException {
+
+        //Local local = localRepository.findById(0).orElseThrow(() -> new SpringException(String.format(mensaje, 0)));
+
+        List<Videojuego> videojuegos = videojuegoService.buscarTodos();
+
+        for (Videojuego videojuego : videojuegos) {
+            //nuevoPrecio += videojuegoService.nuevoPrecioFicha(videojuego.getPrecioFicha());
+            double nuevoPrecio = videojuego.getPrecioFicha() + (videojuego.getPrecioFicha() * porcentaje) / 100;
+            videojuegoService.nuevoPrecioFicha(videojuego.getId(), nuevoPrecio);
+        }
+
+        //videojuegoService.nuevoPrecioFicha(nuevoPrecio);
+
+        //localRepository.save(local);
+    }
+
+
+----
+
+Simular clientes que juegan
+
+
+contar clientes -> repository.count()
+contar videojuegos
+cliente al azar entre 0 y count
+videojuego al azar entre 0 y count
+
+for hasta i = cliente
+cliente = 
+
+////
+
+void simularJuegos(numeroDeVeces) {
+ list clientes = buscartodos
+ list videojuegos = buscartodos
+
+ for 0 a numeroDeVeces-1 {
+  C = numero al azar entre 0 y count de clientes
+  V = numero al azar entre 0 y count de videojuegos
+
+  cliente = listaclientes.get(C)
+  videojuego = listavideojuegos.get(V)
+
+  si (cliente.tarjeta.saldo >= videojuego.precioficha) {
+   videojuegoservice.jugar(C,V)
+  }
+ }
+}
+
+----
+
+en VideojuegoService:
+
+public void jugar(Integer dniCliente, Integer idVideojuego) {
+	Cliente cliente = buscarPorDni(dniCliente);
+	Videojuego videojuego = buscarPorId(idVideojuego);
+
+	//averiguo el precio de la ficha del videojuego
+	double precioFicha = videojuego.getPrecioFicha();
+
+	//así NO:
+	//cliente.getTarjeta().setSaldo(cliente.getTarjeta().getSaldo() - precioFicha);
+	//así SÍ:
+	tarjetaService.consumo(cliente.getTarjeta(), precioFicha);
+	
+	//actualizo la recaudación del videojuego
+	videojuego.recaudar(precioFicha);
+
+	//agrega transaccion con código 2, dniCliente, idVideojuego, precioFicha, fecha
+}
+
+public void recaudar(Integer idVideojuego, Integer monto) {
+	Videojuego videojuego = buscarPorId(idVideojuego);
+
+	//guardo la recaudación actual
+	Double recaudacionActual = videojuego.getRecaudacion();
+
+	//actualizo la recaudación
+	videojuego.setRecaudación(recaudacionActual + monto);
+
+	videojuegoRepository.save(videojuego);
+}
+
+public Double cerrar(Integer idVideojuego) {
+	Videojuego videojuego = buscarPorId(idVideojuego);
+
+	//guardo recaudación actual
+	Double recaudacion = videojuego.getRecaudacion();
+
+	//pongo la recaudación a 0
+	videojuego.setRecaudacion(0.0);
+
+	videojuegoRepository.save(videojuego);
+
+	return recaudacion;
+}
+
+----
+
+Cierre caja:
+//reemplaza al recaudar que ya existe en LocalService
+
+public void cerrarCaja() {
+	LocalDateTime ahora = LocalDateTime.now();
+
+	//en teoría tendría que haber un solo local con id 0, lo uso para guardar
+	//la recaudación y la fecha de último cierre
+	Local local = localRepository.buscarPorId(0);
+
+	Double totalRecaudacion = 0.0;
+
+	//guardo una lista con todos los videojuegos
+	List<Videojuego> videojuegos = videojuegoRepository.buscarTodos();
+
+	//recorro los videojuegos, voy cerrando todos y acumulando las recaudaciones
+	videojuegos.forEach(videojuego -> {
+		totalRecaudacion += videojuego.cerrar(videojuego.getId());
+	});
+
+	//guardo los datos del local
+	local.setRecaudacion(totalRecaudacion);
+	local.setFechaUltimoCierre(ahora);
+
+	localRepository.save(local);
+
+	//agrega transaccion con código 4, totalRecaudacion, fecha ahora
+}
+
+
+----
+
+Cambio de tarjeta:
+
+controlador: @ModelAttribute Cliente cliente
+
+clienteService.cambiarTarjeta(cliente);
+
+
+service:
+
+public void cambiarTarjeta(Cliente cliente) {
+	//guardo el saldo de la tarjeta actual
+	Double tempSaldo = cliente.getTarjeta.getSaldo();
+
+	//elimino la tarjeta
+	tarjetaService.eliminar(cliente.getTarjeta.getId());
+
+	//creo una nueva tarjeta temporal con el saldo anterior
+	Tarjeta tarjeta = new Tarjeta();
+	tarjeta.setSaldo = tempSaldo;
+
+	//le asigno la nueva tarjeta al cliente
+	cliente.setTarjeta(tarjeta);
+
+	//guardo el cliente
+	clienteRepository.save(cliente);
+}
+
+
+
+Sistema de gestión para local comercial de videojuegos que permitirá a los empleados acceder con un usuario y contraseña propios y realizar consultas y modificaciones dependiendo los permisos que tengan. Entre las funcionalidades se encuentran el ABM de videojuegos, empleados, clientes
